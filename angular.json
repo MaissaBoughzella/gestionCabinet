@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "gestionCabinet"
+    }
+  },
+  "defaultProject": "gestionCabinet",
+  "cli": {
+    "analytics": false
+  }
 }
