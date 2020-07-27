@@ -12,8 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private apiAuthService: ApiAuthService) { }
 
   ngOnInit(): void {
-    console.log("hi");
-    this.apiAuthService.getUsers().subscribe((res: any) => {
+      this.apiAuthService.getUsers().subscribe((res: any) => {
       this.users=res['hydra:member'];
     });
   }

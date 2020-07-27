@@ -11,7 +11,7 @@
         <i class="icon md-more" aria-hidden="true"></i>
       </button>
       <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
-        <img class="navbar-brand-logo" src="assets/images/logo.png" title="Remark">
+        <img class="navbar-brand-logo" src="../../assets/images/logo.png" title="Remark">
         <span class="navbar-brand-text hidden-xs-down"> Remark</span>
       </div>
       <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-search"
@@ -119,32 +119,32 @@
                     <ul class="blocks-3">
                       <li>
                         <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="assets/global/photos/view-1-150x100.jpg" alt="assets." />
+                          <img class="w-full" src="../../assets/global/photos/view-1-150x100.jpg" alt="../../assets." />
                         </a>
                       </li>
                       <li>
                         <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="assets/global/photos/view-2-150x100.jpg" alt="assets." />
+                          <img class="w-full" src="../../assets/global/photos/view-2-150x100.jpg" alt="../../assets." />
                         </a>
                       </li>
                       <li>
                         <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="assets/global/photos/view-3-150x100.jpg" alt="assets." />
+                          <img class="w-full" src="../../assets/global/photos/view-3-150x100.jpg" alt="../../assets." />
                         </a>
                       </li>
                       <li>
                         <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="assets/global/photos/view-4-150x100.jpg" alt="assets." />
+                          <img class="w-full" src="../../assets/global/photos/view-4-150x100.jpg" alt="../../assets." />
                         </a>
                       </li>
                       <li>
                         <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="assets/global/photos/view-5-150x100.jpg" alt="assets." />
+                          <img class="w-full" src="../../assets/global/photos/view-5-150x100.jpg" alt="../../assets." />
                         </a>
                       </li>
                       <li>
                         <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="assets/global/photos/view-6-150x100.jpg" alt="assets." />
+                          <img class="w-full" src="../../assets/global/photos/view-6-150x100.jpg" alt="../../assets." />
                         </a>
                       </li>
                     </ul>
@@ -223,23 +223,19 @@
               <span class="flag-icon flag-icon-us"></span>
             </a>
             <div class="dropdown-menu" role="menu">
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                <span class="flag-icon flag-icon-gb"></span> English</a>
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+              <a class="dropdown-item" (click)="useLanguage('fr')" role="menuitem">
                 <span class="flag-icon flag-icon-fr"></span> French</a>
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                <span class="flag-icon flag-icon-cn"></span> Chinese</a>
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+              <a class="dropdown-item" (click)="useLanguage('en')" role="menuitem">
+                <span class="flag-icon flag-icon-gb"></span> English</a>
+              <a class="dropdown-item" (click)="useLanguage('de')" role="menuitem">
                 <span class="flag-icon flag-icon-de"></span> German</a>
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                <span class="flag-icon flag-icon-nl"></span> Dutch</a>
             </div>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
               data-animation="scale-up" role="button">
               <span class="avatar avatar-online">
-                <img src="assets/global/portraits/5.jpg" alt="assets.">
+                <img src="../../assets/global/portraits/5.jpg" alt="../../assets.">
                 <i></i>
               </span>
             </a>
@@ -342,7 +338,7 @@
               </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
               <div class="dropdown-menu-header" role="presentation">
-                <h5>MESSAGES</h5>
+                <h5 [translate]="'demo.title'"></h5>
                 <span class="badge badge-round badge-info">New 3</span>
               </div>
 
@@ -353,7 +349,7 @@
                       <div class="media">
                         <div class="pr-10">
                           <span class="avatar avatar-sm avatar-online">
-                            <img src="assets/global/portraits/2.jpg" alt="assets." />
+                            <img src="../../assets/global/portraits/2.jpg" alt="../../assets." />
                             <i></i>
                           </span>
                         </div>
@@ -370,7 +366,7 @@
                       <div class="media">
                         <div class="pr-10">
                           <span class="avatar avatar-sm avatar-off">
-                            <img src="assets/global/portraits/3.jpg" alt="assets." />
+                            <img src="../../assets/global/portraits/3.jpg" alt="../../assets." />
                             <i></i>
                           </span>
                         </div>
@@ -387,7 +383,7 @@
                       <div class="media">
                         <div class="pr-10">
                           <span class="avatar avatar-sm avatar-busy">
-                            <img src="assets/global/portraits/4.jpg" alt="assets." />
+                            <img src="../../assets/global/portraits/4.jpg" alt="../../assets." />
                             <i></i>
                           </span>
                         </div>
@@ -404,7 +400,7 @@
                       <div class="media">
                         <div class="pr-10">
                           <span class="avatar avatar-sm avatar-away">
-                            <img src="assets/global/portraits/5.jpg" alt="assets." />
+                            <img src="../../assets/global/portraits/5.jpg" alt="../../assets." />
                             <i></i>
                           </span>
                         </div>
@@ -441,9 +437,9 @@
 
         <div class="navbar-brand navbar-brand-center">
           <a href="index.html">
-            <img class="navbar-brand-logo navbar-brand-logo-normal" src="assets/images/logo.png"
+            <img class="navbar-brand-logo navbar-brand-logo-normal" src="../../assets/images/logo.png"
               title="Remark">
-            <img class="navbar-brand-logo navbar-brand-logo-special" src="assets/images/logo-colored.png"
+            <img class="navbar-brand-logo navbar-brand-logo-special" src="../../assets/images/logo-colored.png"
               title="Remark">
           </a>
         </div>
@@ -456,7 +452,7 @@
           <div class="form-group">
             <div class="input-search">
               <i class="input-search-icon md-search" aria-hidden="true"></i>
-              <input type="text" class="form-control" name="site-search" placeholder="Searchassets.">
+              <input type="text" class="form-control" name="site-search" placeholder="Search../../assets.">
               <button type="button" class="input-search-close icon md-close" data-target="#site-navbar-search"
                 data-toggle="collapse" aria-label="Close"></button>
             </div>
@@ -469,11 +465,11 @@
   <div class="site-menubar">
     <div class="site-menubar-header">
       <div class="cover overlay">
-        <img class="cover-image" src="assets/examples/images/dashboard-header.jpg" alt="assets.">
+        <img class="cover-image" src="../../assets/examples/images/dashboard-header.jpg" alt="../../assets.">
         <div class="overlay-panel vertical-align overlay-background">
           <div class="vertical-align-middle">
             <a class="avatar avatar-lg" href="javascript:void(0)">
-              <img src="assets/global/portraits/1.jpg" alt="">
+              <img src="../../assets/global/portraits/1.jpg" alt="">
             </a>
             <div class="site-menubar-info">
               <h5 class="site-menubar-user">Machi</h5>

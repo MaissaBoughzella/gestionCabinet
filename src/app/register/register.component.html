@@ -1,7 +1,6 @@
-<app-header></app-header>
   <!-- Page -->
-  <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">>
-    <div class="page-content vertical-align-middle">
+  <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
+    <div class="page-content vertical-align-middle" style="width: 35%;">
       <div class="panel">
         <div class="panel-body">
           <div class="brand">
@@ -10,48 +9,58 @@
           </div>
           <form  [formGroup]="RegisterForm" method="post">
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" class="form-control" required formControlName="nom"/>
+              <input type="text" class="form-control"  formControlName="nom"/>
               <label class="floating-label">Nom</label>
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" class="form-control" required formControlName="prenom"/>
+              <input type="text" class="form-control"  formControlName="prenom"/>
               <label class="floating-label">Prénom</label>
             </div>
           
-            <div class="dropdown form-group form-material floating" data-plugin="formMaterial">
-              <button type="button" class="btn btn-default dropdown-toggle" id="exampleColorDropdown1"
-                data-toggle="dropdown" aria-expanded="true" style="width: 100%;">
-                {{gender}}
-              </button>
-              <div class="dropdown-menu" aria-labelledby="exampleColorDropdown1" role="menu" style="width: 100%;" formControlName="genre">
-                <a class="dropdown-item" role="menuitem" style="cursor: pointer;" *ngFor="let gen of genre" 
-                (click)="setGenre(gen)">{{gen}}</a>
-              </div>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+              <select class="browser-default custom-select form-control" formControlName="genre">
+                <option *ngFor="let gen of genre" [ngValue]="gen">
+                  {{ gen }}
+                </option>
+              </select>              
+              <label class="floating-label">Genre</label>
             </div>
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+            <select class="browser-default custom-select form-control" formControlName="langue">
+              <option *ngFor="let lan of langue" [ngValue]="lan">
+                {{ lan }}
+              </option>
+            </select>
+            <label class="floating-label">Langue</label>
+            </div>
+
             <div class="form-group form-material floating" data-plugin="formMaterial">
               <input type="text" class="form-control"  formControlName="adresse"/>
               <label class="floating-label">Adresse</label>
             </div>
+
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="tel" class="form-control"  formControlName="tel"/>
+              <input type="text" class="form-control"  formControlName="telephone"/>
               <label class="floating-label">Téléphone</label>
             </div>
-            <div class="dropdown form-group form-material floating" data-plugin="formMaterial">
-              <button type="button" class="btn btn-default dropdown-toggle" id="exampleColorDropdown1"
-                data-toggle="dropdown" aria-expanded="false" style="width: 100%;">
-                {{role}} 
-              </button>
-              <div class="dropdown-menu" aria-labelledby="exampleColorDropdown1" role="menu" style="width: 100%;" formControlName="role">
-                <a class="dropdown-item" style="cursor: pointer;" *ngFor="let role of roles" 
-                (click)="setRole(role)">{{role?.role}}</a>
-              </div>
-            </div>
+            
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="email" class="form-control" required formControlName="email"/>
+            <select  class="browser-default custom-select form-control" formControlName="roles">
+              <option *ngFor="let role of roles" [ngValue]="role['@id']">
+                {{ role?.role }}
+              </option>
+            </select>
+            <label class="floating-label">Role</label>
+            </div>
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+              <input type="email" class="form-control"  formControlName="email"/>
               <label class="floating-label">Email</label>
             </div>
+
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="password" class="form-control" required formControlName="password"/>
+              <input type="password" class="form-control"  formControlName="password"/>
               <label class="floating-label">Mot de passe</label>
             </div>
           <a>
@@ -64,7 +73,7 @@
         </div>
       </div>
 
-      <!-- <footer class="page-copyright page-copyright-inverse">
+      <footer class="page-copyright page-copyright-inverse">
         <p>WEBSITE BY Creation Studio</p>
         <p>© 2018. All RIGHT RESERVED.</p>
         <div class="social">
@@ -78,11 +87,10 @@
             <i class="icon bd-google-plus" aria-hidden="true"></i>
           </a>
         </div>
-      </footer> -->
+      </footer>
     </div>
   </div>
   <!-- End Page -->
-  <app-footer></app-footer>
 
 
    <!-- Plugins For This Page -->

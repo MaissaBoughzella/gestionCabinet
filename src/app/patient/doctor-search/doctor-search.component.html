@@ -1,0 +1,227 @@
+<!-- Page -->
+
+<div class="page">
+    <div class="page-content">
+      <!-- Panel -->
+      <div class="panel">
+        <div class="panel-body">
+          <form class="page-search-form" role="search">
+            <div class="input-search input-search-dark">
+              <i class="input-search-icon md-search" aria-hidden="true"></i>
+              <input type="text" class="form-control" id="inputSearch" name="search" placeholder="Search Users">
+              <button type="button" class="input-search-close icon md-close" aria-label="Close"></button>
+            </div>
+          </form>
+
+          <div class="nav-tabs-horizontal nav-tabs-animate" data-plugin="tabs">
+            <div class="dropdown page-user-sortlist">
+              Order By: <a class="dropdown-toggle inline-block" data-toggle="dropdown"
+                href="#" aria-expanded="false">Last Active</a>
+              <div class="dropdown-menu animation-scale-up animation-top-right animation-duration-250"
+                role="menu">
+                <a class="active dropdown-item" href="javascript:void(0)">Last Active</a>
+                <a class="dropdown-item" href="javascript:void(0)">Username</a>
+                <a class="dropdown-item" href="javascript:void(0)">Location</a>
+                <a class="dropdown-item" href="javascript:void(0)">Register Date</a>
+              </div>
+            </div>
+
+            <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+              <li class="nav-item" role="presentation"><a class="active nav-link" data-toggle="tab" href="#all_contacts"
+                  aria-controls="all_contacts" role="tab">All Contacts</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#my_contacts" aria-controls="my_contacts"
+                  role="tab">My Contacts</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#google_contacts" aria-controls="google_contacts"
+                  role="tab">Google Contacts</a></li>
+              <li class="dropdown nav-item" role="presentation">
+                <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-expanded="false">Contacts </a>
+                <div class="dropdown-menu" role="menu">
+                  <a class="dropdown-item" data-toggle="tab" href="#all_contacts" aria-controls="all_contacts"
+                    role="tab">All Contacts</a>
+                  <a class="active dropdown-item" data-toggle="tab" href="#my_contacts" aria-controls="my_contacts"
+                    role="tab">My Contacts</a>
+                  <a class="dropdown-item" data-toggle="tab" href="#google_contacts" aria-controls="google_contacts"
+                    role="tab">Google Contacts</a>
+                </div>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane animation-fade active" id="all_contacts" role="tabpanel">
+                <ul class="list-group" >
+                  <li class="list-group-item" *ngFor="let user of users">
+                    <div class="media">
+                      <div class="pr-0 pr-sm-20 align-self-center">
+                        <div class="avatar avatar-online">
+                          <img src="../../../assets/global/portraits/1.jpg" alt="...">
+                          <i class="avatar avatar-busy"></i>
+                        </div>
+                      </div>
+                      <div class="media-body align-self-center" >
+                        <h5 class="mt-0 mb-5">
+                          {{user?.nom}}
+                          <small>Last Access: 1 hour ago</small>
+                        </h5>
+                        <p>
+                          <i class="icon icon-color md-pin" aria-hidden="true"></i>                          Street 4425 Golf Course Rd
+                        </p>
+                        <div>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color md-email" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color md-smartphone" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color bd-twitter" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color bd-facebook" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color bd-dribbble" aria-hidden="true"></i>
+                        </a>
+                        </div>
+                      </div>
+                      <div class="pl-0 pl-sm-20 mt-15 mt-sm-0 align-self-center">
+                        <button type="button" class="btn btn-primary btn-sm">Follow</button>
+                      </div>
+                    </div>
+                  </li>
+                  
+                  
+                  
+                </ul>
+                <nav>
+                  <ul data-plugin="paginator" data-total="50" data-skin="pagination-no-border"></ul>
+                </nav>
+              </div>
+
+              <div class="tab-pane animation-fade" id="my_contacts" role="tabpanel">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <div class="media">
+                      <div class="pr-0 pr-sm-20 align-self-center">
+                        <div class="avatar avatar-online">
+                          <img src="../../global/portraits/13.jpg" alt="...">
+                          <i></i>
+                        </div>
+                      </div>
+                      <div class="media-body align-self-center">
+                        <h5 class="mt-0 mb-5">
+                          Sarah Graves
+                          <small>Last Access: 1 hour ago</small>
+                        </h5>
+                        <p>
+                          <i class="icon icon-color md-pin" aria-hidden="true"></i>                          Street 4190 W Lone Mountain Rd
+                        </p>
+                        <div>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color md-email" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color md-smartphone" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color bd-twitter" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color bd-facebook" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color bd-dribbble" aria-hidden="true"></i>
+                        </a>
+                        </div>
+                      </div>
+                      <div class="pl-0 pl-sm-20 mt-15 mt-sm-0 align-self-center">
+                        <button type="button" class="btn btn-primary btn-sm">Follow</button>
+                      </div>
+                    </div>
+                  </li>
+                  
+                </ul>
+                <nav>
+                  <ul data-plugin="paginator" data-total="50" data-skin="pagination-no-border"></ul>
+                </nav>
+              </div>
+
+              <div class="tab-pane animation-fade" id="google_contacts" role="tabpanel">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <div class="media">
+                      <div class="pr-0 pr-sm-20 align-self-center">
+                        <div class="avatar avatar-online">
+                          <img src="../../global/portraits/8.jpg" alt="...">
+                          <i></i>
+                        </div>
+                      </div>
+                      <div class="media-body align-self-center">
+                        <h5 class="mt-0 mb-5">
+                          Heather Harper
+                          <small>Last Access: 1 hour ago</small>
+                        </h5>
+                        <p>
+                          <i class="icon icon-color md-pin" aria-hidden="true"></i>                          Street 4393 Kelly Dr
+                        </p>
+                        <div>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color md-email" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color md-smartphone" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color bd-twitter" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color bd-facebook" aria-hidden="true"></i>
+                        </a>
+                          <a class="text-action" href="javascript:void(0)">
+                          <i class="icon icon-color bd-dribbble" aria-hidden="true"></i>
+                        </a>
+                        </div>
+                      </div>
+                      <div class="pl-0 pl-sm-20 mt-15 mt-sm-0 align-self-center">
+                        <button type="button" class="btn btn-success btn-sm">
+                          <i class="icon md-check" aria-hidden="true"></i>Following
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                  
+                </ul>
+                <nav>
+                  <ul data-plugin="paginator" data-total="50" data-skin="pagination-no-border"></ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Panel -->
+    </div>
+  </div>
+  <!-- End Page -->
+<!-- Plugins For This Page -->
+<script src="../../../assets/global/vendor/aspaginator/jquery-asPaginator.minfd53.js?v4.0.1"></script>
+<!-- Page -->
+<script src="../../../assets/js/Site.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/js/Plugin/asscrollable.minfd53.js?v4.0.1"></script>
+
+<script src="../../../assets/global/js/Plugin/slidepanel.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/js/Plugin/switchery.minfd53.js?v4.0.1"></script>
+
+<script src="../../../assets/global/js/Plugin/aspaginator.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/js/Plugin/responsive-tabs.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/js/Plugin/tabs.minfd53.js?v4.0.1"></script>
+
+
+<script>
+  (function(document, window, $) {
+    'use strict';
+
+    var Site = window.Site;
+    $(document).ready(function() {
+      Site.run();
+    });
+  })(document, window, jQuery);
+</script>

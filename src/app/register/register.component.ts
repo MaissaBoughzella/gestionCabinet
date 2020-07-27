@@ -9,16 +9,13 @@ import { ApiAuthService } from 'src/app/shared/api-auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
   RegisterForm: FormGroup;
-  message = '';
-  strength = '';
-  emailValidation = '';
   roles;
-  genre;
-  role = "Role";
-  gender="Genre";
-  selectedRoleId;
-  selectedGenreValue;
+  genre = ['Femme', 'Homme'];
+  langue = ['Français', 'Anglais', 'Allemnad'];
+  roleName;
+  RegisterFormMedecin: FormGroup;
 
   constructor(private router: Router, private apiAuthService: ApiAuthService) {
     this.RegisterForm = new FormGroup({
@@ -26,13 +23,24 @@ export class RegisterComponent implements OnInit {
       nom: new FormControl('', [Validators.required]),
       prenom: new FormControl('', [Validators.required]),
       adresse: new FormControl(''),
-      tel: new FormControl(''),
+      telephone: new FormControl(''),
       genre: new FormControl(''),
-      role: new FormControl(''),
+      langue: new FormControl(''),
+      roles: new FormControl((''), [Validators.required]),
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)])
     })
-    
+
+    this.RegisterFormMedecin = new FormGroup({
+
+      photo: new FormControl('', [Validators.required]),
+      qualification: new FormControl('', [Validators.required]),
+      experience: new FormControl(''),
+      formation: new FormControl(''),
+      specialité: new FormControl(''),
+     
+    })
+
   }
 
   ngOnInit(): void {
@@ -40,37 +48,43 @@ export class RegisterComponent implements OnInit {
     this.apiAuthService.getRoles().subscribe((res: any) => {
       this.roles = res['hydra:member'];
     });
-
-    this.genre = ['Femme', 'Homme']
-
-  }
-
-  setGenre(gen) {
-    this.gender = gen;
-    this.selectedGenreValue = gen;
-    console.log( this.selectedGenreValue)
-
-  }
-
-  setRole(rol) {
-    this.role = rol.role;
-    this.selectedRoleId = rol.id;
-    console.log(this.role)
   }
 
   addUser() {
-    
-    console.warn(this.RegisterForm.value);
-    console.log(this.RegisterForm.valid);
+    // console.warn(this.RegisterForm.value);
+    // console.log(this.RegisterForm.valid);
     if (!this.RegisterForm.valid) {
-      console.log("Wrong password or Email !");
     } else {
-      console.log("correct !")
       this.apiAuthService.addUser(this.RegisterForm.value).subscribe((res: any) => {
-        console.log(res);
+        var body = {
+          user: res['@id']
+        }
+        var id = res.roles.substring(11);
+        
+        this.apiAuthService.getRoleById(id).subscribe((res: any) => {
+        
+        if (this.roleName == "Medecin" ||  this.roleName == "medecin") {
+          this.apiAuthService.addMedecin(body).subscribe((res: any) => {
+          });
+        }
+        else if (this.roleName == "Patient" ||this.roleName == "patient" ) {
+          this.apiAuthService.addPatient(body).subscribe((res: any) => {
+          });
+        }
+        else if (this.roleName == "Secretaire" || this.roleName == "secretaire" ){
+          this.apiAuthService.addSecretaire(body).subscribe((res: any) => {
+          });
+        }
       });
+      localStorage.setItem("token",res['email']);
+      this.router.navigate(['/home'])
+            .then(() => {
+              window.location.reload();
+            });     
+    },
+    error => {
+      console.error();
+  });
     }
   }
-
-
 }
