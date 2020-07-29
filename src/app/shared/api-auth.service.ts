@@ -22,6 +22,10 @@ export class ApiAuthService {
     return this.http.get('http://127.0.0.1:8000/api/roles');
   }
 
+  getSpecialite() {
+    return this.http.get('http://127.0.0.1:8000/api/specialites');
+  }
+  
   getRoleById(id) {
     return this.http.get('http://127.0.0.1:8000/api/roles/' + id);
 
@@ -48,6 +52,11 @@ export class ApiAuthService {
 
   logout() {
     localStorage.removeItem('token');
-    this.router.navigate(['home']);
+    localStorage.removeItem('isMedecin');
+    localStorage.removeItem('isPatient');
+    localStorage.removeItem('isSecretaire');
+    localStorage.removeItem('id');
+    localStorage.removeItem('userId');
+    this.router.navigate(['login']);
   }
 }

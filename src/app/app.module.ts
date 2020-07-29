@@ -15,6 +15,13 @@ import { FooterComponent } from './footer/footer.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { DoctorSearchComponent } from './patient/doctor-search/doctor-search.component';
+import { RegisterPatientComponent } from './register-patient/register-patient.component';
+import { MedecinComponent } from './medecin/medecin.component';
+import { PatientComponent } from './patient/patient.component';
+import { AddSecretaireComponent } from './medecin/add-secretaire/add-secretaire.component';
+import { SecretaireComponent } from './secretaire/secretaire.component';
+import { AddRdvComponent } from './secretaire/add-rdv/add-rdv.component';
+import { ConsultationComponent } from './medecin/consultation/consultation.component';
 
 
 @NgModule({
@@ -26,6 +33,13 @@ import { DoctorSearchComponent } from './patient/doctor-search/doctor-search.com
     HeaderComponent,
     FooterComponent,
     DoctorSearchComponent,
+    RegisterPatientComponent,
+    MedecinComponent,
+    PatientComponent,
+    AddSecretaireComponent,
+    SecretaireComponent,
+    AddRdvComponent,
+    ConsultationComponent
   ],
   imports: [
     BrowserModule,

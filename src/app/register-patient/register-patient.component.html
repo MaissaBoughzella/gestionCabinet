@@ -55,26 +55,15 @@
               <label class="floating-label">Mot de passe</label>
             </div>
           </form>
-          <form  [formGroup]="RegisterFormMedecin" method="post">
+          <form  [formGroup]="RegisterFormPatient" method="post">
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" class="form-control"  formControlName="qualification"/>
-              <label class="floating-label">Qualification</label>
+              <input type="text" class="form-control"  formControlName="profession"/>
+              <label class="floating-label">Profession</label>
             </div>
+            
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <select class="browser-default custom-select form-control" formControlName="specialite">
-                <option *ngFor="let spec of specialite" [ngValue]="spec['@id']">
-                  {{ spec?.specialite }}
-                </option>
-              </select>              
-              <label class="floating-label">Specialité</label>
-            </div>
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="textarea" class="form-control"  formControlName="experience"/>
-              <label class="floating-label">Experience</label>
-            </div>
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="textarea" class="form-control"  formControlName="formation"/>
-              <label class="floating-label">Formation</label>
+              <input type="date" class="form-control"  formControlName="dateNaiss"/>
+              <label class="floating-label">Date de naissance</label>
             </div>
           
           <a><button type="submit" class="btn btn-primary btn-block btn-lg mt-40"  

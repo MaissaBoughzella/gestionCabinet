@@ -4,20 +4,20 @@ import { Router } from '@angular/router';
 import { ApiAuthService } from 'src/app/shared/api-auth.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-add-secretaire',
+  templateUrl: './add-secretaire.component.html',
+  styleUrls: ['./add-secretaire.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class AddSecretaireComponent implements OnInit {
 
   RegisterForm: FormGroup;
   roles;
   genre = ['Femme', 'Homme'];
   langue = ['Français', 'Anglais', 'Allemnad'];
   roleName;
-  RegisterFormMedecin: FormGroup;
   specialite: any;
   roleId: any;
+  addSecretaireForm: FormGroup;
 
   constructor(private router: Router, private apiAuthService: ApiAuthService) {
     this.RegisterForm = new FormGroup({
@@ -31,60 +31,34 @@ export class RegisterComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)])
     })
-    this.RegisterFormMedecin = new FormGroup({
-
-      qualification: new FormControl(''),
-      experience: new FormControl(''),
-      formation: new FormControl(''),
-      specialite: new FormControl(''),
-
+    this.addSecretaireForm = new FormGroup({
     })
 
   }
 
   ngOnInit(): void {
-
     this.apiAuthService.getRoles().subscribe((res: any) => {
       this.roles = res['hydra:member'];
-
       for (const role of this.roles) {
-
-        if (role.role == "Medecin" || role.role == "medecin") {
+        if (role.role == "Secretaire" || role.role == "secretaire") {
           this.roleId = role["@id"];
-          console.log(this.roleId);
         }
       }
-      
-
     });
-
-    this.apiAuthService.getSpecialite().subscribe((res: any) => {
-      this.specialite = res['hydra:member'];
-    });
+    var id = localStorage.getItem('id');
+    console.log(id)
   }
 
   addUser() {
-    // console.warn(this.RegisterForm.value);
-    // console.log(this.RegisterForm.valid);
-    // console.log("hi")
-    // console.warn(this.RegisterFormMedecin.value);
-    // console.log(this.RegisterFormMedecin.valid);
-    if (!this.RegisterForm.valid && !this.RegisterFormMedecin.valid) {
+    if (!this.RegisterForm.valid && !this.addSecretaireForm.valid) {
     } else {
       this.RegisterForm.addControl('roles', new FormControl(this.roleId, Validators.required));
       this.apiAuthService.addUser(this.RegisterForm.value).subscribe((res: any) => {
-        localStorage.setItem("token", res['email']);
-        localStorage.setItem('userId', res['@id']);
-
-        this.RegisterFormMedecin.addControl('user', new FormControl(res['@id'], Validators.required));
-        this.apiAuthService.addMedecin(this.RegisterFormMedecin.value).subscribe((res: any) => {
-          localStorage.setItem('isMedecin', 'true');
-          localStorage.setItem('id', res['@id']);
-
-          this.router.navigate(['/medecin'])
-          .then(() => {
-            window.location.reload();
-          });
+        this.addSecretaireForm.addControl('user', new FormControl(res['@id'], Validators.required));
+        this.addSecretaireForm.addControl('medecinId', new FormControl(localStorage.getItem('id'), Validators.required));
+       
+        this.apiAuthService.addSecretaire(this.addSecretaireForm.value).subscribe((res: any) => {
+          console.log(res);
         });
       },
         error => {
