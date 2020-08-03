@@ -9,8 +9,13 @@ export class ApiPatientService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  
+
   getPatients() {
     return this.http.get('http://127.0.0.1:8000/api/patients');
   }
+
+  getPatientByUserId(userId) {
+    return this.http.get('http://127.0.0.1:8000/api/patients/getByUserId/' + userId);
+  }
+
 }

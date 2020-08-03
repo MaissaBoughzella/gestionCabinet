@@ -14,10 +14,15 @@ export class ApiAuthService {
   getUsers() {
     return this.http.get('http://127.0.0.1:8000/api/users');
   }
-  
+
   getUserById(id) {
     return this.http.get('http://127.0.0.1:8000/api/users/' + id);
   }
+
+  getUserByRole(role) {
+    return this.http.get('http://127.0.0.1:8000/api/users/byRole/' + role);
+  }
+
   getRoles() {
     return this.http.get('http://127.0.0.1:8000/api/roles');
   }
@@ -25,11 +30,11 @@ export class ApiAuthService {
   getSpecialite() {
     return this.http.get('http://127.0.0.1:8000/api/specialites');
   }
-  
+
   getRoleById(id) {
     return this.http.get('http://127.0.0.1:8000/api/roles/' + id);
-
   }
+
   addUser(body) {
     return this.http.post('http://127.0.0.1:8000/api/users', body);
   }

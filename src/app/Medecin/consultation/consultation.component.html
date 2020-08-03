@@ -1,1 +1,120 @@
-<p>consultation works!</p>
+<div class="col-xxl-6">
+    <!-- Panel Custom Grid Field -->
+    <div class="panel">
+      <header class="panel-heading">
+        <h2 class="panel-title">Liste des rendez-vous</h2>
+      </header>
+      <div class="panel-body">
+        <div id="exampleCustomGridField">
+            <div class="col-lg-12">
+                <!-- Example Bordered Table -->
+                <div class="example-wrap">
+                  <div class="example table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr >
+                          <th style="border-top: 2px solid #dee2e6;"></th>
+                          <th style="border-top: 2px solid #dee2e6;">Date</th>
+                          <th style="border-top: 2px solid #dee2e6;">Heure</th>
+                          <th style="border-top: 2px solid #dee2e6;">Patient</th>
+                          <th style="border-top: 2px solid #dee2e6;">Etat</th>
+                          <th style="border-top: 2px solid #dee2e6;width: 120px;" class="text-nowrap">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let rdv of rdvs  | paginate: config; let i=index;" >
+                          
+                          <td>{{i+1}}</td>
+                          <td><i class="icon md-calendar"></i>&nbsp;{{rdv?.date | date:'fullDate'}}</td>
+                          <td><i class="icon md-time"></i>&nbsp;{{rdv?.heure | date:'shortTime'}}</td>
+                          <td>{{rdv?.patient}}</td>
+                          <td>{{rdv?.etat}}</td>
+                          <td class="text-nowrap">
+                           
+                            <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
+                                <button type="button" class="btn btn-success btn-icon"
+                                tooltip="Ajouter consultation"
+                                (click)= "setSelectedRdv(rdv)"
+                                data-toggle="modal" 
+                                data-target="#addModal">
+                                <i class="icon md-plus" aria-hidden="true"></i>
+                                Consulter</button>
+                              </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- End Example Bordered Table -->
+                <!-- Example Basic Pagination -->
+                  <nav>
+                    <ul class="pagination page-item" style="margin-left: 40%;">
+                      <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                    </ul>
+                  </nav>
+              <!-- End Example Basic Pagination -->
+              </div>
+        </div>
+      </div>
+    </div>
+   
+    <!-- End Panel Custom Grid Field -->
+  </div>
+      <!-- Modal -->
+      <div class="modal fade" id="addModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
+      role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">Ajouter une consultation</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group form-material row">
+                <label class="col-md-3 col-form-label">Date</label>
+                <div class="col-md-9">
+                  <input type="date" class="form-control"  #date1 value="{{selectedRdv?.date |  date : 'yyyy-MM-dd'}}">
+                </div>
+              </div>
+              <div class="form-group form-material row">
+                  <label class="col-md-3 col-form-label">Heure</label>
+                  <div class="col-md-9">
+                    <input type="time" class="form-control" #heure1 value="{{selectedRdv?.heure | date:'hh:mm'}}">
+                  </div>
+              </div>
+                <div class="form-group form-material row">
+                    <label class="col-md-3 col-form-label">Prix</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control" #prix1 placeholder="Précisez le prix de le consultation"
+                       min="0" max="100" step="10" >
+                    </div>
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal"
+            (click)="addcons(date1.value,heure1.value,prix1.value)">Enregister</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+     <!-- Plugins For This Page -->
+  <script src="../../../assets/global/vendor/bootstrap-table/bootstrap-table.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/bootstrap-table/extensions/mobile/bootstrap-table-mobile.minfd53.js?v4.0.1"></script>
+
+  <!-- Page -->
+  <script src="../../../assets/js/Site.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/asscrollable.minfd53.js?v4.0.1"></script>
+
+  <script src="../../../assets/global/js/Plugin/slidepanel.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/switchery.minfd53.js?v4.0.1"></script>
+
+
+  <script src="../../../assets/examples/js/tables/bootstrap.minfd53.js?v4.0.1"></script>

@@ -22,7 +22,8 @@ import { AddSecretaireComponent } from './medecin/add-secretaire/add-secretaire.
 import { SecretaireComponent } from './secretaire/secretaire.component';
 import { AddRdvComponent } from './secretaire/add-rdv/add-rdv.component';
 import { ConsultationComponent } from './medecin/consultation/consultation.component';
-
+import {NgxPaginationModule} from 'ngx-pagination';
+import { GestionConsultationComponent } from './medecin/gestion-consultation/gestion-consultation.component'; 
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ConsultationComponent } from './medecin/consultation/consultation.compo
     AddSecretaireComponent,
     SecretaireComponent,
     AddRdvComponent,
-    ConsultationComponent
+    ConsultationComponent,
+    GestionConsultationComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { ConsultationComponent } from './medecin/consultation/consultation.compo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     TranslateModule.forRoot({
         loader: {
             provide: TranslateLoader,

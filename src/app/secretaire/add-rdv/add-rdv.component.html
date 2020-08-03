@@ -26,15 +26,17 @@
                           <th style="border-top: 2px solid #dee2e6;">Date</th>
                           <th style="border-top: 2px solid #dee2e6;">Heure</th>
                           <th style="border-top: 2px solid #dee2e6;">Patient</th>
+                          <th style="border-top: 2px solid #dee2e6;">Etat</th>
                           <th style="border-top: 2px solid #dee2e6;width: 120px;" class="text-nowrap">Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let rdv of rdvs ; let i=index" >
+                        <tr *ngFor="let rdv of rdvs  | paginate: config ; let i=index;" >
                           <td>{{i+1}}</td>
-                          <td><i class="icon md-calendar"></i>{{rdv?.date | date:'fullDate'}}</td>
-                          <td><i class="icon md-time"></i>{{rdv?.heure | date:'shortTime'}}</td>
+                          <td><i class="icon md-calendar"></i>&nbsp;{{rdv?.date | date:'fullDate'}}</td>
+                          <td><i class="icon md-time"></i>&nbsp;{{rdv?.heure | date:'shortTime'}}</td>
                           <td>{{rdv?.patient}}</td>
+                          <td>{{rdv?.etat}}</td>
                           <td class="text-nowrap">
                             <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
                                 <button type="button" class="btn btn-primary btn-icon"
@@ -58,28 +60,11 @@
                 </div>
                 <!-- End Example Bordered Table -->
                 <!-- Example Basic Pagination -->
-                <div class="example">
                   <nav>
-                    <ul class="pagination">
-                      <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                        </a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-                      <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                      <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                      <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
-                      <li class="page-item"><a class="page-link" href="javascript:void(0)">5</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>
+                    <ul class="pagination page-item" style="margin-left: 40%;">
+                      <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                     </ul>
                   </nav>
-                </div>
-              
               <!-- End Example Basic Pagination -->
               </div>
         </div>
@@ -117,8 +102,8 @@
                     <label class="col-md-3 col-form-label">Patient: </label>
                     <select class="form-control form-control-sm col-md-8" formControlName="patient" 
                     style="margin-left: 15px;">
-                    <option *ngFor="let patient of patients" [ngValue]="patient['@id']">
-                        {{ patient?.id }}
+                    <option *ngFor="let user of users" [ngValue]="user['@id']">
+                        {{ user?.prenom }}  {{ user?.nom }}
                       </option>
                     </select>
                   </div>
@@ -151,15 +136,29 @@
               <div class="form-group form-material row">
                 <label class="col-md-3 col-form-label">Date</label>
                 <div class="col-md-9">
-                  <input type="date" class="form-control" placeholder="heure" #date1 value="{{selectedRdv?.date | date : 'fullDate'}}">
+                  <input type="date" class="form-control"  #date1 value="{{selectedRdv?.date |  date : 'yyyy-MM-dd'}}">
                 </div>
               </div>
               <div class="form-group form-material row">
                   <label class="col-md-3 col-form-label">Heure</label>
                   <div class="col-md-9">
-                    <input type="time" class="form-control" #heure1 value="{{selectedRdv?.heure | date:'shortTime'}}">
+                    <input type="time" class="form-control" #heure1 value="{{selectedRdv?.heure | date:'hh:mm'}}">
                   </div>
+              </div>
+              <div class="dropdown form-group form-material row" >
+                <label class="col-md-3 col-form-label">Etat</label>
+                <button 
+                style="background-color: white;color: black;border-color: #d0d0d0;margin-left: 15px;"
+                class="btn btn-secondary dropdown-toggle col-md-8" type="button" id="dropdownMenuButton" 
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{getEtat(etatToEdit)}}   
+                </button>
+                <div class="dropdown-menu col-md-8" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item col-lg-11" #noncons style="cursor: pointer;" (click)="setEtat(noncons)">Non consulté</a>
+                  <a class="dropdown-item col-lg-11" #cons style="cursor: pointer;" (click)="setEtat(cons)">Consulté</a>
+                  <a class="dropdown-item col-lg-11" #annul style="cursor: pointer;" (click)="setEtat(annul)">Annulé</a>
                 </div>
+          </div>
               
 
             </form>

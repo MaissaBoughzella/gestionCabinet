@@ -1,72 +1,57 @@
-<!-- Page -->
-<div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
-    <div class="page-content vertical-align-middle" style="width: 35%;">
-      <div class="panel">
-        <div class="panel-body">
-          <div class="brand">
-            <img class="brand-img" src="../assets/images/logo-colored.png" alt="...">
-            <h2 class="brand-text font-size-18">Remark</h2>
-          </div>
-          <form [formGroup]="loginForm" method="post">
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="email" class="form-control" formControlName="email" />
-              <label class="floating-label">Email</label>
-            </div>
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="password" class="form-control" formControlName="password" />
-              <label class="floating-label">Password</label>
-            </div>
-            <div class="form-group clearfix">
-            </div>
-            <button type="submit" class="btn btn-block btn-primary waves-effect waves-light waves-round"
-            (click)="login()">
-              Sign in</button>
-          </form>
-          <p>Still no account? Please go to <a href="register">Sign up</a></p>
+<div class="limiter" >
+  <div class="container-login100" style="padding: 0px;background-color:#3949ab">
+    <div class="wrap-login100" style="margin-top: -250px;margin-bottom: -100px;position: fixed;">
+      <form [formGroup]="loginForm" method="post" class="login100-form validate-form">
+        <span class="login100-form-title p-b-26">
+          Connexion
+        </span>
+        <div class="form-group wrap-input100 validate-input" data-validate = "Email valide est: a@b.c">
+          <input class="input100 form-control"  formControlName="email" type="text" name="email">
+          <span class="focus-input100" data-placeholder="Email"></span>
         </div>
-      </div>
 
-      <footer class="page-copyright page-copyright-inverse">
-        <p>WEBSITE BY Creation Studio</p>
-        <p>© 2018. All RIGHT RESERVED.</p>
-        <div class="social">
-          <a class="btn btn-icon btn-pure" href="javascript:void(0)">
-            <i class="icon bd-twitter" aria-hidden="true"></i>
-          </a>
-          <a class="btn btn-icon btn-pure" href="javascript:void(0)">
-            <i class="icon bd-facebook" aria-hidden="true"></i>
-          </a>
-          <a class="btn btn-icon btn-pure" href="javascript:void(0)">
-            <i class="icon bd-google-plus" aria-hidden="true"></i>
+        <div class="wrap-input100 validate-input" data-validate="Entrer votre mot de passe">
+          <span class="btn-show-pass">
+            <i class="zmdi zmdi-eye"></i>
+          </span>
+          <input class="input100 form-control" formControlName="password" type="password" name="pass">
+          <span class="focus-input100" data-placeholder="Mot de passe"></span>
+        </div>
+
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button type="submit" class="login100-form-btn" style="background-color:#3949ab"
+            (click)="login()">
+              Se connecter
+            </button>
+          </div>
+        </div>
+
+        <div class="text-center p-t-115" style="padding-top: 50px;">
+          <span class="txt1">
+            Vous n’avez pas de compte?
+          </span>
+
+          <a class="txt2" href="#">
+           S'inscrire
           </a>
         </div>
-      </footer>
+      </form>
     </div>
   </div>
-  <!-- End Page -->
+</div>
 
 
-  <!-- Plugins For This Page -->
-  <script src="../../assets/global/vendor/jquery-placeholder/jquery.placeholder.minfd53.js?v4.0.1"></script>
+<div id="dropDownSelect1"></div>
 
-<!-- Page -->
-<script src="../../assets/js/Site.minfd53.js?v4.0.1"></script>
-<script src="../../assets/global/js/Plugin/asscrollable.minfd53.js?v4.0.1"></script>
-
-<script src="../../assets/global/js/Plugin/slidepanel.minfd53.js?v4.0.1"></script>
-<script src="../../assets/global/js/Plugin/switchery.minfd53.js?v4.0.1"></script>
-
-<script src="../../assets/global/js/Plugin/jquery-placeholder.minfd53.js?v4.0.1"></script>
-<script src="../../assets/global/js/Plugin/material.minfd53.js?v4.0.1"></script>
-
-
-<script>
-  (function(document, window, $) {
-    'use strict';
-
-    var Site = window.Site;
-    $(document).ready(function() {
-      Site.run();
-    });
-  })(document, window, jQuery);
-</script>
+<!--===============================================================================================-->
+<script src="../../assets/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../assets/login/vendor/animsition/js/animsition.min.js"></script>
+<script src="../../assets/login/vendor/bootstrap/js/popper.js"></script>
+<script src="../../assets/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../assets/login/vendor/select2/select2.min.js"></script>
+<script src="../../assets/login/vendor/daterangepicker/moment.min.js"></script>
+<script src="../../assets/login/vendor/daterangepicker/daterangepicker.js"></script>
+<script src="../../assets/login/vendor/countdowntime/countdowntime.js"></script>
+<script src="../../assets/login/js/main.js"></script>

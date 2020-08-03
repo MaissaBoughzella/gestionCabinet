@@ -12,6 +12,7 @@ import { AddSecretaireComponent } from './medecin/add-secretaire/add-secretaire.
 import { SecretaireComponent } from './secretaire/secretaire.component';
 import { AddRdvComponent } from './secretaire/add-rdv/add-rdv.component';
 import { ConsultationComponent } from './medecin/consultation/consultation.component';
+import { GestionConsultationComponent } from './medecin/gestion-consultation/gestion-consultation.component';
 
 const routes: Routes = [
   {
@@ -19,9 +20,9 @@ const routes: Routes = [
     component: MedecinComponent,
     canActivate: [AuthGuard],
     children: [
-
       { path: 'addSecretaire', component: AddSecretaireComponent ,canActivate: [AuthGuard]},
-      { path: 'consultations', component: ConsultationComponent ,canActivate: [AuthGuard]},
+      { path: 'rendezVous', component: ConsultationComponent ,canActivate: [AuthGuard]},
+      { path: 'consultation/:id', component:GestionConsultationComponent ,canActivate: [AuthGuard]},
       //{ path: '', redirectTo: 'register', pathMatch: 'full' },
     ]
   },
