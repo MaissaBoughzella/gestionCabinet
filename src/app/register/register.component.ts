@@ -80,7 +80,6 @@ export class RegisterComponent implements OnInit {
         this.apiAuthService.addMedecin(this.RegisterFormMedecin.value).subscribe((res: any) => {
           localStorage.setItem('isMedecin', 'true');
           localStorage.setItem('id', res['@id']);
-
           this.router.navigate(['/medecin'])
           .then(() => {
             window.location.reload();

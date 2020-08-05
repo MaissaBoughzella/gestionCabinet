@@ -54,12 +54,6 @@ export class ConsultationComponent implements OnInit {
 
   }
 
-  // deleteRdv(id) {
-  //   this.apiRdvService.deleteRdv(id).subscribe((res: any) => {
-  //     this.ngOnInit();
-  //   });
-  // }
-
   pageChanged(event) {
     this.config.currentPage = event;
   }

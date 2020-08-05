@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiSecretaireService {
+  existSecretaire: any;
+  isEmpty: boolean;
 
   constructor(private http: HttpClient, private router: Router) { }
 

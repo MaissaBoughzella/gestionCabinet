@@ -8,8 +8,12 @@ export class ApiMedecinService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  
+
   getMedecins() {
     return this.http.get('http://127.0.0.1:8000/api/medecins');
+  }
+
+  getMedecinByUserId(id) {
+    return this.http.get('http://127.0.0.1:8000/api/medecins/getByUserId/' + id);
   }
 }

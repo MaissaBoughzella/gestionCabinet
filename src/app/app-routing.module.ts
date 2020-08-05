@@ -20,7 +20,7 @@ const routes: Routes = [
     component: MedecinComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'addSecretaire', component: AddSecretaireComponent ,canActivate: [AuthGuard]},
+      { path: 'gestionSecretaires', component: AddSecretaireComponent ,canActivate: [AuthGuard]},
       { path: 'rendezVous', component: ConsultationComponent ,canActivate: [AuthGuard]},
       { path: 'consultation/:id', component:GestionConsultationComponent ,canActivate: [AuthGuard]},
       //{ path: '', redirectTo: 'register', pathMatch: 'full' },

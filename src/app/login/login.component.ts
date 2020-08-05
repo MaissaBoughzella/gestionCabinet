@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiAuthService } from '../shared/api-auth.service';
 import { Router } from '@angular/router';
 import { error } from '@angular/compiler/src/util';
+import { ApiMedecinService } from '../shared/api-medecin.service';
 
 @Component({
     selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     roleName: string;
     roles;
-    constructor(private fb: FormBuilder, private authService: ApiAuthService, private router: Router) {
+    constructor(private fb: FormBuilder, private authService: ApiAuthService,private apiMedService: ApiMedecinService, private router: Router) {
 
         this.loginForm = this.fb.group({
             email: ['', Validators.required],
@@ -31,19 +32,22 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem("token", ress['email']);
                 localStorage.setItem('userId', ress['@id']);
                 var id = ress['roles'].substring(11);
-                
+                var user = ress['@id'].substring(11);
                 this.authService.getRoleById(id).subscribe((res: any) => {
                     this.roleName=res.role;
                     if (this.roleName == "Medecin" || this.roleName == "medecin") {
-
+                        
+                    this.apiMedService.getMedecinByUserId(user).subscribe((res: any) => {
+                        localStorage.setItem('id', res['@id']);
+                    
                         localStorage.setItem('isMedecin', 'true');
                         this.router.navigate(['/medecin'])
                         .then(() => {
                           window.location.reload();
                         });
-                    } 
+                    });
+                } 
                     else if (this.roleName == "Patient" || this.roleName == "patient") {
-
                             localStorage.setItem('isPatient', 'true');
                             this.router.navigate(['/patient'])
                             .then(() => {

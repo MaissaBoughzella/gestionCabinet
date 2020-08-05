@@ -26,6 +26,7 @@ export class AddSecretaireComponent implements OnInit {
   selectedSec: any;
   genreToEdit: any;
   langueToEdit: any;
+  selectedSecByUser: any;
 
   constructor(private router: Router, private apiAuthService: ApiAuthService, private apiSecService: ApiSecretaireService) {
     this.RegisterForm = new FormGroup({
@@ -61,28 +62,30 @@ export class AddSecretaireComponent implements OnInit {
       }
       this.apiAuthService.getUserByRole(this.roleId1).subscribe((res: any) => {
         this.secretaires = res['hydra:member'];
+        this.apiSecService.isEmpty = this.isEmpty();
       });
     });
 
   }
 
   addUser() {
-    if (!this.RegisterForm.valid && !this.addSecretaireForm.valid) {
-    } else {
-      this.RegisterForm.addControl('roles', new FormControl(this.roleId, Validators.required));
-      this.apiAuthService.addUser(this.RegisterForm.value).subscribe((res: any) => {
-        this.addSecretaireForm.addControl('user', new FormControl(res['@id'], Validators.required));
-        this.addSecretaireForm.addControl('medecinId', new FormControl(localStorage.getItem('id'), Validators.required));
 
-        this.apiAuthService.addSecretaire(this.addSecretaireForm.value).subscribe((res: any) => {
-          this.ngOnInit();
-        });
-      },
-        error => {
-          console.error();
-        });
-    }
+    this.RegisterForm.addControl('roles', new FormControl(this.roleId, Validators.required));
+    this.apiAuthService.addUser(this.RegisterForm.value).subscribe((res: any) => {
+      this.addSecretaireForm.addControl('user', new FormControl(res['@id'], Validators.required));
+      this.addSecretaireForm.addControl('medecinId', new FormControl(localStorage.getItem('id'), Validators.required));
+
+      this.apiAuthService.addSecretaire(this.addSecretaireForm.value).subscribe((res: any) => {
+        this.apiSecService.existSecretaire = res 
+        this.ngOnInit();
+        
+      });
+    },
+      error => {
+        console.error();
+      });
   }
+
   pageChanged(event) {
     this.config.currentPage = event;
   }
@@ -91,21 +94,28 @@ export class AddSecretaireComponent implements OnInit {
     this.selectedSec = sec;
     this.genreToEdit = sec.genre;
     this.langueToEdit = sec.langue;
+    this.apiSecService.getSecretaireByUserId(sec.id).subscribe((res: any) => {
+      console.log(res)
+      this.selectedSecByUser = res.id;
+    });
   }
 
-  editSec(nom1, prenom1, email1,adresse1,tel1) {
+  editSec(nom1, prenom1, email1, adresse1, tel1) {
     var body = {
       nom: nom1,
       prenom: prenom1,
-      email : email1,
-      adresse : adresse1,
-      telephone : tel1,
+      email: email1,
+      adresse: adresse1,
+      telephone: tel1,
       genre: this.genreToEdit,
       langue: this.langueToEdit,
-    }
-    this.apiSecService.editSec(this.selectedSec.id, body).subscribe((res: any) => {
-      //this.ngOnInit();
-      console.log(res)
+    };
+    var body1 = {};
+
+    this.apiAuthService.editUser(this.selectedSec.id, body).subscribe((res: any) => {
+      this.apiSecService.editSec(this.selectedSecByUser, body1).subscribe((res: any) => {
+        this.ngOnInit();
+      });
     });
   }
 
@@ -144,8 +154,19 @@ export class AddSecretaireComponent implements OnInit {
   }
 
   deleteSec(id) {
-    this.apiSecService.deleteSec(id).subscribe((res: any) => {
+    this.apiAuthService.deleteUser(id).subscribe((res: any) => {
+      this.apiSecService.existSecretaire = res
       this.ngOnInit();
     });
   }
+
+  public isEmpty(): boolean {
+    if (this.apiSecService.existSecretaire == undefined
+      || this.apiSecService.existSecretaire == null) {
+      return true;
+    }
+    else return false;
+  }
+
+
 }
