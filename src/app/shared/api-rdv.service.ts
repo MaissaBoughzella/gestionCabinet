@@ -13,6 +13,11 @@ export class ApiRdvService {
     return this.http.get('http://127.0.0.1:8000/api/rdvs');
   }
 
+  getRdvById(id) {
+    return this.http.get('http://127.0.0.1:8000/api/rdvs/' + id);
+  }
+
+
   addRdv(body) {
     return this.http.post('http://127.0.0.1:8000/api/rdvs', body);
   }

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ApiConsultationService } from 'src/app/shared/api-consultation.service';
 import { ApiAnalyseService } from 'src/app/shared/api-analyse.service';
+import { ApiRadioService } from 'src/app/shared/api-radio.service';
+
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -12,6 +14,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class GestionConsultationComponent implements OnInit {
   addAnalyseForm: FormGroup;
+  addRadioForm: FormGroup;
   config: { itemsPerPage: number; currentPage: number; };
   types: any;
   consId: any;
@@ -21,14 +24,32 @@ export class GestionConsultationComponent implements OnInit {
   type: any;
   typeName: any;
   selectedTypeId: any;
+  typesradios: any;
+  radios: any;
+  selectedRadio: any;
+  typer: any;
+  typeRadioName: any;
+  selectedTypeRadioId: any;
+  
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private apiConsService: ApiConsultationService, private apiAnalyseService: ApiAnalyseService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, 
+    private apiConsService: ApiConsultationService, private apiAnalyseService: ApiAnalyseService, 
+    private apiRadioService: ApiRadioService) {
+
 
     this.addAnalyseForm = new FormGroup({
 
       nom: new FormControl(''),
       description: new FormControl(''),
       typeanalyse: new FormControl(''),
+
+    });
+
+    this.addRadioForm = new FormGroup({
+
+      nom: new FormControl(''),
+      description: new FormControl(''),
+      typeradio: new FormControl(''),
 
     });
 
@@ -40,14 +61,22 @@ export class GestionConsultationComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    
+    localStorage.setItem('idConsultation',this.activatedRoute.snapshot.paramMap.get('id')) ;
     this.apiAnalyseService.getTypesAnalyses().subscribe((res: any) => {
       this.types = res['hydra:member'];
     });
 
     this.apiAnalyseService.getAnalyses().subscribe((res: any) => {
       this.analyses = res['hydra:member'];
+    });
 
+    this.apiRadioService.getTypesRadios().subscribe((res: any) => {
+      this.typesradios = res['hydra:member'];
+    });
+
+    this.apiRadioService.getRadios().subscribe((res: any) => {
+      this.radios = res['hydra:member'];
     });
   }
 
@@ -70,6 +99,17 @@ export class GestionConsultationComponent implements OnInit {
     }
   }
 
+  addImgRadio() {
+    const idCons = this.activatedRoute.snapshot.paramMap.get('id')
+    if (!this.addRadioForm.valid) {
+    } else {
+      this.addRadioForm.addControl('consultation', new FormControl('/api/consultations/' + idCons));
+      this.apiRadioService.addRadio(this.addRadioForm.value).subscribe((res: any) => {
+        this.ngOnInit();
+      });
+    }
+  }
+
   setSelectedAnalyse(anal) {
     this.selectedAnalyse = anal; 
     this.type = anal.typeanalyse.substring(18);
@@ -78,10 +118,22 @@ export class GestionConsultationComponent implements OnInit {
     });
   }
 
-  
+  setSelectedRadio(radio) {
+    this.selectedRadio = radio; 
+    this.typer = radio.typeradio.substring(16);
+    this.apiRadioService.getTypeRadioById(this.typer).subscribe((res: any) => {
+      this.typeRadioName = res.radio;
+    });
+  }
+
   setType(type){
     this.typeName = type.analyse;
     this.selectedTypeId = type['@id'];
+  }
+
+  setTypeRadio(type){
+    this.typeRadioName = type.radio;
+    this.selectedTypeRadioId = type['@id'];
   }
 
   editAnalyse(nomm, descc) {
@@ -95,8 +147,25 @@ export class GestionConsultationComponent implements OnInit {
     });
   }
 
+  editRadio(nom1, desc1) {
+    var form = {
+      nom: nom1,
+      description: desc1,
+      typeradio: this.selectedTypeRadioId,
+    }
+    this.apiRadioService.editRadio(this.selectedRadio.id, form).subscribe((res: any) => {
+      this.ngOnInit();
+    });
+  }
+
   deleteAnalyse(id) {
     this.apiAnalyseService.deleteAnalyse(id).subscribe((res: any) => {
+      this.ngOnInit();
+    });
+  }
+
+  deleteRadio(id) {
+    this.apiRadioService.deleteRadio(id).subscribe((res: any) => {
       this.ngOnInit();
     });
   }

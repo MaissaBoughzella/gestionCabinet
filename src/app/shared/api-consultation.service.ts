@@ -13,6 +13,10 @@ export class ApiConsultationService {
     return this.http.get('http://127.0.0.1:8000/api/consultations');
   }
 
+  getConsById(id) {
+    return this.http.get('http://127.0.0.1:8000/api/consultations/' + id);
+  }
+
   addConsultation(body) {
     return this.http.post('http://127.0.0.1:8000/api/consultations', body);
   }

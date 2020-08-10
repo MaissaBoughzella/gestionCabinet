@@ -14,6 +14,10 @@ export class ApiPatientService {
     return this.http.get('http://127.0.0.1:8000/api/patients');
   }
 
+  getPatientById(id) {
+    return this.http.get('http://127.0.0.1:8000/api/patients/' + id);
+  }
+
   getPatientByUserId(userId) {
     return this.http.get('http://127.0.0.1:8000/api/patients/getByUserId/' + userId);
   }

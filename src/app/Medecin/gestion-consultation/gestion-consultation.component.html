@@ -4,49 +4,85 @@
       <h2 class="panel-title" style="margin-bottom: 15px;">Consultation</h2>
     </div>
     <ul class="nav nav-tabs nav-tabs-line" role="tablist">
-      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#exampleTopDiagnostic"
-          aria-controls="exampleTopHome" role="tab">Diagnostic</a></li>
-      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopOrdonnance"
-          aria-controls="exampleTopComponents" role="tab">Ordonnance</a></li>
+      <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#exampleTopOrdonnance"
+          aria-controls="exampleTopHome" role="tab">Ordonnance</a>
+      </li>
       <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopImages" aria-controls="exampleTopCss"
-          role="tab">Images Radio</a></li>
+          role="tab">Images Radio</a>
+      </li>
       <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopAnalyses"
-          aria-controls="exampleTopJavascript" role="tab">Analyses</a></li>
+          aria-controls="exampleTopJavascript" role="tab">Analyses</a>
+      </li>
     </ul>
     <div class="panel-body">
       <div class="tab-content">
-        <div class="tab-pane active" id="exampleTopDiagnostic" role="tabpanel">
-          Conturbamur senectutem saepti statua, putanda homini acuti dialectica levamur urbanitas
-          animadversionem mala se depulsa, magis nihilo efficeret tenetur
-          cives gloriae concursio defendit conscientiam nascuntur, refugiendi
-          defendit falsi platonem paranda metum iustioribus cognita robustus,
-          tuum omnia usque omnis temperantiam quaeri electram.
-        </div>
-        <div class="tab-pane" id="exampleTopOrdonnance" role="tabpanel">
-          Protervi dissensio consuetudine equos publicam ingenia. Voluptatibus legendus initia
-          confirmare sententiam. Desistunt possint habeatur dediti dubio,
-          triarium is offendimur reprehenderit exercitus laudabilis motus
-          celeritas, utrum dissentio renovata, habet partus natus. Iustius
-          disserunt, quantum ennii admodum divinum mortem elaborare primum
-          autem.
+        <div class="tab-pane active" id="exampleTopOrdonnance" role="tabpanel">  
+          <app-ordonnance></app-ordonnance>
         </div>
         <div class="tab-pane" id="exampleTopImages" role="tabpanel">
-          Incurrunt latinam, faciendi dedecora evertitur delicatissimi, afficit noctesque
-          detracta illustriora epicurum contenta rogatiuncula dolores perspecta
-          indocti, eveniunt confirmatur tractat consuevit durissimis iuvaret
-          coercendi familiarem. Dolere prima fortunae intellegamus vix
-          porro huic errorem molestum, graecos deinde effugiendorum aliter
-          appetendum afferrent eosdem.
-        </div>
+          <div id="exampleCustomGridField">
+            <div>
+              <button id="addPresButton" class="contact100-form-btn" 
+              data-toggle="modal" 
+              data-target="#addImgRadioModal"
+              style="width: 20%;margin-left: 80%;margin-bottom: 20px;border: none;">
+              <span>Ajouter image radio &nbsp;<i class="icon md-plus" aria-hidden="true"></i></span>
+              </button>
+            </div>
+            <div class="col-lg-12">
+                <!-- Example Bordered Table -->
+                <div class="example-wrap">
+                  <div class="example table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th style="border-top: 2px solid #dee2e6;"></th>
+                          <th style="border-top: 2px solid #dee2e6;">Nom</th>
+                          <th style="border-top: 2px solid #dee2e6;">Description</th>
+                          <th style="border-top: 2px solid #dee2e6;">Type</th>
+                          <th style="border-top: 2px solid #dee2e6;width: 120px;" class="text-nowrap">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let radio of radios;let i=index">
+                          <td>{{i+1}}</td>
+                          <td>{{radio?.nom}}</td>
+                          <td>{{radio?.description}}</td>
+                          <td>{{radio?.typeradio}}</td>
+                          <!-- <td>{{getAnalyseName(analyse?.typeanalyse)}}</td> -->
+                          <td class="text-nowrap">
+                            <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
+                                <button type="button" class="btn btn-primary btn-icon"
+                                style="MARGIN-LEFT: 13PX;"
+                                tooltip="Modifier image radio"
+                                (click)= "setSelectedRadio(radio)"
+                                data-toggle="modal" 
+                                data-target="#editImgRadioModal">
+                                  <i class="icon md-edit" aria-hidden="true"></i>
+                                </button>
+        
+                                <button type="button" class="btn btn-danger btn-icon" (click)="deleteRadio(radio?.id)">
+                                  <i class="icon md-delete" aria-hidden="true"></i>
+                                </button>
+                              </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              </div>
+              </div>
         <div class="tab-pane" id="exampleTopAnalyses" role="tabpanel">
                 <div id="exampleCustomGridField">
                     <div>
-                        <button type="button" class="btn btn-round btn-primary waves-effect waves-light waves-round" 
+                        <button class="contact100-form-btn" 
                         data-toggle="modal" 
                         data-target="#addModal"
-                        style="margin-left: 88.7%;">
-                        <i class="icon md-plus" aria-hidden="true"></i>
-                        Ajouter analyse</button>
+                        style="width: 20%;margin-left: 80%;margin-bottom: 20px;border: none;">
+                        <span>Ajouter analyse &nbsp;<i class="icon md-plus" aria-hidden="true"></i></span>
+                        </button>
                     </div>
                     <div class="col-lg-12">
                         <!-- Example Bordered Table -->
@@ -80,7 +116,7 @@
                                           <i class="icon md-edit" aria-hidden="true"></i>
                                         </button>
                 
-                                        <button type="button" class="btn btn-danger btn-icon">
+                                        <button type="button" class="btn btn-danger btn-icon" (click)="deleteAnalyse(analyse?.id)">
                                           <i class="icon md-delete" aria-hidden="true"></i>
                                         </button>
                                       </div>
@@ -90,12 +126,12 @@
                             </table>
                           </div>
                         </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              </div>
+              </div>
   
 <!-- Modal -->
 <div class="modal fade" id="addModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
@@ -188,6 +224,102 @@ role="dialog" tabindex="-1">
       <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Annuler</button>
       <button type="button" class="btn btn-primary" data-dismiss="modal"
       (click)="editAnalyse(nom1.value, desc1.value)">Modifier</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="addImgRadioModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
+role="dialog" tabindex="-1">
+<div class="modal-dialog modal-simple modal-center">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h4 class="modal-title">Ajouter une image radio</h4>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="addRadioForm" method="post">
+          <div class="form-group form-material row">
+            <label class="col-md-3 col-form-label">Nom: </label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" formControlName="nom">
+            </div>
+          </div>
+          <div class="form-group form-material row">
+              <label class="col-md-3 col-form-label">Description: </label>
+              <div class="col-md-9">
+                <input type="textarea" class="form-control" formControlName="description">
+              </div>
+            </div>
+          <div class="form-group example row">
+              <label class="col-md-3 col-form-label">Type: </label>
+              <select class="form-control form-control-sm col-md-8" formControlName="typeradio" 
+              style="margin-left: 15px;">
+              <option *ngFor="let typer of typesradios" [ngValue]="typer['@id']">
+                  {{typer?.radio}}
+                </option>
+              </select>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Annuler</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal"
+      (click)="addImgRadio()">Ajouter</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="editImgRadioModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
+role="dialog" tabindex="-1">
+<div class="modal-dialog modal-simple modal-center">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h4 class="modal-title">Modifier l'image radio</h4>
+    </div>
+    <div class="modal-body">
+      <form>
+          <div class="form-group form-material row">
+            <label class="col-md-3 col-form-label">Nom: </label>
+            <div class="col-md-9">
+              <input type="text" class="form-control"  #nomz value="{{selectedRadio?.nom}}">
+            </div>
+          </div>
+          <div class="form-group form-material row">
+              <label class="col-md-3 col-form-label">Description: </label>
+              <div class="col-md-9">
+                <input type="textarea" class="form-control" #descz value="{{selectedRadio?.description}}">
+              </div>
+          </div>
+          <div class="dropdown form-group form-material row" >
+            <label class="col-md-3 col-form-label">Type: </label>
+            <button 
+            style="background-color: white;color: black;border-color: #d0d0d0;margin-left: 15px;"
+            class="btn btn-secondary dropdown-toggle col-md-8" type="button" id="dropdownMenuButton" 
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{typeRadioName}}
+            </button>
+            <div class="dropdown-menu col-md-8" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item col-lg-11" style="cursor: pointer;" *ngFor="let typer of typesradios" (click)="setTypeRadio(typer)">{{typer?.radio}}</a>
+            </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Annuler</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal"
+      (click)="editRadio(nomz.value, descz.value)">Modifier</button>
     </div>
   </div>
 </div>

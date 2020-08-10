@@ -1,0 +1,209 @@
+<div class="container-contact100-form-btn" *ngIf="!isAddContext">
+    <button type="button" class="contact100-form-btn" 
+        style="width: 20%"
+        (click)="ajouterOrdonnance()">
+        <span>
+        Ajouter ordonnance        
+            <i class="icon md-plus" aria-hidden="true"></i>
+        </span>
+    </button>
+</div>
+
+<div class="container-contact100" *ngIf="isAddContext">
+    <div class="wrap-contact100" style="padding: 40px 55px 80px 55px;">
+        <div class="row pb-4" >
+            <div class="col-md-6" style="TEXT-ALIGN: left;">
+                <p class="mb-1" style=" font-family: Montserrat-SemiBold;font: inherit;">Docteur {{medecin?.prenom}} {{medecin?.nom}}</p>
+                <p style=" font-family: Montserrat-SemiBold;font: inherit;">
+                    &nbsp;&nbsp;<i class="icon md-pin" aria-hidden="true"></i> &nbsp;{{medecin?.adresse}}</p>
+                <p class="mb-1" style=" font-family: Montserrat-SemiBold;font: inherit;">
+                    &nbsp;&nbsp;<i class="icon md-phone" aria-hidden="true"></i>&nbsp;{{medecin?.telephone}}</p>
+            </div>
+            <div class="col-md-6">
+                <p style="font-family: Montserrat-SemiBold;
+                text-align: right;
+                margin-top: 100PX;
+                MARGIN-RIGHT: 30px;">
+                    <i class="icon md-calendar" aria-hidden="true"></i> 
+                    &nbsp;Le {{consultation?.date | date:'dd/MM/yyyy'}}
+                </p>
+            </div>
+            <hr class="my-5">
+        </div>
+        <div>
+            <p style="font-family: Montserrat-SemiBold;
+            text-align: left;
+            MARGIN-TOP: 20PX;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 20px;
+            color: black;">
+            &nbsp;Patient: {{patient?.prenom}} {{patient?.nom}}</p>
+        </div>
+        <button id="addPresButton" class="contact100-form-btn" 
+        style="width: 30%;
+        margin-left: 70%;
+        margin-bottom: 20PX;" 
+        (click)="setAddPresContext()">
+        <span>Ajouter médicament &nbsp;<i class="icon md-plus" aria-hidden="true"></i></span>
+        </button>
+        <form [formGroup]="addPrescriptionForm" method="post" class="contact100-form" *ngIf="isAddPresContext">
+            <div class="form-group wrap-input100 input100-select bg1" style="margin-top: -50px;">
+                <span class="label-input100">Medicament</span>
+                <div>
+                    <select class="js-select2 form-control" formControlName="medicament">
+                        <option class="input100"  style="font-size: 14px;" *ngFor="let med of medicaments" [ngValue]="med['@id']">
+                            {{med?.nom}} -- {{med?.description}}
+                        </option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+            </div>
+
+            <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
+                <span class="label-input100">Forme </span>
+                <input type="text" class="input100 form-control" formControlName="forme"  
+                placeholder="Préciser la forme " style="height: 30px;font-size: 14px;border:none;">
+            </div>
+
+            <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
+                <span class="label-input100">Dosage </span>
+                <input type="text" class="input100 form-control" formControlName="dosage" 
+                placeholder="Préciser le dosage" style="height: 30px;font-size: 14px;border:none;">
+            </div>
+
+            <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
+                <span class="label-input100">Quantité </span>
+                <input type="number" class="input100 form-control" formControlName="quantite" 
+                placeholder="Préciser la quantité" style="height: 30px;font-size: 14px;border:none;">
+            </div>
+            <button class="col md-5 rs1-wrap-input100 contact100-form-btn"
+             style="margin-bottom: 40px; margin-right: 10px;background-color: #36459b;"
+            (click)="ajouterPrescription()">
+            <span>Confirmer</span>
+            </button>
+            <button type="reset" class="col md-5 rs1-wrap-input100 contact100-form-btn"
+            style="margin-bottom: 40px;background-color: rgb(192 189 189);"
+            (click)="setAnnulerAddPresContext()">
+                <span>Annuler</span>
+            </button>
+        </form>
+        <!-- Example Custom -->
+            <div class="list-group" *ngFor="let pres of prescriptions">
+              <div class="wrap-input100 bg1" id="{{pres?.id}}">
+                <h5 class="list-group-item-heading mt-0" *ngIf="!isEditContextPres(pres?.id)" style="font-size:16px;">
+                <i class="icon md-check-circle" aria-hidden="true"></i>&nbsp;{{pres.medicament}}
+                </h5>
+                <p class="mb-0" style="font-family: inherit" *ngIf="!isEditContextPres(pres?.id)">
+                    Forme: {{pres.forme}} | Dosage: {{pres.dosage}} | Quantité: {{pres.quantite}}</p>
+                <div class="btn-group hidden-sm-down" *ngIf="!isEditContextPres(pres?.id)" id="exampleTableEventsToolbar" role="group"
+                style="margin-left: 91%;MARGIN-TOP: -45PX;">
+                    <button type="button" class="btn btn-primary btn-icon"
+                    tooltip="Modifier prescription"
+                    (click)= "setSelectedPresc(pres)">
+                      <i class="icon md-edit" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-icon"
+                    tooltip="supprimer prescription"
+                    (click)= "deleteprescription(pres?.id)">
+                      <i class="icon md-delete" aria-hidden="true"></i>
+                    </button>
+                </div>
+              </div>
+              <form class="contact100-form" *ngIf="isEditContextPres(pres?.id)" id="form">
+                <div class="form-group wrap-input100 input100-select bg1" style="margin-top: -50px;">
+                    <span class="label-input100">Medicament</span>
+                    <div>
+                        <button 
+                        style="background-color: white;color: black;border: none;font-family: Montserrat-SemiBold;font-size: 14px;"
+                        class="btn btn-secondary dropdown-toggle col-md-12" type="button" id="dropdownMenuButton" 
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{selectedmedicament?.nom}} -- {{selectedmedicament?.description}}     
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 93.5%;">
+                          <a class="dropdown-item" style="cursor: pointer;font-size: 12px;font-family: Montserrat-SemiBold;" *ngFor="let med of medicaments" 
+                          (click)="setMedicament(med)">
+                              {{med?.nom}} -- {{med?.description}}
+                         </a>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
+                    <span class="label-input100">Forme </span>
+                    <input type="text" class="input100 form-control" #forme1 value="{{selectedpres?.forme}}" 
+                    style="height: 30px;font-size: 14px;border:none;">
+                </div>
+    
+                <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
+                    <span class="label-input100">Dosage </span>
+                    <input type="text" class="input100 form-control" #dosage1 value="{{selectedpres?.dosage}}"
+                     style="height: 30px;font-size: 14px;border:none;">
+                </div>
+    
+                <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
+                    <span class="label-input100">Quantité </span>
+                    <input type="number" class="input100 form-control" #qte1 value="{{selectedpres?.quantite}}"
+                    style="height: 30px;font-size: 14px;border:none;">
+                </div>
+                <button class="col md-5 rs1-wrap-input100 contact100-form-btn"
+                 style="margin-bottom: 40px; margin-right: 10px;background-color: #36459b;"
+                (click)="editPrescription(forme1.value, dosage1.value, qte1.value)">
+                <span>Modifier</span>
+                </button>
+                <button type="reset" class="col md-5 rs1-wrap-input100 contact100-form-btn"
+                style="margin-bottom: 40px;background-color: rgb(192 189 189);"
+                (click)="setAnnulerEditPresContext()">
+                    <span>Annuler</span>
+                </button>
+            </form>
+            </div>
+          <!-- End Example Custom -->
+    </div>
+</div>
+
+<!--===============================================================================================-->
+<script src="../../../assets/ordonnance/vendor/jquery/jquery-3.2.1.min.js"></script>
+  <script src="../../../assets/ordonnance/vendor/animsition/js/animsition.min.js"></script>
+  <script src="../../../assets/ordonnance/vendor/bootstrap/js/popper.js"></script>
+  <script src="../../../assets/ordonnance/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../../../assets/ordonnance/vendor/select2/select2.min.js"></script>
+  <script src="../../../assets/ordonnance/vendor/daterangepicker/moment.min.js"></script>
+  <script src="../../../assets/ordonnance/vendor/daterangepicker/daterangepicker.js"></script>
+  <script src="../../../assets/ordonnance/vendor/countdowntime/countdowntime.js"></script>
+  <script src="../../../assets/ordonnance/vendor/noui/nouislider.min.js"></script>
+  <script>
+      var filterBar = document.getElementById('filter-bar');
+
+      noUiSlider.create(filterBar, {
+          start: [ 1500, 3900 ],
+          connect: true,
+          range: {
+              'min': 1500,
+              'max': 7500
+          }
+      });
+
+      var skipValues = [
+      document.getElementById('value-lower'),
+      document.getElementById('value-upper')
+      ];
+
+      filterBar.noUiSlider.on('update', function( values, handle ) {
+          skipValues[handle].innerHTML = Math.round(values[handle]);
+          $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
+          $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
+      });
+  </script>
+  <script src="../../../assets/ordonnance/js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>

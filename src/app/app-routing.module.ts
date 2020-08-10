@@ -22,7 +22,7 @@ const routes: Routes = [
     children: [
       { path: 'gestionSecretaires', component: AddSecretaireComponent ,canActivate: [AuthGuard]},
       { path: 'rendezVous', component: ConsultationComponent ,canActivate: [AuthGuard]},
-      { path: 'consultation/:id', component:GestionConsultationComponent ,canActivate: [AuthGuard]},
+      { path: 'consultation/:id', component: GestionConsultationComponent ,canActivate: [AuthGuard]},
       //{ path: '', redirectTo: 'register', pathMatch: 'full' },
     ]
   },
