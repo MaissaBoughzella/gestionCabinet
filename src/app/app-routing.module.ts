@@ -13,6 +13,10 @@ import { SecretaireComponent } from './secretaire/secretaire.component';
 import { AddRdvComponent } from './secretaire/add-rdv/add-rdv.component';
 import { ConsultationComponent } from './medecin/consultation/consultation.component';
 import { GestionConsultationComponent } from './medecin/gestion-consultation/gestion-consultation.component';
+import { ProfileComponent } from './medecin/profile/profile.component';
+import { ProfilePatientComponent } from './patient/profile-patient/profile-patient.component';
+import { ProfileSecretaireComponent } from './secretaire/profile-secretaire/profile-secretaire.component';
+
 
 const routes: Routes = [
   {
@@ -20,9 +24,10 @@ const routes: Routes = [
     component: MedecinComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'gestionSecretaires', component: AddSecretaireComponent ,canActivate: [AuthGuard]},
-      { path: 'rendezVous', component: ConsultationComponent ,canActivate: [AuthGuard]},
-      { path: 'consultation/:id', component: GestionConsultationComponent ,canActivate: [AuthGuard]},
+      { path: 'gestionSecretaires', component: AddSecretaireComponent, canActivate: [AuthGuard] },
+      { path: 'profil', component: ProfileComponent, canActivate: [AuthGuard] },
+      { path: 'rendezVous', component: ConsultationComponent, canActivate: [AuthGuard] },
+      { path: 'consultation/:id', component: GestionConsultationComponent, canActivate: [AuthGuard] },
       //{ path: '', redirectTo: 'register', pathMatch: 'full' },
     ]
   },
@@ -32,7 +37,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       // { path: 'home', component: PatientComponent },
-       { path: 'searchDoctor', component: DoctorSearchComponent },
+      { path: 'profil', component: ProfilePatientComponent, canActivate: [AuthGuard] },
+      { path: 'searchDoctor', component: DoctorSearchComponent },
       //{ path: '', redirectTo: 'home', pathMatch: 'full' },
     ]
   },
@@ -41,8 +47,8 @@ const routes: Routes = [
     component: SecretaireComponent,
     canActivate: [AuthGuard],
     children: [
-
-    { path: 'rdv', component: AddRdvComponent ,canActivate: [AuthGuard]},
+      { path: 'profil', component: ProfileSecretaireComponent, canActivate: [AuthGuard] },
+      { path: 'rdv', component: AddRdvComponent, canActivate: [AuthGuard] },
       //{ path: '', redirectTo: 'register', pathMatch: 'full' },
     ]
   },

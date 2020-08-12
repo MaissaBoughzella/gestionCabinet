@@ -32,6 +32,7 @@ export class OrdonnanceComponent implements OnInit {
   selectedmedicament: any;
   selectedMedId: any;
   editedId: any;
+  ordId: any;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
     private apiConsService: ApiConsultationService, private apiAuthService: ApiAuthService,
@@ -49,11 +50,15 @@ export class OrdonnanceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('idOrdonnance') != undefined && localStorage.getItem('idOrdonnance') != null) {
-      this.isAddContext = true;
-    }
-    else this.isAddContext = false;
-    const idCons = localStorage.getItem('idConsultation');
+
+    const idCons = this.activatedRoute.snapshot.paramMap.get('id');
+    this.apiOrdService.getOrdonnanceByConsultationId(idCons).subscribe((res: any) => {
+      this.ordId = res.id;
+      if (this.ordId != undefined && this.ordId != null) {
+        this.isAddContext = true;
+      }
+      else this.isAddContext = false;
+    });
     this.apiConsService.getConsById(idCons).subscribe((res: any) => {
       this.consultation = res;
       this.apiRdvService.getRdvById(res.rdv.substring(10)).subscribe((res: any) => {
@@ -73,34 +78,39 @@ export class OrdonnanceComponent implements OnInit {
     this.apiMedicamentService.getMedicaments().subscribe((res: any) => {
       this.medicaments = res['hydra:member'];
     });
-
-    const idOrdonnance = localStorage.getItem('idOrdonnance');
-    this.apiPrescriptionService.getPrescriptionByOrdId(idOrdonnance).subscribe((res: any) => {
-      this.prescriptions = res['hydra:member'];
+    this.apiOrdService.getOrdonnanceByConsultationId(idCons).subscribe((res: any) => {
+      this.ordId = res.id;
+      this.apiPrescriptionService.getPrescriptionByOrdId(this.ordId).subscribe((res: any) => {
+        this.prescriptions = res['hydra:member'];
+      });
     });
+
   }
 
   ajouterOrdonnance() {
-    const idCons = localStorage.getItem('idConsultation');
-    let dat = new Date(this.consultation.date);
+    const idCons = this.activatedRoute.snapshot.paramMap.get('id');
+    let dat = this.consultation.date;
     var body = {
       consultation: '/api/consultations/' + idCons,
       date: dat
     }
     this.apiOrdService.addOrdonnance(body).subscribe((res: any) => {
       this.isAddContext = true;
-      localStorage.setItem('idOrdonnance', res.id);
+      this.ordId = res.id;
     });
   }
 
   ajouterPrescription() {
-    const idOrdonnance = localStorage.getItem('idOrdonnance');
-    this.addPrescriptionForm.addControl('ordonnance', new FormControl('/api/ordonnances/' + idOrdonnance));
-    this.apiPrescriptionService.addPrescription(this.addPrescriptionForm.value).subscribe((res: any) => {
-      this.isAddPresContext = false;
-      document.getElementById("addPresButton").style.visibility = "visible";
-      this.apiPrescriptionService.getPrescriptionByOrdId(idOrdonnance).subscribe((res: any) => {
-        this.prescriptions = res['hydra:member'];
+    const idCons = this.activatedRoute.snapshot.paramMap.get('id');
+    this.apiOrdService.getOrdonnanceByConsultationId(idCons).subscribe((res: any) => {
+      this.ordId = res.id;
+      this.addPrescriptionForm.addControl('ordonnance', new FormControl('/api/ordonnances/' + this.ordId));
+      this.apiPrescriptionService.addPrescription(this.addPrescriptionForm.value).subscribe((res: any) => {
+        this.isAddPresContext = false;
+        document.getElementById("addPresButton").style.visibility = "visible";
+        this.apiPrescriptionService.getPrescriptionByOrdId(this.ordId).subscribe((res: any) => {
+          this.prescriptions = res['hydra:member'];
+        });
       });
     });
   }
@@ -145,28 +155,37 @@ export class OrdonnanceComponent implements OnInit {
     else
       isDiv = false;
     return isDiv && this.isEditPresContext;
-    
+
   }
 
   editPrescription(forme1, dosage1, qte1) {
-
-    const idOrdonnance = localStorage.getItem('idOrdonnance');
     var form = {
       forme: forme1,
       dosage: dosage1,
       quantite: Number(qte1),
       medicament: this.selectedMedId,
-    }
+    };
+    const idCons = this.activatedRoute.snapshot.paramMap.get('id');
     this.apiPrescriptionService.editPrescription(this.editedId, form).subscribe((res: any) => {
       this.isEditPresContext = false;
-      this.apiPrescriptionService.getPrescriptionByOrdId(idOrdonnance).subscribe((res: any) => {
-        this.prescriptions = res['hydra:member'];
+      this.apiOrdService.getOrdonnanceByConsultationId(idCons).subscribe((res: any) => {
+        this.ordId = res.id;
+        this.apiPrescriptionService.getPrescriptionByOrdId(this.ordId).subscribe((res: any) => {
+          this.prescriptions = res['hydra:member'];
+        });
       });
     });
   }
 
   setAnnulerEditPresContext() {
     this.isEditPresContext = false;
+  }
+
+  getNameMed(medId) {
+    let id = medId.substring(17);
+    this.apiMedicamentService.getMedicamentById(id).subscribe((res: any) => {
+      return res.nom;
+    });
   }
 }
 

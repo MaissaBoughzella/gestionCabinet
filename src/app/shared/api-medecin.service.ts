@@ -16,4 +16,18 @@ export class ApiMedecinService {
   getMedecinByUserId(id) {
     return this.http.get('http://127.0.0.1:8000/api/medecins/getByUserId/' + id);
   }
+
+  getMedecinById(id) {
+    return this.http.get('http://127.0.0.1:8000/api/medecins/' + id);
+  }
+  
+  editMedecin(id, body) {
+    return this.http.patch('http://127.0.0.1:8000/api/medecins/' + id, body);
+  }
+
+  getSpecialite(id) {
+    return this.http.get('http://127.0.0.1:8000/api/specialites/' + id);
+  }
+
+
 }

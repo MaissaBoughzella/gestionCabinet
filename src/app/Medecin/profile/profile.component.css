@@ -1,14 +1,4 @@
-label {
-  font-weight: 500;
-  font-size: 13px;
-}
-
-.table thead th{
-  font-weight: 600;
-  color: #616161;
-  border-bottom-width: 1px;
-  font-size: 14px;
-}
+@import "../../../assets/examples/css/pages/profile.minfd53.css";
 /*[ Button ]*/
 .container-contact100-form-btn {
     display: -webkit-box;
@@ -65,3 +55,4 @@ label {
     -o-transform: translateX(10px);
     transform: translateX(10px);
   }
+  

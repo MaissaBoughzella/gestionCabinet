@@ -62,10 +62,9 @@ export class AddSecretaireComponent implements OnInit {
       }
       this.apiAuthService.getUserByRole(this.roleId1).subscribe((res: any) => {
         this.secretaires = res['hydra:member'];
-        this.apiSecService.isEmpty = this.isEmpty();
+        //this.apiSecService.isEmpty = this.isEmpty();
       });
     });
-
   }
 
   addUser() {
@@ -76,7 +75,7 @@ export class AddSecretaireComponent implements OnInit {
       this.addSecretaireForm.addControl('medecinId', new FormControl(localStorage.getItem('id'), Validators.required));
 
       this.apiAuthService.addSecretaire(this.addSecretaireForm.value).subscribe((res: any) => {
-        this.apiSecService.existSecretaire = res 
+        //this.apiSecService.secretaire = res 
         this.ngOnInit();
         
       });
@@ -155,18 +154,18 @@ export class AddSecretaireComponent implements OnInit {
 
   deleteSec(id) {
     this.apiAuthService.deleteUser(id).subscribe((res: any) => {
-      this.apiSecService.existSecretaire = res
+      //this.apiSecService.secretaire = res
       this.ngOnInit();
     });
   }
 
-  public isEmpty(): boolean {
-    if (this.apiSecService.existSecretaire == undefined
-      || this.apiSecService.existSecretaire == null) {
-      return true;
-    }
-    else return false;
-  }
+  // public isEmpty(): boolean {
+  //   if (this.apiSecService.secretaire == undefined
+  //     || this.apiSecService.secretaire == null) {
+  //     return true;
+  //   }
+  //   else return false;
+  // }
 
 
 }

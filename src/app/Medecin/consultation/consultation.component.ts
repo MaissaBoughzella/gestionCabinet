@@ -16,10 +16,11 @@ export class ConsultationComponent implements OnInit {
   rdvs = [];
   config: { itemsPerPage: number; currentPage: number };
   selectedRdvId;
+  selectRdvId: any;
 
   constructor(private router: Router, private apiRdvService: ApiRdvService, private apiConsService: ApiConsultationService) {
     this.config = {
-      itemsPerPage: 2,
+      itemsPerPage: 10,
       currentPage: 1,
     };
   }
@@ -37,7 +38,8 @@ export class ConsultationComponent implements OnInit {
 
   setSelectedRdv(rdv) {
     this.selectedRdv = rdv;
-    this.selectedRdvId = rdv['@id']
+    this.selectedRdvId = rdv['@id'];
+    this.selectRdvId = rdv.id;
   }
 
   addcons(dat, heur, pri) {
@@ -46,12 +48,29 @@ export class ConsultationComponent implements OnInit {
       heure: heur,
       prix: Number(pri),
       rdv: this.selectedRdvId
+    };
+    var body1 = {
+      etat: "Consulté",
     }
     this.apiConsService.addConsultation(body).subscribe((res: any) => {
-      
+      this.apiRdvService.editRdv(this.selectRdvId, body1).subscribe((ress: any) => {
+        this.router.navigate(['/medecin/consultation', res.id]);
+      });
+    });
+  }
+
+  annulercons() {
+    var body = {
+      etat: "Annulé",
+    }
+    this.apiRdvService.editRdv(this.selectRdvId, body).subscribe((ress: any) => {
+    });
+  }
+
+  AfficherConsultation(id) {
+    this.apiConsService.getConsByRdvId(id).subscribe((res: any) => {
       this.router.navigate(['/medecin/consultation', res.id]);
     });
-
   }
 
   pageChanged(event) {

@@ -1,0 +1,195 @@
+<!-- Page -->
+<div class="page">
+    <div class="page-content container-fluid">
+      <div class="row">
+        <div class="col-lg-3">
+          <!-- Page Widget -->
+          <div class="card card-shadow text-center">
+            <div class="card-block">
+              <a class="avatar avatar-lg" style="width: 80%;">
+                <img src="../../../assets/global/portraits/5.jpg" alt="...">
+              </a>
+              <h4 class="profile-user" style="margin-top: 10%;margin-bottom: 4%;">
+                Docteur {{user?.prenom}} {{user?.nom}}</h4>
+              <p class="profile-job" style="color: #9e9e9e;">{{medecinSpec}}</p><hr>
+              <p style=" font-family: Montserrat-SemiBold;font: inherit;">
+                &nbsp;&nbsp;<i class="icon md-pin" aria-hidden="true"></i> &nbsp;{{user?.adresse}}</p>
+              <p class="mb-1" style=" font-family: Montserrat-SemiBold;font: inherit;">
+                &nbsp;&nbsp;<i class="icon md-phone" aria-hidden="true"></i>&nbsp;{{user?.telephone}}</p>
+            </div>
+          </div>
+          <!-- End Page Widget -->
+        </div>
+
+        <div class="col-lg-9">
+          <!-- Panel -->
+          <div class="panel">
+            <div class="panel-body nav-tabs-animate nav-tabs-horizontal" data-plugin="tabs">
+              <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+                <li class="nav-item" role="presentation"><a class="active nav-link" data-toggle="tab" href="#profile" aria-controls="profile"
+                    role="tab">Informations Générales</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#activities"
+                    aria-controls="activities" role="tab">Informations Professionnelles</a></li>
+              </ul>
+
+              <div class="tab-content">
+                <div class="tab-pane  animation-slide-left" id="activities" role="tabpanel">
+                  <!-- Example Basic Form (Form row) -->
+              <div class="example-wrap" style="margin: 50PX 50PX 80PX 50PX;">
+                <div class="example">
+                  <form autocomplete="off">
+                      <div class="form-group form-material">
+                        <label class="form-control-label">Formation</label>
+                        <textarea rows="5" class="form-control" 
+                        #form1 autocomplete="off">{{medecin?.formation}}</textarea>
+                      </div>
+
+                      <div class="dropdown form-group form-material" >
+                        <label class="form-control-label" for="inputBasicGenre">Spécialité</label>
+                        <button class="btn btn-secondary dropdown-toggle col-md-12" type="button" id="inputBasicGenre" 
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        style="background-color: white;color: black;border-color: #d0d0d0;" >
+                        {{medecinSpec}}  
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="inputBasicGenre" style="WIDTH: 97%">
+                          <a class="dropdown-item col-lg-11" style="cursor: pointer;" *ngFor="let spec of specialites"
+                          (click)="setSpecialite(spec)">{{spec?.specialite}}</a>
+                        </div>
+                      </div>
+
+                      <div class="form-group form-material">
+                        <label class="form-control-label">Qualification</label>
+                        <textarea rows="5" class="form-control" 
+                        #qualif1 autocomplete="off">{{medecin?.qualification}}</textarea>
+                      </div>
+
+                      <div class="form-group form-material">
+                        <label class="form-control-label">Experience</label>
+                        <textarea rows="5" class="form-control" 
+                        #exp1 autocomplete="off">{{medecin?.experience}}</textarea>
+                      </div>
+
+                      <div class="form-group form-material" style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary" 
+                        style="margin-right:5px;background-color: #36459b;border-color: #36459b;height: 37px;"
+                        (click)="editInfoProf(form1.value, qualif1.value, exp1.value)">
+                        Enregistrer</button>
+                        <button type="reset" class="btn btn-light" style="background-color: rgb(192 189 189);border-color: rgb(192 189 189);
+                        height: 37px;"
+                         (click)="resetBtn()">Annuler</button>
+                      </div>
+                  </form>
+                </div>
+              </div>
+              <!-- End Example Basic Form (Form row) -->
+                </div>
+
+                <div class="tab-pane active animation-slide-left" id="profile" role="tabpanel">
+                    <!-- Example Basic Form (Form row) -->
+              <div class="example-wrap" style="margin: 50PX 50PX 80PX 50PX;">
+                <div class="example">
+                  <form autocomplete="off">
+                    <div class="form-row">
+                      <div class="form-group form-material col-md-6">
+                        <label class="form-control-label" for="inputBasicFirstName">Nom</label>
+                        <input type="text" class="form-control" id="inputBasicFirstName" 
+                        #nom1 value="{{user?.nom}}" autocomplete="off" />
+                      </div>
+                      <div class="form-group form-material col-md-6">
+                        <label class="form-control-label" for="inputBasicLastName">Prénom</label>
+                        <input type="text" class="form-control" id="inputBasicLastName" 
+                        #prenom1 value="{{user?.prenom}}" autocomplete="off" />
+                      </div>
+                    </div>
+                  <div class="form-row">
+                   <div class="dropdown form-group form-material col-md-6" >
+                    <label class="form-control-label" for="inputBasicGenre">Genre</label>
+                    <button class="btn btn-secondary dropdown-toggle col-md-12" type="button" id="inputBasicGenre" 
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    style="background-color: white;color: black;border-color: #d0d0d0;" >
+                    {{ getGenre(user?.genre)}}   
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="inputBasicGenre" style="WIDTH: 97%">
+                      <a class="dropdown-item col-lg-11" #femme style="cursor: pointer;" (click)="setGenre(femme)">Femme</a>
+                      <a class="dropdown-item col-lg-11" #homme style="cursor: pointer;" (click)="setGenre(homme)">Homme</a>
+                    </div>
+                    </div>
+                    <div class="dropdown form-group form-material col-md-6" >
+                      <label class="form-control-label" for="inputBasicLangue">La version de l'application</label><br>
+                      <button class="btn btn-secondary dropdown-toggle col-md-12" type="button" id="inputBasicLangue" 
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                      style="background-color: white;color: black;border-color: #d0d0d0;">
+                      {{ getLangue(user?.langue)}}   
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="inputBasicLangue" style="WIDTH: 97%">
+                        <a class="dropdown-item col-lg-11" #fr style="cursor: pointer;" (click)="setLangue(fr)">Français</a>
+                        <a class="dropdown-item col-lg-11" #en style="cursor: pointer;" (click)="setLangue(en)">Anglais</a>
+                        <a class="dropdown-item col-lg-11" #de style="cursor: pointer;" (click)="setLangue(de)">Allemand</a>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group form-material col-md-6">
+                        <label class="form-control-label" for="inputBasicEmail">Email</label>
+                        <input type="email" class="form-control" id="inputBasicEmail" 
+                        #email1 value="{{user?.email}}" autocomplete="off" />
+                      </div>
+                      <div class="form-group form-material col-md-6">
+                        <label class="form-control-label" for="inputBasicPassword">Mot de passe</label>
+                        <input type="password" class="form-control" id="inputBasicPassword" 
+                        #pass1 value="{{user?.password}}" autocomplete="off" />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group form-material col-md-6">
+                        <label class="form-control-label" for="inputBasicFirstName">Adresse</label>
+                        <input type="text" class="form-control" id="inputBasicFirstName"
+                        #add1 value="{{user?.adresse}}" autocomplete="off" />
+                      </div>
+                      <div class="form-group form-material col-md-6">
+                        <label class="form-control-label" for="inputBasicLastName">Téléphone</label>
+                        <input type="text" class="form-control" id="inputBasicLastName"
+                        #tel1 value="{{user?.telephone}}" autocomplete="off" />
+                      </div>
+                    </div>
+                    <div class="form-group form-material" style="margin-top: 20px;">
+                      <button type="submit" class="btn btn-primary" 
+                      style="margin-right:5px;background-color: #36459b;border-color: #36459b;height: 37px;"
+                      (click)="editInfoGen(nom1.value, prenom1.value,email1.value, pass1.value, add1.value, tel1.value)">
+                      Enregistrer</button>
+                      <button type="reset" class="btn btn-light" style="background-color: rgb(192 189 189);border-color: rgb(192 189 189);
+                      height: 37px;"
+                       (click)="resetBtn()">Annuler</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- End Example Basic Form (Form row) -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Panel -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page -->
+
+
+  <!-- Page -->
+  <script src="../../../assets/js/Site.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/asscrollable.minfd53.js?v4.0.1"></script>
+
+  <script src="../../../assets/global/js/Plugin/slidepanel.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/switchery.minfd53.js?v4.0.1"></script>
+
+  <script src="../../../assets/global/js/Plugin/responsive-tabs.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/tabs.minfd53.js?v4.0.1"></script>
+
+  
+  <!-- Plugins -->
+  <script src="../../../assets/global/vendor/switchery/switchery.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/intro-js/intro.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/screenfull/screenfull.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/slidepanel/jquery-slidePanel.minfd53.js?v4.0.1"></script>

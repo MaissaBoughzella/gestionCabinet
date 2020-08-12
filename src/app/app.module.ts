@@ -24,7 +24,10 @@ import { AddRdvComponent } from './secretaire/add-rdv/add-rdv.component';
 import { ConsultationComponent } from './medecin/consultation/consultation.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { GestionConsultationComponent } from './medecin/gestion-consultation/gestion-consultation.component';
-import { OrdonnanceComponent } from './medecin/ordonnance/ordonnance.component'; 
+import { OrdonnanceComponent } from './medecin/ordonnance/ordonnance.component';
+import { ProfileComponent } from './medecin/profile/profile.component';
+import { ProfilePatientComponent } from './patient/profile-patient/profile-patient.component';
+import { ProfileSecretaireComponent } from './secretaire/profile-secretaire/profile-secretaire.component'; 
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { OrdonnanceComponent } from './medecin/ordonnance/ordonnance.component';
     AddRdvComponent,
     ConsultationComponent,
     GestionConsultationComponent,
-    OrdonnanceComponent
+    OrdonnanceComponent,
+    ProfileComponent,
+    ProfilePatientComponent,
+    ProfileSecretaireComponent
   ],
   imports: [
     BrowserModule,

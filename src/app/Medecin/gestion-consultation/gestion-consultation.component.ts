@@ -62,7 +62,6 @@ export class GestionConsultationComponent implements OnInit {
 
   ngOnInit(): void {
     
-    localStorage.setItem('idConsultation',this.activatedRoute.snapshot.paramMap.get('id')) ;
     this.apiAnalyseService.getTypesAnalyses().subscribe((res: any) => {
       this.types = res['hydra:member'];
     });

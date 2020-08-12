@@ -102,8 +102,8 @@
                     <label class="col-md-3 col-form-label">Patient: </label>
                     <select class="form-control form-control-sm col-md-8" formControlName="patient" 
                     style="margin-left: 15px;">
-                    <option *ngFor="let user of users" [ngValue]="user['@id']">
-                        {{ user?.prenom }}  {{ user?.nom }}
+                    <option *ngFor="let patient of patients" [ngValue]="patient['@id']">
+                        {{ patient?.profession }}
                       </option>
                     </select>
                   </div>

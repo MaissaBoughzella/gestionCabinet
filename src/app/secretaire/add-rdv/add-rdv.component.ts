@@ -63,13 +63,11 @@ export class AddRdvComponent implements OnInit {
       }
       this.apiAuthService.getUserByRole(this.roleId).subscribe((res: any) => {
         this.users = res['hydra:member'];
-        //console.log(this.users);
       });
     });
     
-    this.apiPatientService.getPatientByUserId(this.selectedUser.id).subscribe((res: any) => {
-        this.patients = res
-        console.log(res)
+    this.apiPatientService.getPatients().subscribe((res: any) => {
+        this.patients = res['hydra:member'];
       });
   }
 
@@ -91,10 +89,10 @@ export class AddRdvComponent implements OnInit {
     this.etatToEdit = rdv.etat;
   }
 
-  setSelectedUser(user) {
-    this.selectedUser = user;
-    console.log(this.selectedUser)
-  }
+  // setSelectedUser(user) {
+  //   this.selectedUser = user;
+  //   console.log(this.selectedUser)
+  // }
 
   editRdv(dat, heur) {
     var body = {

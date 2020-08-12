@@ -4,6 +4,8 @@ import { ApiAuthService } from '../shared/api-auth.service';
 import { Router } from '@angular/router';
 import { error } from '@angular/compiler/src/util';
 import { ApiMedecinService } from '../shared/api-medecin.service';
+import { ApiPatientService } from '../shared/api-patient.service';
+import { ApiSecretaireService } from '../shared/api-secretaire.service';
 
 @Component({
     selector: 'app-login',
@@ -15,7 +17,9 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     roleName: string;
     roles;
-    constructor(private fb: FormBuilder, private authService: ApiAuthService,private apiMedService: ApiMedecinService, private router: Router) {
+    constructor(private fb: FormBuilder, private authService: ApiAuthService,
+        private apiMedService: ApiMedecinService, private apiPatientService: ApiPatientService,
+        private apiSecService: ApiSecretaireService,private router: Router) {
 
         this.loginForm = this.fb.group({
             email: ['', Validators.required],
@@ -34,38 +38,45 @@ export class LoginComponent implements OnInit {
                 var id = ress['roles'].substring(11);
                 var user = ress['@id'].substring(11);
                 this.authService.getRoleById(id).subscribe((res: any) => {
-                    this.roleName=res.role;
+                    this.roleName = res.role;
                     if (this.roleName == "Medecin" || this.roleName == "medecin") {
-                        
-                    this.apiMedService.getMedecinByUserId(user).subscribe((res: any) => {
-                        localStorage.setItem('id', res['@id']);
-                    
-                        localStorage.setItem('isMedecin', 'true');
-                        this.router.navigate(['/medecin'])
-                        .then(() => {
-                          window.location.reload();
+
+                        this.apiMedService.getMedecinByUserId(user).subscribe((res: any) => {
+                            localStorage.setItem('id', res['@id']);
+
+                            localStorage.setItem('isMedecin', 'true');
+                            this.router.navigate(['/medecin'])
+                                .then(() => {
+                                    window.location.reload();
+                                });
                         });
-                    });
-                } 
+                    }
                     else if (this.roleName == "Patient" || this.roleName == "patient") {
+                        this.apiPatientService.getPatientByUserId(user).subscribe((res: any) => {
+                            localStorage.setItem('id', res['@id']);
+
                             localStorage.setItem('isPatient', 'true');
                             this.router.navigate(['/patient'])
-                            .then(() => {
-                              window.location.reload();
-                            });
-                        }
-                        else if (this.roleName == "Secretaire" || this.roleName == "secretaire") {
+                                .then(() => {
+                                    window.location.reload();
+                                });
+                        });
+                    }
+                    else if (this.roleName == "Secretaire" || this.roleName == "secretaire") {
+                        this.apiSecService.getSecretaireByUserId(user).subscribe((res: any) => {
+                            localStorage.setItem('id', res['@id']);
 
                             localStorage.setItem('isSecretaire', 'true');
                             this.router.navigate(['/secretaire'])
-                            .then(() => {
-                              window.location.reload();
-                            });
-                        }
+                                .then(() => {
+                                    window.location.reload();
+                                });
+                        });
+                    }
                 });
             });
 
-        
+
+        }
     }
-}
 }

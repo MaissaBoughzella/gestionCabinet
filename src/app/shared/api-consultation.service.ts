@@ -17,6 +17,10 @@ export class ApiConsultationService {
     return this.http.get('http://127.0.0.1:8000/api/consultations/' + id);
   }
 
+  getConsByRdvId(id) {
+    return this.http.get('http://127.0.0.1:8000/api/consultations/getByRdvId/' + id);
+  }
+
   addConsultation(body) {
     return this.http.post('http://127.0.0.1:8000/api/consultations', body);
   }
