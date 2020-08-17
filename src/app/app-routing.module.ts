@@ -16,6 +16,15 @@ import { GestionConsultationComponent } from './medecin/gestion-consultation/ges
 import { ProfileComponent } from './medecin/profile/profile.component';
 import { ProfilePatientComponent } from './patient/profile-patient/profile-patient.component';
 import { ProfileSecretaireComponent } from './secretaire/profile-secretaire/profile-secretaire.component';
+import { RendezVousListComponent } from './patient/rendez-vous-list/rendez-vous-list.component';
+import { DossierMedicalComponent } from './patient/dossier-medical/dossier-medical.component';
+import { ConsultationByPatientComponent } from './patient/consultation-by-patient/consultation-by-patient.component';
+import { ListePatientsComponent } from './medecin/liste-patients/liste-patients.component';
+import { AdminComponent } from './admin/admin.component';
+import { RoleComponent } from './admin/role/role.component';
+import { SpecialiteComponent } from './admin/specialite/specialite.component';
+import { TypeAnalyseComponent } from './admin/type-analyse/type-analyse.component';
+import { TypeRadioComponent } from './admin/type-radio/type-radio.component';
 
 
 const routes: Routes = [
@@ -24,7 +33,8 @@ const routes: Routes = [
     component: MedecinComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'gestionSecretaires', component: AddSecretaireComponent, canActivate: [AuthGuard] },
+      { path: 'patients', component: ListePatientsComponent, canActivate: [AuthGuard] },
+      { path: 'secretaires', component: AddSecretaireComponent, canActivate: [AuthGuard] },
       { path: 'profil', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'rendezVous', component: ConsultationComponent, canActivate: [AuthGuard] },
       { path: 'consultation/:id', component: GestionConsultationComponent, canActivate: [AuthGuard] },
@@ -39,6 +49,9 @@ const routes: Routes = [
       // { path: 'home', component: PatientComponent },
       { path: 'profil', component: ProfilePatientComponent, canActivate: [AuthGuard] },
       { path: 'searchDoctor', component: DoctorSearchComponent },
+      { path: 'rendezVous', component: RendezVousListComponent, canActivate: [AuthGuard] },
+      { path: 'dossierMedical', component: DossierMedicalComponent, canActivate: [AuthGuard] },
+      { path: 'consultation/:id', component: ConsultationByPatientComponent, canActivate: [AuthGuard] },
       //{ path: '', redirectTo: 'home', pathMatch: 'full' },
     ]
   },
@@ -48,10 +61,16 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'profil', component: ProfileSecretaireComponent, canActivate: [AuthGuard] },
-      { path: 'rdv', component: AddRdvComponent, canActivate: [AuthGuard] },
+      { path: 'rendezVous', component: AddRdvComponent, canActivate: [AuthGuard] },
       //{ path: '', redirectTo: 'register', pathMatch: 'full' },
     ]
   },
+
+  { path: 'admin', component: AdminComponent },
+  { path: 'admin/roles', component: RoleComponent },
+  { path: 'admin/specialites', component: SpecialiteComponent },
+  { path: 'admin/typesAnalyses', component: TypeAnalyseComponent },
+  { path: 'admin/typesImagesRadios', component: TypeRadioComponent },
   { path: 'medecin/register', component: RegisterComponent },
   { path: 'patient/register', component: RegisterPatientComponent },
   { path: 'login', component: LoginComponent },

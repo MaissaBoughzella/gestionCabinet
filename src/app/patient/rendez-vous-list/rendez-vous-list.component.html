@@ -1,0 +1,82 @@
+<div class="panel">
+    <div class="panel-heading">
+      <h2 class="panel-title">Liste des rendez-vous pris</h2>
+      <div class="page-header-actions">
+        <form action="#" method="post">
+          <div class="input-search input-search-dark">
+            <i class="input-search-icon md-search" aria-hidden="true"></i>
+            <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width: 9%;"></th>
+            <th>Etat</th>
+            <th>Date</th>
+            <th>Heure</th>
+            <th style="width: 15%;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rdv of rdvs  | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } | filter:term; let i=index;">
+            <td style="font-weight: 600;color: #616161;">{{ itemsPerPage * (currentPage - 1) + (i+1) }} </td>
+            <td class="work-status" *ngIf = "rdv?.etat == 'Annulé'">
+              <span class="badge badge-danger" style="font-size: 12px;">{{rdv?.etat}}</span>
+            </td>
+            <td class="work-status" *ngIf = "rdv?.etat == 'Consulté'">
+              <span class="badge badge-success" style="font-size: 12px;">{{rdv?.etat}}</span>
+            </td>
+            <td class="work-status" *ngIf = "rdv?.etat == 'Non consulté'">
+              <span class="badge badge-primary" style="font-size: 12px;">{{rdv?.etat}}</span>
+            </td>
+            <td class="subject">
+              <i class="icon md-calendar"></i>&nbsp;{{rdv?.date | date:'dd/MM/yyyy'}}              
+            </td>
+            <td class="work-progress">
+              <i class="icon md-time"></i>&nbsp;{{rdv?.heure | date:'shortTime'}}
+            </td>
+            <td class="actions" *ngIf = "rdv?.etat == 'Consulté'">
+              <button id="AfficherBtn" type="button" class="btn  btn-icon"
+              style="width: 200px;
+              height: 35px;
+              font-size: 13px;
+              font-weight: 500;
+              color: #4caf50;
+              background-color: #fff;"
+              (click)="AfficherConsultation(rdv?.id)">
+              Afficher consultation
+              </button>
+            </td>
+            <td class="actions" *ngIf = "rdv?.etat == 'Annulé' || rdv?.etat == 'Non consulté'"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel-footer">
+      <nav>
+        <ul class="pagination page-item" style="margin-left: 40%;">
+          <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+        </ul>
+      </nav>
+    </div>
+  </div>
+<!-- Plugins For This Page -->
+<script src="../../../assets/global/vendor/slidepanel/jquery-slidePanel.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/vendor/chartist/chartist.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/vendor/jquery-selective/jquery-selective.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/vendor/aspaginator/jquery-asPaginator.minfd53.js?v4.0.1"></script>
+
+<!-- Page -->
+<script src="../../../assets/js/Site.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/js/Plugin/asscrollable.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/js/Plugin/slidepanel.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/js/Plugin/switchery.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/global/js/Plugin/aspaginator.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/js/BaseApp.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/js/App/Work.minfd53.js?v4.0.1"></script>
+<script src="../../../assets/examples/js/apps/work.minfd53.js?v4.0.1"></script>

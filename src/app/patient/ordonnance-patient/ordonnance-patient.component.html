@@ -1,0 +1,89 @@
+<div class="container-contact100" style="min-height:0px">
+    <div class="wrap-contact100">
+        <div class="row pb-4" >
+            <div class="col-md-6" style="TEXT-ALIGN: left;">
+                <p class="mb-1" style=" font-family: Montserrat-SemiBold;font: inherit;">Docteur {{medecin?.prenom}} {{medecin?.nom}}</p>
+                <p style=" font-family: Montserrat-SemiBold;font: inherit;">
+                    &nbsp;&nbsp;<i class="icon md-pin" aria-hidden="true"></i> &nbsp;{{medecin?.adresse}}</p>
+                <p class="mb-1" style=" font-family: Montserrat-SemiBold;font: inherit;">
+                    &nbsp;&nbsp;<i class="icon md-phone" aria-hidden="true"></i>&nbsp;{{medecin?.telephone}}</p>
+            </div>
+            <div class="col-md-6">
+                <p style="font-family: Montserrat-SemiBold;
+                text-align: right;
+                margin-top: 100PX;
+                MARGIN-RIGHT: 30px;">
+                    <i class="icon md-calendar" aria-hidden="true"></i> 
+                    &nbsp;Le {{consultation?.date | date:'dd/MM/yyyy'}}
+                </p>
+            </div>
+            <hr class="my-5">
+        </div>
+        <div>
+            <p style="font-family: Montserrat-SemiBold;
+            text-align: left;
+            MARGIN-TOP: 20PX;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 20px;
+            color: black;">
+            &nbsp;Patient: {{patient?.prenom}} {{patient?.nom}}</p>
+        </div>
+        <!-- Example Custom -->
+            <div class="list-group" *ngFor="let pres of prescriptions">
+              <div class="wrap-input100 bg1" id="{{pres?.id}}">
+                <h5 class="list-group-item-heading mt-0" style="font-size:16px;">
+                <i class="icon md-check-circle" aria-hidden="true"></i>&nbsp;{{pres?.medicament}}
+                </h5>
+                <p class="mb-0" style="font-family: inherit">
+                    Forme: {{pres?.forme}} | Dosage: {{pres?.dosage}} | Quantité: {{pres?.quantite}}</p>
+              </div>
+            </div>
+          <!-- End Example Custom -->
+    </div>
+</div>
+<script src="../../../assets/ordonnance/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../../assets/ordonnance/vendor/animsition/js/animsition.min.js"></script>
+<script src="../../../assets/ordonnance/vendor/bootstrap/js/popper.js"></script>
+<script src="../../../assets/ordonnance/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../assets/ordonnance/vendor/select2/select2.min.js"></script>
+<script src="../../../assets/ordonnance/vendor/daterangepicker/moment.min.js"></script>
+<script src="../../../assets/ordonnance/vendor/daterangepicker/daterangepicker.js"></script>
+<script src="../../../assets/ordonnance/vendor/countdowntime/countdowntime.js"></script>
+<script src="../../../assets/ordonnance/vendor/noui/nouislider.min.js"></script>
+<script>
+    var filterBar = document.getElementById('filter-bar');
+
+    noUiSlider.create(filterBar, {
+        start: [ 1500, 3900 ],
+        connect: true,
+        range: {
+            'min': 1500,
+            'max': 7500
+        }
+    });
+
+    var skipValues = [
+    document.getElementById('value-lower'),
+    document.getElementById('value-upper')
+    ];
+
+    filterBar.noUiSlider.on('update', function( values, handle ) {
+        skipValues[handle].innerHTML = Math.round(values[handle]);
+        $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
+        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
+    });
+</script>
+<script src="../../../assets/ordonnance/js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-23581568-13');
+</script>
+

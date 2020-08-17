@@ -20,13 +20,15 @@ export class AddRdvComponent implements OnInit {
   medecinId;
   rdvs = [];
   selectedRdv;
-  config: { itemsPerPage: number; currentPage: number };
   etatToEdit;
   selectedRdvHeure;
   users;
   roles;
   roleId: any;
   selectedUser: any;
+  itemsPerPage: number;
+  currentPage: number;
+  term;
 
   constructor(private router: Router, private apiAuthService: ApiAuthService, private apiPatientService: ApiPatientService, private apiRdvService: ApiRdvService, private apiSecretaireService: ApiSecretaireService) {
 
@@ -37,11 +39,9 @@ export class AddRdvComponent implements OnInit {
       patient: new FormControl(''),
 
     });
-
-    this.config = {
-      itemsPerPage: 2,
-      currentPage: 1,
-    };
+    
+    this.itemsPerPage = 10;
+    this.currentPage = 1;
   }
 
   ngOnInit(): void {
@@ -112,7 +112,7 @@ export class AddRdvComponent implements OnInit {
   }
 
   pageChanged(event) {
-    this.config.currentPage = event;
+    this.currentPage = event;
   }
 
   // filter() {

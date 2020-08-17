@@ -1,0 +1,72 @@
+<!-- <div class="panel">
+    <div class="panel-heading" style="margin-bottom: 30px;">
+      <h2 class="panel-title">Liste des patients</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:5%;"></th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Genre</th>
+            <th>Téléphone</th>
+            <th>Adresse</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+                    <tbody>
+                      <tr *ngFor="let sec of secretaires | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage }; let i=index;" >
+                        <td style="font-weight: 600;color: #616161;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
+                        <td>{{sec?.nom}}</td>
+                        <td>{{sec?.prenom}}</td>
+                        <td>{{sec?.email}}</td>
+                        <td>{{sec?.genre}}</td>
+                        <td>{{sec?.telephone}}</td>
+                        <td>{{sec?.adresse}}</td>
+                        <td class="text-nowrap">
+                          <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
+                              <button type="button" class="btn btn-primary btn-icon"
+                              tooltip="Modifier secretaire"
+                              (click)= "setSelectedSec(sec)"
+                              data-toggle="modal" 
+                              data-target="#editModal">
+                                <i class="icon md-edit" aria-hidden="true"></i>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-icon" (click)="deleteSec(sec?.id)">
+                                <i class="icon md-delete" aria-hidden="true"></i>
+                              </button>
+                            </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="panel-footer">
+                <nav>
+                  <ul class="pagination page-item" style="margin-left: 40%;">
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                  </ul>
+                </nav>
+                </div>
+              </div> -->
+
+
+  <!-- Plugins For This Page -->
+  <script src="../../../assets/global/vendor/slidepanel/jquery-slidePanel.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/chartist/chartist.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/jquery-selective/jquery-selective.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/aspaginator/jquery-asPaginator.minfd53.js?v4.0.1"></script>
+
+  <!-- Page -->
+  <script src="../../../assets/js/Site.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/asscrollable.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/slidepanel.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/switchery.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/aspaginator.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/js/BaseApp.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/js/App/Work.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/examples/js/apps/work.minfd53.js?v4.0.1"></script>
+ 

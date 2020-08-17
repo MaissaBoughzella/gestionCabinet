@@ -1,13 +1,14 @@
     <div class="panel">
       <div class="panel-heading">
         <h2 class="panel-title">Liste des rendez-vous</h2>
-        <!-- <form class="panel-search-form" role="search">
-          <div class="input-search">
-            <i class="input-search-icon md-search" aria-hidden="true"></i>
-            <input type="text" class="form-control" id="inputSearch" name="search" placeholder="Search List">
-            <i class="icon md-refresh"></i>
-          </div>
-        </form> -->
+        <div class="page-header-actions">
+          <form action="#" method="post">
+            <div class="input-search input-search-dark">
+              <i class="input-search-icon md-search" aria-hidden="true"></i>
+              <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+            </div>
+          </form>
+        </div>
       </div>
       <div class="panel-body">
         <table class="table">
@@ -22,8 +23,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let rdv of rdvs  | paginate: config; let i=index;">
-              <td style="font-weight: 600;color: #616161;">{{i+1}}</td>
+            <tr *ngFor="let rdv of rdvs  | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } | filter:term ;let i=index;">
+              <td style="font-weight: 600;color: #616161;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
               <td class="work-status" *ngIf = "rdv?.etat == 'Annulé'">
                 <span class="badge badge-danger" style="font-size: 12px;">{{rdv?.etat}}</span>
               </td>

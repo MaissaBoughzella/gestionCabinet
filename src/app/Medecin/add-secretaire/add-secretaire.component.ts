@@ -27,6 +27,9 @@ export class AddSecretaireComponent implements OnInit {
   genreToEdit: any;
   langueToEdit: any;
   selectedSecByUser: any;
+  itemsPerPage: number;
+  currentPage: number;
+  term;
 
   constructor(private router: Router, private apiAuthService: ApiAuthService, private apiSecService: ApiSecretaireService) {
     this.RegisterForm = new FormGroup({
@@ -42,11 +45,8 @@ export class AddSecretaireComponent implements OnInit {
     })
     this.addSecretaireForm = new FormGroup({
     })
-
-    this.config = {
-      itemsPerPage: 5,
-      currentPage: 1,
-    };
+    this.itemsPerPage = 10;
+    this.currentPage = 1;
 
   }
 
@@ -62,7 +62,6 @@ export class AddSecretaireComponent implements OnInit {
       }
       this.apiAuthService.getUserByRole(this.roleId1).subscribe((res: any) => {
         this.secretaires = res['hydra:member'];
-        //this.apiSecService.isEmpty = this.isEmpty();
       });
     });
   }
@@ -75,7 +74,6 @@ export class AddSecretaireComponent implements OnInit {
       this.addSecretaireForm.addControl('medecinId', new FormControl(localStorage.getItem('id'), Validators.required));
 
       this.apiAuthService.addSecretaire(this.addSecretaireForm.value).subscribe((res: any) => {
-        //this.apiSecService.secretaire = res 
         this.ngOnInit();
         
       });
@@ -86,7 +84,7 @@ export class AddSecretaireComponent implements OnInit {
   }
 
   pageChanged(event) {
-    this.config.currentPage = event;
+    this.currentPage = event;
   }
 
   setSelectedSec(sec) {
@@ -154,7 +152,6 @@ export class AddSecretaireComponent implements OnInit {
 
   deleteSec(id) {
     this.apiAuthService.deleteUser(id).subscribe((res: any) => {
-      //this.apiSecService.secretaire = res
       this.ngOnInit();
     });
   }

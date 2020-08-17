@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     roles;
     constructor(private fb: FormBuilder, private authService: ApiAuthService,
         private apiMedService: ApiMedecinService, private apiPatientService: ApiPatientService,
-        private apiSecService: ApiSecretaireService,private router: Router) {
+        private apiSecService: ApiSecretaireService, private router: Router) {
 
         this.loginForm = this.fb.group({
             email: ['', Validators.required],
@@ -72,6 +72,14 @@ export class LoginComponent implements OnInit {
                                     window.location.reload();
                                 });
                         });
+                    }
+                    else if (this.roleName == "Super Admin" || this.roleName == "Super admin"
+                        || this.roleName == "super Admin" || this.roleName == "super admin") {
+                        localStorage.setItem('isSuperAdmin', 'true');
+                        this.router.navigate(['/admin'])
+                            .then(() => {
+                                window.location.reload();
+                            });
                     }
                 });
             });

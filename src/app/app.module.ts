@@ -27,7 +27,18 @@ import { GestionConsultationComponent } from './medecin/gestion-consultation/ges
 import { OrdonnanceComponent } from './medecin/ordonnance/ordonnance.component';
 import { ProfileComponent } from './medecin/profile/profile.component';
 import { ProfilePatientComponent } from './patient/profile-patient/profile-patient.component';
-import { ProfileSecretaireComponent } from './secretaire/profile-secretaire/profile-secretaire.component'; 
+import { ProfileSecretaireComponent } from './secretaire/profile-secretaire/profile-secretaire.component';
+import { DossierMedicalComponent } from './patient/dossier-medical/dossier-medical.component';
+import { RendezVousListComponent } from './patient/rendez-vous-list/rendez-vous-list.component';
+import { ConsultationByPatientComponent } from './patient/consultation-by-patient/consultation-by-patient.component';
+import { OrdonnancePatientComponent } from './patient/ordonnance-patient/ordonnance-patient.component';
+import { ListePatientsComponent } from './medecin/liste-patients/liste-patients.component'; 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AdminComponent } from './admin/admin.component';
+import { TypeAnalyseComponent } from './admin/type-analyse/type-analyse.component';
+import { TypeRadioComponent } from './admin/type-radio/type-radio.component';
+import { RoleComponent } from './admin/role/role.component';
+import { SpecialiteComponent } from './admin/specialite/specialite.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +60,17 @@ import { ProfileSecretaireComponent } from './secretaire/profile-secretaire/prof
     OrdonnanceComponent,
     ProfileComponent,
     ProfilePatientComponent,
-    ProfileSecretaireComponent
+    ProfileSecretaireComponent,
+    DossierMedicalComponent,
+    RendezVousListComponent,
+    ConsultationByPatientComponent,
+    OrdonnancePatientComponent,
+    ListePatientsComponent,
+    AdminComponent,
+    TypeAnalyseComponent,
+    TypeRadioComponent,
+    RoleComponent,
+    SpecialiteComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +81,7 @@ import { ProfileSecretaireComponent } from './secretaire/profile-secretaire/prof
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    Ng2SearchPipeModule,
     TranslateModule.forRoot({
         loader: {
             provide: TranslateLoader,

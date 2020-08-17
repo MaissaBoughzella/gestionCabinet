@@ -15,7 +15,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class GestionConsultationComponent implements OnInit {
   addAnalyseForm: FormGroup;
   addRadioForm: FormGroup;
-  config: { itemsPerPage: number; currentPage: number; };
+
   types: any;
   consId: any;
   analyses: any;
@@ -30,11 +30,13 @@ export class GestionConsultationComponent implements OnInit {
   typer: any;
   typeRadioName: any;
   selectedTypeRadioId: any;
-  
+  itemsPerPage: number;
+  currentPage: number;
+  term;
+  term2;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, 
-    private apiConsService: ApiConsultationService, private apiAnalyseService: ApiAnalyseService, 
-    private apiRadioService: ApiRadioService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute,
+    private apiAnalyseService: ApiAnalyseService, private apiRadioService: ApiRadioService) {
 
 
     this.addAnalyseForm = new FormGroup({
@@ -53,15 +55,13 @@ export class GestionConsultationComponent implements OnInit {
 
     });
 
-    this.config = {
-      itemsPerPage: 2,
-      currentPage: 1,
-    };
+    this.itemsPerPage = 10;
+    this.currentPage = 1;
   }
 
 
   ngOnInit(): void {
-    
+
     this.apiAnalyseService.getTypesAnalyses().subscribe((res: any) => {
       this.types = res['hydra:member'];
     });
@@ -110,7 +110,7 @@ export class GestionConsultationComponent implements OnInit {
   }
 
   setSelectedAnalyse(anal) {
-    this.selectedAnalyse = anal; 
+    this.selectedAnalyse = anal;
     this.type = anal.typeanalyse.substring(18);
     this.apiAnalyseService.getTypeAnalyseById(this.type).subscribe((res: any) => {
       this.typeName = res.analyse;
@@ -118,19 +118,19 @@ export class GestionConsultationComponent implements OnInit {
   }
 
   setSelectedRadio(radio) {
-    this.selectedRadio = radio; 
+    this.selectedRadio = radio;
     this.typer = radio.typeradio.substring(16);
     this.apiRadioService.getTypeRadioById(this.typer).subscribe((res: any) => {
       this.typeRadioName = res.radio;
     });
   }
 
-  setType(type){
+  setType(type) {
     this.typeName = type.analyse;
     this.selectedTypeId = type['@id'];
   }
 
-  setTypeRadio(type){
+  setTypeRadio(type) {
     this.typeRadioName = type.radio;
     this.selectedTypeRadioId = type['@id'];
   }
@@ -169,5 +169,8 @@ export class GestionConsultationComponent implements OnInit {
     });
   }
 
+  pageChanged(event) {
+    this.currentPage = event;
+  }
 
 }

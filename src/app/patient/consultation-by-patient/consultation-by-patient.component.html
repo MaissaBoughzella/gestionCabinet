@@ -1,0 +1,94 @@
+
+<div class="panel nav-tabs-horizontal" data-plugin="tabs">
+    <div class="panel-heading">
+      <h2 class="panel-title" style="margin-bottom: 15px;">Consultation</h2>
+    </div>
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#exampleTopOrdonnance"
+          aria-controls="exampleTopHome" role="tab">Ordonnance</a>
+      </li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopImages" aria-controls="exampleTopCss"
+          role="tab">Images Radio</a>
+      </li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopAnalyses"
+          aria-controls="exampleTopJavascript" role="tab">Analyses</a>
+      </li>
+    </ul>
+    <div class="panel-body">
+      <div class="tab-content">
+        <div class="tab-pane active" id="exampleTopOrdonnance" role="tabpanel">  
+        <app-ordonnance-patient></app-ordonnance-patient>            
+        </div>
+        <div class="tab-pane" id="exampleTopImages" role="tabpanel">
+          <div class="page-header-actions" style=" margin-top: -83px;">
+          <form action="#" method="post">
+            <div class="input-search input-search-dark">
+              <i class="input-search-icon md-search" aria-hidden="true"></i>
+              <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+            </div>
+          </form>
+          </div>
+          <div id="exampleCustomGridField">
+                    <table class="table">
+                      <thead >
+                        <tr>
+                          <th style="width:12%;"></th>
+                          <th>Nom</th>
+                          <th>Description</th>
+                          <th style="width: 25%;">Type</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let radio of radios | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } | filter:term; let i=index;">
+                          <td style="font-weight: 600;color: #616161;padding-left: 60px;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
+                          <td>{{radio?.nom}}</td>
+                          <td>{{radio?.description}}</td>
+                          <td>{{radio?.typeradio}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <nav>
+                    <ul class="pagination page-item" style="margin-left: 40%;">
+                      <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                    </ul>
+                  </nav>
+                </div>
+        <div class="tab-pane" id="exampleTopAnalyses" role="tabpanel">
+          <div class="page-header-actions" style=" margin-top: -83px;">
+            <form action="#" method="post">
+              <div class="input-search input-search-dark">
+                <i class="input-search-icon md-search" aria-hidden="true"></i>
+                <input type="text" [(ngModel)]="term2" class="form-control" name="search" placeholder="Search...">
+              </div>
+            </form>
+            </div>
+                <div id="exampleCustomGridField">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th style="width:12%;"></th>
+                                  <th>Nom</th>
+                                  <th>Description</th>
+                                  <th style="width: 25%;">Type</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let analyse of analyses | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } |filter:term2; let i=index;">
+                                  <td style="font-weight: 600;color: #616161;padding-left: 60px;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
+                                  <td>{{analyse?.nom}}</td>
+                                  <td>{{analyse?.description}}</td>
+                                  <td>{{analyse?.typeanalyse}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <nav>
+                            <ul class="pagination page-item" style="margin-left: 40%;">
+                              <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                            </ul>
+                          </nav>
+                        </div>
+                      </div>
+                    </div>
+                  </div>

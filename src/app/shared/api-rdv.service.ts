@@ -8,9 +8,17 @@ import { HttpClient } from '@angular/common/http';
 export class ApiRdvService {
 
   constructor(private http: HttpClient, private router: Router) { }
-  
+
   getRdvs() {
     return this.http.get('http://127.0.0.1:8000/api/rdvs');
+  }
+
+  getAllRdvsByPatient(id) {
+    return this.http.get('http://127.0.0.1:8000/api/rdvs/getAllRdvsByPatientId/' + id);
+  }
+
+  getAllRdvsByMedecin(id) {
+    return this.http.get('http://127.0.0.1:8000/api/rdvs/getRdvsByMedecinId/' + id);
   }
 
   getRdvById(id) {
@@ -22,7 +30,7 @@ export class ApiRdvService {
     return this.http.post('http://127.0.0.1:8000/api/rdvs', body);
   }
 
-  editRdv(id,body) {
+  editRdv(id, body) {
     return this.http.patch('http://127.0.0.1:8000/api/rdvs/' + id, body);
   }
 

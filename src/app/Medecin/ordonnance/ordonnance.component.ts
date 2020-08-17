@@ -7,7 +7,6 @@ import { ApiPatientService } from 'src/app/shared/api-patient.service';
 import { ApiMedicamentService } from 'src/app/shared/api-medicament.service';
 import { ApiOrdonnanceService } from 'src/app/shared/api-ordonnance.service';
 import { ApiPrescriptionService } from 'src/app/shared/api-prescription.service';
-
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({

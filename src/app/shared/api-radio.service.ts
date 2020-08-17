@@ -19,6 +19,18 @@ export class ApiRadioService {
     return this.http.get('http://127.0.0.1:8000/api/typeradios/' + id);
   }
 
+  addTypeRadio(body) {
+    return this.http.post('http://127.0.0.1:8000/api/typeradios', body);
+  }
+
+  editTypeRadio(id, body) {
+    return this.http.patch('http://127.0.0.1:8000/api/typeradios/' + id, body);
+  }
+
+  deleteTypeRadio(id) {
+    return this.http.delete('http://127.0.0.1:8000/api/typeradios/' + id);
+  }
+
 // ############### les apis de table ImageRadio ################## 
 
   getRadios() {

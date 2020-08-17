@@ -14,15 +14,14 @@ export class ConsultationComponent implements OnInit {
   selectedRdv;
   consultations = [];
   rdvs = [];
-  config: { itemsPerPage: number; currentPage: number };
   selectedRdvId;
   selectRdvId: any;
-
+  itemsPerPage: number;
+  currentPage: number;
+  term;
   constructor(private router: Router, private apiRdvService: ApiRdvService, private apiConsService: ApiConsultationService) {
-    this.config = {
-      itemsPerPage: 10,
-      currentPage: 1,
-    };
+    this.itemsPerPage = 10;
+    this.currentPage = 1;
   }
 
   ngOnInit(): void {
@@ -30,8 +29,8 @@ export class ConsultationComponent implements OnInit {
     this.apiConsService.getConsultations().subscribe((res: any) => {
       this.consultations = res['hydra:member'];
     });
-
-    this.apiRdvService.getRdvs().subscribe((res: any) => {
+    let medId = localStorage.getItem('id').substring(14);
+    this.apiRdvService.getAllRdvsByMedecin(medId).subscribe((res: any) => {
       this.rdvs = res['hydra:member'];
     });
   }
@@ -74,6 +73,6 @@ export class ConsultationComponent implements OnInit {
   }
 
   pageChanged(event) {
-    this.config.currentPage = event;
+    this.currentPage = event;
   }
 }

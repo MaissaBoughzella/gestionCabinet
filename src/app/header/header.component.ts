@@ -27,4 +27,16 @@ export class HeaderComponent implements OnInit {
         window.location.reload();
       });
   }
+  isMedecin() {
+    return (localStorage.getItem("isMedecin") == "true");
+  }
+  isPatient() {
+    return (localStorage.getItem("isPatient") == "true");
+  }
+  isSecretaire() {
+    return (localStorage.getItem("isSecretaire") == "true");
+  }
+  isSuperAdmin() {
+    return (localStorage.getItem("isSuperAdmin") == "true");
+  }
 }

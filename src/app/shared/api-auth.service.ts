@@ -60,10 +60,9 @@ export class ApiAuthService {
     localStorage.removeItem('isMedecin');
     localStorage.removeItem('isPatient');
     localStorage.removeItem('isSecretaire');
+    localStorage.removeItem('isSuperAdmin');
     localStorage.removeItem('id');
     localStorage.removeItem('userId');
-    localStorage.removeItem('idOrdonnance');
-    localStorage.removeItem('idConsultation');
     this.router.navigate(['login']);
   }
   editUser(id,body) {

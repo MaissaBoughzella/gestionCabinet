@@ -29,7 +29,18 @@
               style="font-size: 14px;font-weight: 500;margin-bottom: 20px;">
               <i class="icon md-plus" aria-hidden="true"></i>
               Ajouter image radio</button>
+              <form action="#" method="post" style="float: left;
+              margin-right: 685PX;
+              width: 400PX;">
+                <div class="input-search input-search-dark">
+                  <i class="input-search-icon md-search" aria-hidden="true"></i>
+                  <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+                </div>
+              </form>
             </div>
+            
+           
+          
             
                     <table class="table">
                       <thead>
@@ -42,8 +53,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let radio of radios;let i=index">
-                          <td style="font-weight: 600;color: #616161;padding-left: 60px;">{{i+1}}</td>
+                        <tr *ngFor="let radio of radios | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } | filter:term ;let i=index">
+                          <td style="font-weight: 600;color: #616161;padding-left: 60px;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
                           <td>{{radio?.nom}}</td>
                           <td>{{radio?.description}}</td>
                           <td>{{radio?.typeradio}}</td>
@@ -67,6 +78,11 @@
                       </tbody>
                     </table>
                   </div>
+                  <nav>
+                    <ul class="pagination page-item" style="margin-left: 40%;">
+                      <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                    </ul>
+                  </nav>
                 </div>
         <div class="tab-pane" id="exampleTopAnalyses" role="tabpanel">
                 <div id="exampleCustomGridField">
@@ -78,6 +94,14 @@
                       style="font-size: 14px;font-weight: 500;margin-bottom: 20px;">
                       <i class="icon md-plus" aria-hidden="true"></i>
                       Ajouter analyse</button>
+                      <form action="#" method="post" style="float: left;
+                        margin-right: 715PX;
+                        width: 400PX;">
+                <div class="input-search input-search-dark">
+                  <i class="input-search-icon md-search" aria-hidden="true"></i>
+                  <input type="text" [(ngModel)]="term2" class="form-control" name="search" placeholder="Search...">
+                </div>
+              </form>
                     </div>
                             <table class="table">
                               <thead>
@@ -90,8 +114,8 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr *ngFor="let analyse of analyses;let i=index">
-                                  <td style="font-weight: 600;color: #616161;padding-left: 60px;">{{i+1}}</td>
+                                <tr *ngFor="let analyse of analyses | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } | filter: term2;let i=index">
+                                  <td style="font-weight: 600;color: #616161;padding-left: 60px;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
                                   <td>{{analyse?.nom}}</td>
                                   <td>{{analyse?.description}}</td>
                                   <td>{{analyse?.typeanalyse}}</td>
@@ -117,6 +141,11 @@
                               </tbody>
                             </table>
                           </div>
+                          <nav>
+                            <ul class="pagination page-item" style="margin-left: 40%;">
+                              <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                            </ul>
+                          </nav>
                         </div>
                       </div>
                     </div>

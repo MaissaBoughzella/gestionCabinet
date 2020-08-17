@@ -19,6 +19,22 @@ export class ApiAnalyseService {
     return this.http.get('http://127.0.0.1:8000/api/typeanalyses/' + id);
   }
 
+  getTypeAnalyse() {
+    return this.http.get('http://127.0.0.1:8000/api/typeanalyses');
+  }
+
+  addTypeAnalyse(body) {
+    return this.http.post('http://127.0.0.1:8000/api/typeanalyses', body);
+  }
+
+  editTypeAnalyse(id, body) {
+    return this.http.patch('http://127.0.0.1:8000/api/typeanalyses/' + id, body);
+  }
+
+  deleteTypeAnalyse(id) {
+    return this.http.delete('http://127.0.0.1:8000/api/typeanalyses/' + id);
+  }
+
 // ############### les apis de table ANALYSE ################## 
 
   getAnalyses() {
@@ -36,5 +52,6 @@ export class ApiAnalyseService {
   deleteAnalyse(id) {
     return this.http.delete('http://127.0.0.1:8000/api/analyses/' + id);
   }
+
 
 }

@@ -3,8 +3,17 @@
     <div class="panel">
       <header class="panel-heading">
         <h2 class="panel-title">Liste des rendez-vous</h2>
+        <div class="page-header-actions">
+        <form action="#" method="post">
+          <div class="input-search input-search-dark">
+            <i class="input-search-icon md-search" aria-hidden="true"></i>
+            <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+          </div>
+        </form>
+        </div>
         <div style="float: right;
-        margin-top: -40px;
+        margin-top: 10px;
+        MARGIN-BOTTOM: 20PX;
         margin-right: 30px;">
             <button type="button" class="btn btn-round btn-primary waves-effect waves-light waves-round" 
             data-toggle="modal" 
@@ -31,8 +40,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let rdv of rdvs  | paginate: config ; let i=index;" >
-                          <td>{{i+1}}</td>
+                        <tr *ngFor="let rdv of rdvs  | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } | filter:term; let i=index;" >
+                          <td>{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
                           <td><i class="icon md-calendar"></i>&nbsp;{{rdv?.date | date:'fullDate'}}</td>
                           <td><i class="icon md-time"></i>&nbsp;{{rdv?.heure | date:'shortTime'}}</td>
                           <td>{{rdv?.patient}}</td>
