@@ -3,11 +3,11 @@ import { ApiAuthService } from 'src/app/shared/api-auth.service';
 import { ApiPatientService } from 'src/app/shared/api-patient.service';
 
 @Component({
-  selector: 'app-profile-secretaire',
-  templateUrl: './profile-secretaire.component.html',
-  styleUrls: ['./profile-secretaire.component.css']
+  selector: 'app-profil-admin',
+  templateUrl: './profil-admin.component.html',
+  styleUrls: ['./profil-admin.component.css']
 })
-export class ProfileSecretaireComponent implements OnInit {
+export class ProfilAdminComponent implements OnInit {
 
   user: any;
 

@@ -1,0 +1,210 @@
+<app-header></app-header>
+<div class="page">
+    <div class="page-header">
+      <h1 class="page-title mb-10">Liste des Medecins</h1>
+    </div>
+    <div class="page-content">
+        <form action="#" method="post">
+              <div class="input-search input-search-dark">
+                <i class="input-search-icon md-search" aria-hidden="true"></i>
+                <input type="text" [(ngModel)]="term" class="form-control" name="search" 
+                placeholder="Search..." style="MARGIN-TOP: -20PX; margin-bottom: 30PX;">
+              </div>
+        </form>
+      <div class="documents-wrap categories" data-plugin="animateList" data-child="li">
+        <ul class="blocks blocks-100 blocks-xxl-4 blocks-lg-3 blocks-sm-2" data-plugin="matchHeight">
+          <li *ngFor= "let med of medecins | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } | filter:term; let i=index;">
+            <div class="category">
+              <div class="icon-wrap">
+                <a class="avatar avatar-lg" style="width: 30%;">
+                    <img src="../../../assets/global/portraits/5.jpg" alt="...">
+                </a>
+              </div>
+              <h4 style="margin-top: 15px;">{{med?.prenom | titlecase}} {{med?.nom | titlecase}}</h4>
+            <small><cite>{{med?.adresse}}
+            &nbsp;<i class="icon md-pin" aria-hidden="true"></i></cite></small>
+            <p>
+                <i class="icon md-email" aria-hidden="true"></i> &nbsp;{{med?.email}}
+                <br/>
+                <i class="icon md-phone" aria-hidden="true"></i> &nbsp;{{med?.telephone}}
+            </p>
+              <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
+                <button type="button" class="btn btn-primary btn-icon"
+                (click)="viewProfile(med?.id)">
+                  <i class="icon md-account" aria-hidden="true"></i>
+                  <span>Voir le Profil</span>
+                </button>
+                <button type="button" class="btn btn-danger btn-icon"
+                (click)= "setSelectedMed(med)"
+                data-toggle="modal" 
+                data-target="#cancelModal">
+                <i class="icon md-delete" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="panel-footer">
+        <nav>
+          <ul class="pagination page-item" style="margin-left: 40%;">
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+          </ul>
+        </nav>
+    </div>
+     <!-- Site Action -->
+     <div class="site-action" data-plugin="actionBtn">
+        <button type="button" class=" btn-circle site-action-toggle btn-raised btn btn-success btn-floating"
+        tooltip="Ajouter Médecin"
+        data-toggle="modal" 
+        data-target="#addModal">
+          <i class="front-icon md-account-add animation-scale-up" aria-hidden="true" style="FONT-SIZE: 30PX;"></i>
+        </button>
+     </div>
+      <!-- End Site Action -->
+  </div>
+<app-footer></app-footer>
+<!-- Modal -->
+<div class="modal" id="cancelModal">
+    <div class="modal-dialog modal-simple modal-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 >Supprimer Le Medecin? </h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-pure" 
+          style="font-size: 13px;font-weight: 500;"
+          data-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-primary"
+           data-dismiss="modal" style="font-size: 13px;font-weight: 500;"
+           (click)="deleteMed()">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- End Modal -->
+<!-- Modal -->
+<div class="modal fade" id="addModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
+role="dialog" tabindex="-1">
+<div class="modal-dialog modal-simple modal-center">
+  <div class="modal-content" style="width:700px;margin-left: -100px;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h4 class="modal-title">Ajouter un Médecin</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addUserForm" method="post">
+            <div class="form-row">
+              <div class="form-group form-material col-md-6">
+                <label class="form-control-label" for="inputBasicFirstName" style="margin-top: 10px;">Nom</label>
+                <input type="text" class="form-control" formControlName="nom">
+              </div>
+              <div class="form-group form-material col-md-6">
+                <label class="form-control-label" for="inputBasicLastName" style="margin-top: 10px;">Prénom</label>
+                <input type="text" class="form-control" formControlName="prenom">
+              </div>
+            </div>
+          <div class="form-row">
+           <div class="dropdown form-group form-material col-md-6" >
+            <label class="form-control-label" for="inputBasicGenre">Genre</label>
+            <select class="browser-default custom-select form-control" formControlName="genre">
+                <option *ngFor="let gen of genre" [ngValue]="gen">
+                  {{ gen }}
+                </option>
+              </select>   
+            </div>
+            <div class="dropdown form-group form-material col-md-6" >
+              <label class="form-control-label" for="inputBasicLangue">La version de l'application</label><br>
+              <select class="form-control form-control-sm" formControlName="langue">
+              <option *ngFor="let lan of langue" [ngValue]="lan">
+                {{ lan }}
+                </option>
+              </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group form-material col-md-6">
+                <label class="form-control-label" for="inputBasicEmail">Email</label>
+                <input type="email" class="form-control" formControlName="email">
+              </div>
+              <div class="form-group form-material col-md-6">
+                <label class="form-control-label" for="inputBasicPassword">Mot de passe</label>
+                <input type="password" class="form-control" formControlName="password">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group form-material col-md-6">
+                <label class="form-control-label" for="inputBasicFirstName">Adresse</label>
+                <input type="text" class="form-control" formControlName="adresse">
+              </div>
+              <div class="form-group form-material col-md-6">
+                <label class="form-control-label" for="inputBasicLastName">Téléphone</label>
+                <input type="text" class="form-control" formControlName="telephone">
+              </div>
+            </div>
+          </form>
+          <form [formGroup]="addMedForm" method="post">
+            <div class="form-row">
+              <div class="form-group form-material col-md-6">
+                <label class="form-control-label" for="inputBasicLastName">Qualification</label>
+                <textarea rows="1" class="form-control" formControlName="qualification"></textarea>
+              </div>
+              <div class="dropdown form-group form-material col-md-6" >
+                <label class="form-control-label" for="inputBasicGenre">Spécialité</label>
+                <select class="browser-default custom-select form-control" 
+                formControlName="specialite" style="height: 2.3rem;">
+                    <option *ngFor="let spec of specialite" [ngValue]="spec['@id']">
+                      {{ spec?.specialite }}
+                    </option>
+                </select> 
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group form-material col-md-6">
+                    <label class="form-control-label" for="inputBasicEmail">Formation</label>
+                    <textarea rows="1" class="form-control" formControlName="formation"></textarea>
+                </div>
+              <div class="form-group form-material col-md-6">
+                <label class="form-control-label" for="inputBasicFirstName">Experience</label>
+                <textarea rows="1" class="form-control" formControlName="experience"></textarea>
+              </div>
+            </div>
+          </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
+      style="font-size: 13px;font-weight: 500;">Annuler</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal"
+      style="font-size: 13px;font-weight: 500;"
+      (click)="addUser()">Ajouter</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- End Modal -->
+
+  <!-- Plugins For This Page -->
+  <script src="../../../assets/global/vendor/matchheight/jquery.matchHeight-minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/bootstrap-select/bootstrap-select.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/stickyfill/stickyfill.minfd53.js?v4.0.1"></script>
+
+  <!-- Page -->
+  <script src="../../../assets/js/Site.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/asscrollable.minfd53.js?v4.0.1"></script>
+
+  <script src="../../../assets/global/js/Plugin/slidepanel.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/switchery.minfd53.js?v4.0.1"></script>
+
+  <script src="../../../assets/global/js/Plugin/matchheight.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/bootstrap-select.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/animate-list.minfd53.js?v4.0.1"></script>
+
+
+  <script src="../../../assets/js/Site.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/js/App/Documents.minfd53.js?v4.0.1"></script>
+
+  <script src="../../../assets/examples/js/apps/documents.minfd53.js?v4.0.1"></script>
+

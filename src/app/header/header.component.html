@@ -25,20 +25,15 @@
       <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
         <!-- Navbar Toolbar -->
         <ul class="nav navbar-toolbar">
-          <li class="nav-item hidden-float" id="toggleMenubar">
-            <a class="nav-link" data-toggle="menubar" href="#" role="button">
+          <li class="nav-item hidden-float">
+            <a class="nav-link" data-toggle="menubar" href="#" role="button" style="color: white;">
                 <i class="icon hamburger hamburger-arrow-left">
-                  <span class="sr-only">Toggle menubar</span>
-                  <span class="hamburger-bar"></span>
+                  <span class="sr-only" style="background-color: white;">Toggle menubar</span>
+                  <span class="hamburger-bar" style="background-color: white;"></span>
                 </i>
               </a>
           </li>
-          <li class="nav-item hidden-float">
-            <a class="nav-link icon md-search" data-toggle="collapse" href="#" data-target="#site-navbar-search"
-              role="button">
-              <span class="sr-only">Toggle Search</span>
-            </a>
-          </li> 
+          
         </ul>
         <!-- End Navbar Toolbar -->
 
@@ -67,7 +62,7 @@
               </span>
             </a>
             <div class="dropdown-menu" role="menu"  *ngIf="isSuperAdmin()">
-              <a class="dropdown-item" role="menuitem" style="width: 94%;" routerLink="/admin"><i class="icon md-account" 
+              <a class="dropdown-item" role="menuitem" style="width: 94%;" routerLink="/superAdmin/profil"><i class="icon md-account" 
                 aria-hidden="true"></i> Profil</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" style="width: 94%;" (click)="logout()"><i class="icon md-power" aria-hidden="true"></i> Se déconnecter</a>
@@ -102,47 +97,37 @@
         </div>
       </div>
       <!-- End Navbar Collapse -->
-
-      <!-- Site Navbar Seach -->
-      <div class="collapse navbar-search-overlap" id="site-navbar-search">
-        <form role="search">
-          <div class="form-group">
-            <div class="input-search">
-              <i class="input-search-icon md-search" aria-hidden="true"></i>
-              <input type="text" class="form-control" name="site-search" placeholder="Search../../assets.">
-              <button type="button" class="input-search-close icon md-close" data-target="#site-navbar-search"
-                data-toggle="collapse" aria-label="Close"></button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <!-- End Site Navbar Seach -->
     </div>
   </nav>
   <div class="site-menubar">
-    <div class="site-menubar-header" style="height:11px">
+    <div class="site-menubar-header">
+      <div class="cover overlay">
+        <img class="cover-image" src="../../assets/examples/images/dashboard-header.jpg"
+          alt="...">
+        <div class="overlay-panel vertical-align overlay-background">
+        </div>
     </div>
-
+    </div>
     <div class="site-menubar-body">
       <div>
         <div>
           <ul class="site-menu" data-plugin="menu" *ngIf="isMedecin()">
-            <li class="site-menu-item active">
+            <li class="site-menu-item" routerLinkActive="active">
               <a routerLink="/medecin/rendezVous">
                 <i class="site-menu-icon md-view-list" aria-hidden="true"></i>
                 <span class="site-menu-title">Gestion des consultations</span>
               </a>
             </li>
             <li class="site-menu-item">
-              <a routerLink="/medecin/secretaires">
+              <a routerLink="/medecin/secretaires" routerLinkActive="active">
                 <i class="site-menu-icon md-accounts" aria-hidden="true"></i>
                 <span class="site-menu-title">Gestion des secretaires</span>
               </a>
             </li>
           </ul>
           <ul class="site-menu" data-plugin="menu" *ngIf="isSecretaire()">
-            <li class="site-menu-item active">
-              <a routerLink="/secretaire/rendezVous">
+            <li class="site-menu-item">
+              <a routerLink="/secretaire/rendezVous" routerLinkActive="active">
                 <i class="site-menu-icon md-calendar-alt" aria-hidden="true"></i>
                 <span class="site-menu-title">Gestion des rendez-vous</span>
               </a>
@@ -157,34 +142,46 @@
             </li> -->
           </ul>
           <ul class="site-menu" data-plugin="menu" *ngIf="isSuperAdmin()">
-            <li class="site-menu-item active">
-              <a routerLink="/admin">
+            <li class="site-menu-item">
+              <a routerLink="/superAdmin" routerLinkActive="active">
                 <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
                 <span class="site-menu-title">Dashboard</span>
               </a>
             </li>
             <li class="site-menu-item">
-              <a routerLink="/admin/roles">
+              <a routerLink="/superAdmin/roles" routerLinkActive="active" class="nav-link">
                 <i class="site-menu-icon md-account-box-o" aria-hidden="true"></i>
                 <span class="site-menu-title">Roles</span>
               </a>
             </li>
             <li class="site-menu-item">
-              <a routerLink="/admin/specialites">
+              <a routerLink="/superAdmin/specialites" routerLinkActive="active" class="nav-link">
                 <i class="site-menu-icon md-wrench" aria-hidden="true"></i>
                 <span class="site-menu-title">Spécialités</span>
               </a>
             </li>
             <li class="site-menu-item">
-              <a routerLink="/admin/typesAnalyses">
+              <a routerLink="/superAdmin/typesAnalyses" routerLinkActive="active" class="nav-link">
                 <i class="site-menu-icon md-file-text" aria-hidden="true"></i>
                 <span class="site-menu-title">Types d'Analyses</span>
               </a>
             </li>
             <li class="site-menu-item">
-              <a routerLink="/admin/typesImagesRadios">
+              <a routerLink="/superAdmin/typesImagesRadios" routerLinkActive="active" class="nav-link">
                 <i class="site-menu-icon md-file-text" aria-hidden="true"></i>
                 <span class="site-menu-title">Types d'Images Radios</span>
+              </a>
+            </li>
+            <li class="site-menu-item">
+              <a routerLink="/superAdmin/medecins" routerLinkActive="active" class="nav-link">
+                <i class="site-menu-icon md-accounts-list-alt" aria-hidden="true"></i>
+                <span class="site-menu-title">Medecins</span>
+              </a>
+            </li>
+            <li class="site-menu-item">
+              <a routerLink="/superAdmin/medicaments" routerLinkActive="active" class="nav-link">
+                <i class="site-menu-icon md-drink" aria-hidden="true"></i>
+                <span class="site-menu-title">Medicaments</span>
               </a>
             </li>
           </ul>

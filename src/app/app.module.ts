@@ -28,7 +28,6 @@ import { OrdonnanceComponent } from './medecin/ordonnance/ordonnance.component';
 import { ProfileComponent } from './medecin/profile/profile.component';
 import { ProfilePatientComponent } from './patient/profile-patient/profile-patient.component';
 import { ProfileSecretaireComponent } from './secretaire/profile-secretaire/profile-secretaire.component';
-import { DossierMedicalComponent } from './patient/dossier-medical/dossier-medical.component';
 import { RendezVousListComponent } from './patient/rendez-vous-list/rendez-vous-list.component';
 import { ConsultationByPatientComponent } from './patient/consultation-by-patient/consultation-by-patient.component';
 import { OrdonnancePatientComponent } from './patient/ordonnance-patient/ordonnance-patient.component';
@@ -39,6 +38,10 @@ import { TypeAnalyseComponent } from './admin/type-analyse/type-analyse.componen
 import { TypeRadioComponent } from './admin/type-radio/type-radio.component';
 import { RoleComponent } from './admin/role/role.component';
 import { SpecialiteComponent } from './admin/specialite/specialite.component';
+import { ProfilAdminComponent } from './admin/profil-admin/profil-admin.component';
+import { MedecinsComponent } from './admin/medecins/medecins.component';
+import { MedecinByIdComponent } from './admin/medecin-by-id/medecin-by-id.component';
+import { MedicamentsComponent } from './admin/medicaments/medicaments.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,6 @@ import { SpecialiteComponent } from './admin/specialite/specialite.component';
     ProfileComponent,
     ProfilePatientComponent,
     ProfileSecretaireComponent,
-    DossierMedicalComponent,
     RendezVousListComponent,
     ConsultationByPatientComponent,
     OrdonnancePatientComponent,
@@ -71,6 +73,10 @@ import { SpecialiteComponent } from './admin/specialite/specialite.component';
     TypeRadioComponent,
     RoleComponent,
     SpecialiteComponent,
+    ProfilAdminComponent,
+    MedecinsComponent,
+    MedecinByIdComponent,
+    MedicamentsComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,3 +11,10 @@
     padding: 0;
     border-radius: 50%;
 }
+
+.table thead tr td{
+  font-weight: 600;
+  color: #616161;
+  border-bottom-width: 1px;
+  font-size: 14px;
+}

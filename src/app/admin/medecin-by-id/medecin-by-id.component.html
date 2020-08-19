@@ -1,39 +1,100 @@
+<app-header></app-header>
 <!-- Page -->
 <div class="page">
     <div class="page-content container-fluid">
       <div class="row">
-        <div class="col-lg-3">
-          <!-- Page Widget -->
-          <div class="card card-shadow text-center">
-            <div class="card-block">
-              
-              <h4 class="profile-user" style="margin-top: 10%;margin-bottom: 4%;">
-                Docteur {{user?.prenom}} {{user?.nom}}</h4>
-              <p class="profile-job" style="color: #9e9e9e;">{{medecinSpec}}</p>
-              <p style=" font-family: Montserrat-SemiBold;font: inherit;">
-                <i class="icon md-graduation-cap" aria-hidden="true"></i> &nbsp;{{medecin?.qualification}}</p><hr>
-              <p style=" font-family: Montserrat-SemiBold;font: inherit;">
-                &nbsp;&nbsp;<i class="icon md-pin" aria-hidden="true"></i> &nbsp;{{user?.adresse}}</p>
-              <p class="mb-1" style=" font-family: Montserrat-SemiBold;font: inherit;">
-                &nbsp;&nbsp;<i class="icon md-phone" aria-hidden="true"></i>&nbsp;{{user?.telephone}}</p>
-            </div>
-          </div>
-          <!-- End Page Widget -->
-        </div>
-
-        <div class="col-lg-9">
+        <div class="col-lg-12">
           <!-- Panel -->
           <div class="panel">
             <div class="panel-body nav-tabs-animate nav-tabs-horizontal" data-plugin="tabs">
               <ul class="nav nav-tabs nav-tabs-line" role="tablist">
                 <li class="nav-item" role="presentation"><a class="active nav-link" data-toggle="tab" href="#profile" aria-controls="profile"
-                    role="tab">Informations Générales</a></li>
+                    role="tab">Informations Générales</a>
+                </li>
                 <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#activities"
-                    aria-controls="activities" role="tab">Informations Professionnelles</a></li>
+                    aria-controls="activities" role="tab">Informations Professionnelles</a>
+                </li>
+                <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#secretaires"
+                    aria-controls="secretaires" role="tab">Liste des Secretaires</a>
+                </li>
               </ul>
-
               <div class="tab-content">
-                <div class="tab-pane  animation-slide-left" id="activities" role="tabpanel">
+                <div class="tab-pane  animation-slide-left" id="secretaires" role="tabpanel">
+                  <!-- Example Basic Form (Form row) -->
+                <div class="example-wrap" style="margin: 50PX 50PX 80PX 50PX;">
+                    <!-- Panel Projects -->
+          <div class="panel">
+            <form action="#" method="post">
+                <div class="input-search input-search-dark">
+                  <i class="input-search-icon md-search" aria-hidden="true"></i>
+                  <input type="text" [(ngModel)]="term" class="form-control" name="search" 
+                  placeholder="Search..." style="MARGIN-TOP: -20PX; margin-bottom: 30PX;">
+                </div>
+          </form>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                    <tr>
+                      <th style="width: 10%;"></th>
+                      <th>Nom</th>
+                      <th>Prénom</th>
+                      <th>Email</th>
+                      <th>Genre</th>
+                      <th>Téléphone</th>
+                      <th>Adresse</th>
+                      <!-- <th>Actions</th> -->
+                    </tr>
+                  </thead>
+                              <tbody>
+                                <tr *ngFor="let sec of secMedecin | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } |filter:term; let i=index;" >
+                                  <td style="font-weight: 600;color: #616161;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
+                                  <td>{{sec?.nom}}</td>
+                                  <td>{{sec?.prenom}}</td>
+                                  <td>{{sec?.email}}</td>
+                                  <td>{{sec?.genre}}</td>
+                                  <td>{{sec?.telephone}}</td>
+                                  <td>{{sec?.adresse}}</td>
+                                  <!-- <td>
+                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-default"
+                                      data-toggle="tooltip" data-original-title="Edit"
+                                      (click)= "setSelectedSec(sec)"
+                                        data-toggle="modal" 
+                                        data-target="#editModal">
+                                      <i class="icon md-edit" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-default"
+                                      data-toggle="tooltip" data-original-title="Delete">
+                                      <i class="icon md-close" aria-hidden="true"></i>
+                                    </button>
+                                  </td> -->
+                                  <!-- <td class="text-nowrap">
+                                    <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
+                                        <button type="button" class="btn btn-primary btn-icon"
+                                        tooltip="Modifier secretaire"
+                                        (click)= "setSelectedSec(sec)"
+                                        data-toggle="modal" 
+                                        data-target="#editModal">
+                                          <i class="icon md-edit" aria-hidden="true"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-icon" (click)="deleteSec(sec?.id)">
+                                          <i class="icon md-delete" aria-hidden="true"></i>
+                                        </button>
+                                      </div>
+                                  </td> -->
+                                </tr>
+                              </tbody>
+                            </table>
+            </div>
+          </div>
+          <!-- End Panel Projects -->
+            </div>
+            <nav>
+                <ul class="pagination page-item" style="margin-left: 40%;">
+                  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                </ul>
+            </nav>
+            </div>
+            <div class="tab-pane  animation-slide-left" id="activities" role="tabpanel">
                   <!-- Example Basic Form (Form row) -->
               <div class="example-wrap" style="margin: 50PX 50PX 80PX 50PX;">
                 <div class="example">
@@ -176,7 +237,7 @@
   </div>
   <!-- End Page -->
 
-
+<app-footer></app-footer>
   <!-- Page -->
   <script src="../../../assets/js/Site.minfd53.js?v4.0.1"></script>
   <script src="../../../assets/global/js/Plugin/asscrollable.minfd53.js?v4.0.1"></script>

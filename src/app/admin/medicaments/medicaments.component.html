@@ -1,0 +1,188 @@
+<app-header></app-header>
+<div class="page">
+    <div class="page-header">
+      <h1 class="page-title mb-10">Liste Des Médicaments</h1>
+    </div>
+    <div class="page-content">
+        <form action="#" method="post">
+              <div class="input-search input-search-dark">
+                <i class="input-search-icon md-search" aria-hidden="true"></i>
+                <input type="text" [(ngModel)]="term" class="form-control" name="search" 
+                placeholder="Search..." style="MARGIN-TOP: -20PX; margin-bottom: 30PX;">
+              </div>
+        </form>
+        <div class="table-responsive" style="width: 90%;margin-left: 65px;">
+            <table class="table table-striped">
+              <thead>
+                  <tr>
+                    <th style="width: 10%;"></th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th style="width: 10%;">Actions</th>
+                  </tr>
+                </thead>
+                    <tbody>
+                        <tr *ngFor="let med of medicaments | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } |filter:term; let i=index;" >
+                            <td style="font-weight: 600;color: #616161;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
+                            <td>{{med?.nom}}</td>
+                            <td>{{med?.description}}</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-icon btn-pure btn-default"
+                                data-toggle="tooltip" data-original-title="Edit"
+                                (click)="setSelectedMed(med)"
+                                data-toggle="modal" 
+                                data-target="#editModal">
+                                <i class="icon md-edit" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-icon btn-pure btn-default"
+                                data-toggle="tooltip" data-original-title="Delete"
+                                (click)="setSelectedMed(med)"
+                                data-toggle="modal" 
+                                data-target="#cancelModal">
+                                <i class="icon md-close" aria-hidden="true"></i>
+                                </button>
+                                </td>
+                        </tr> 
+                    </tbody>
+            </table>
+      </div>
+    </div>
+    <div class="panel-footer">
+        <nav>
+          <ul class="pagination page-item" style="margin-left: 40%;">
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+          </ul>
+        </nav>
+    </div>
+     <!-- Site Action -->
+     <div class="site-action" data-plugin="actionBtn">
+        <button type="button" class=" btn-circle site-action-toggle btn-raised btn btn-success btn-floating"
+        data-toggle="modal" 
+        data-target="#addModal">
+          <i class="front-icon md-plus animation-scale-up" aria-hidden="true" style="FONT-SIZE: 30PX;"></i>
+        </button>
+     </div>
+      <!-- End Site Action -->
+  </div>
+<app-footer></app-footer>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
+role="dialog" tabindex="-1">
+<div class="modal-dialog modal-simple modal-center">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h4 class="modal-title">Ajouter un médicament</h4>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="addForm" method="post">
+          <div class="form-group form-material row">
+            <label class="col-md-3 col-form-label">Nom: </label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" formControlName="nom">
+            </div>
+          </div>
+          <div class="form-group form-material row">
+            <label class="col-md-3 col-form-label">Description: </label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" formControlName="description">
+            </div>
+          </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
+      style="font-size: 13px;font-weight: 500;">Annuler</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal"
+      style="font-size: 13px;font-weight: 500;"
+      (click)="add()">Ajouter</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- End Modal -->
+<!-- Modal -->
+<div class="modal" id="cancelModal">
+    <div class="modal-dialog modal-simple modal-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 >Supprimer le Médicament? </h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-pure" 
+          style="font-size: 13px;font-weight: 500;"
+          data-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-primary"
+           data-dismiss="modal" style="font-size: 13px;font-weight: 500;"
+           (click)="delete()">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- End Modal -->
+<!-- Modal -->
+<div class="modal fade" id="editModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
+role="dialog" tabindex="-1">
+<div class="modal-dialog modal-simple modal-center">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title">Modifier le Médicament</h4>
+  </div>
+ <div class="modal-body">
+     <form>
+        <div class="form-group form-material row">
+          <label class="col-md-3 col-form-label">Nom: </label>
+          <div class="col-md-9">
+            <input type="text" class="form-control"  #nom1 value="{{isSelectedMed?.nom}}">
+          </div>
+        </div>
+        <div class="form-group form-material row">
+            <label class="col-md-3 col-form-label">Description: </label>
+            <div class="col-md-9">
+              <input type="text" class="form-control"  #desc1 value="{{isSelectedMed?.description}}">
+            </div>
+          </div>
+      </form> 
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
+    style="font-size: 13px;font-weight: 500;">Annuler</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal"
+    style="font-size: 13px;font-weight: 500;"
+    (click)="edit(nom1.value, desc1.value)">
+    Modifier</button>
+  </div>
+</div>
+</div>
+</div>
+<!-- End Modal -->
+
+
+  <!-- Plugins For This Page -->
+  <script src="../../../assets/global/vendor/matchheight/jquery.matchHeight-minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/bootstrap-select/bootstrap-select.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/vendor/stickyfill/stickyfill.minfd53.js?v4.0.1"></script>
+
+  <!-- Page -->
+  <script src="../../../assets/js/Site.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/asscrollable.minfd53.js?v4.0.1"></script>
+
+  <script src="../../../assets/global/js/Plugin/slidepanel.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/switchery.minfd53.js?v4.0.1"></script>
+
+  <script src="../../../assets/global/js/Plugin/matchheight.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/bootstrap-select.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/global/js/Plugin/animate-list.minfd53.js?v4.0.1"></script>
+
+
+  <script src="../../../assets/js/Site.minfd53.js?v4.0.1"></script>
+  <script src="../../../assets/js/App/Documents.minfd53.js?v4.0.1"></script>
+
+  <script src="../../../assets/examples/js/apps/documents.minfd53.js?v4.0.1"></script>
+

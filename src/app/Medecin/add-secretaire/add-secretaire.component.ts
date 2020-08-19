@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiAuthService } from 'src/app/shared/api-auth.service';
 import { ApiSecretaireService } from 'src/app/shared/api-secretaire.service';
+import { CONTENT_ATTR } from '@angular/compiler';
 
 @Component({
   selector: 'app-add-secretaire',
@@ -30,6 +31,8 @@ export class AddSecretaireComponent implements OnInit {
   itemsPerPage: number;
   currentPage: number;
   term;
+  medId: string;
+  secMedecin = [];
 
   constructor(private router: Router, private apiAuthService: ApiAuthService, private apiSecService: ApiSecretaireService) {
     this.RegisterForm = new FormGroup({
@@ -51,18 +54,17 @@ export class AddSecretaireComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.apiAuthService.getRoles().subscribe((res: any) => {
-      this.roles = res['hydra:member'];
-      for (const role of this.roles) {
-        if (role.role == "Secretaire" || role.role == "secretaire") {
-          this.roleId = role['@id'];
-          this.roleId1 = role.id;
+    this.medId = localStorage.getItem('id');
+    this.apiSecService.getSecretaires().subscribe((res: any) => {
+      this.secretaires = res['hydra:member'];
+      for (let j = 0; j < this.secretaires.length; j++) {
+        if (this.secretaires[j].medecinId == this.medId) {
+          let userId = this.secretaires[j].user.substring(11);
+          this.apiAuthService.getUserById(userId).subscribe((res: any) => {
+            this.secMedecin.push(res);
+          });
         }
       }
-      this.apiAuthService.getUserByRole(this.roleId1).subscribe((res: any) => {
-        this.secretaires = res['hydra:member'];
-      });
     });
   }
 
@@ -75,7 +77,7 @@ export class AddSecretaireComponent implements OnInit {
 
       this.apiAuthService.addSecretaire(this.addSecretaireForm.value).subscribe((res: any) => {
         this.ngOnInit();
-        
+
       });
     },
       error => {

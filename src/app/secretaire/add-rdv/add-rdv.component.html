@@ -1,6 +1,4 @@
-<div class="col-xxl-6">
-    <!-- Panel Custom Grid Field -->
-    <div class="panel">
+<div class="panel">
       <header class="panel-heading">
         <h2 class="panel-title">Liste des rendez-vous</h2>
         <div class="page-header-actions">
@@ -23,33 +21,36 @@
         </div>
       </header>
       <div class="panel-body">
-        <div id="exampleCustomGridField">
-            <div class="col-lg-12">
-                <!-- Example Bordered Table -->
-                <div class="example-wrap">
-                  <div class="example table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table">
                       <thead>
                         <tr >
-                          <th style="border-top: 2px solid #dee2e6;"></th>
-                          <th style="border-top: 2px solid #dee2e6;">Date</th>
-                          <th style="border-top: 2px solid #dee2e6;">Heure</th>
-                          <th style="border-top: 2px solid #dee2e6;">Patient</th>
-                          <th style="border-top: 2px solid #dee2e6;">Etat</th>
-                          <th style="border-top: 2px solid #dee2e6;width: 120px;" class="text-nowrap">Action</th>
+                          <th ></th>
+                          <th >Date</th>
+                          <th>Heure</th>
+                          <th >Patient</th>
+                          <th >Etat</th>
+                          <th style="width: 120px;">Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let rdv of rdvs  | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } | filter:term; let i=index;" >
-                          <td>{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
+                          <td style="font-weight: 600;color: #616161;padding-left: 30px;">
+                            {{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
                           <td><i class="icon md-calendar"></i>&nbsp;{{rdv?.date | date:'fullDate'}}</td>
                           <td><i class="icon md-time"></i>&nbsp;{{rdv?.heure | date:'shortTime'}}</td>
-                          <td>{{rdv?.patient}}</td>
-                          <td>{{rdv?.etat}}</td>
+                          <td>{{patient?.prenom}} {{patient?.nom}}</td>
+                          <td class="work-status" *ngIf = "rdv?.etat == 'Annulé'">
+                            <span class="badge badge-danger" style="font-size: 12px;">{{rdv?.etat}}</span>
+                          </td>
+                          <td class="work-status" *ngIf = "rdv?.etat == 'Consulté'">
+                            <span class="badge badge-success" style="font-size: 12px;">{{rdv?.etat}}</span>
+                          </td>
+                          <td class="work-status" *ngIf = "rdv?.etat == 'Non consulté'">
+                            <span class="badge badge-primary" style="font-size: 12px;">{{rdv?.etat}}</span>
+                          </td>
                           <td class="text-nowrap">
                             <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
                                 <button type="button" class="btn btn-primary btn-icon"
-                                style="MARGIN-LEFT: 13PX;"
                                 tooltip="Modifier rendez-vous"
                                 (click)= "setSelectedRdv(rdv)"
                                 data-toggle="modal" 
@@ -65,7 +66,6 @@
                         </tr>
                       </tbody>
                     </table>
-                  </div>
                 </div>
                 <!-- End Example Bordered Table -->
                 <!-- Example Basic Pagination -->
@@ -76,12 +76,7 @@
                   </nav>
               <!-- End Example Basic Pagination -->
               </div>
-        </div>
-      </div>
-    </div>
-   
-    <!-- End Panel Custom Grid Field -->
-  </div>
+
       <!-- Modal -->
       <div class="modal fade" id="addModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
       role="dialog" tabindex="-1">
@@ -112,7 +107,7 @@
                     <select class="form-control form-control-sm col-md-8" formControlName="patient" 
                     style="margin-left: 15px;">
                     <option *ngFor="let patient of patients" [ngValue]="patient['@id']">
-                        {{ patient?.profession }}
+                        {{ patientDetail?.prenom }} {{patientDetail?.nom}}
                       </option>
                     </select>
                   </div>

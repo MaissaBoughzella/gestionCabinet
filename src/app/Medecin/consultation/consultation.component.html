@@ -41,7 +41,7 @@
                 <i class="icon md-time"></i>&nbsp;{{rdv?.heure | date:'shortTime'}}
               </td>
               <td class="subject">
-                {{rdv?.patient}}
+                {{patient?.prenom}} {{patient?.nom}}
               </td>
               <td class="actions" *ngIf = "rdv?.etat == 'Non consulté'">
                   <button id="consulterBtn" type="button" class="btn btn-primary btn-icon"

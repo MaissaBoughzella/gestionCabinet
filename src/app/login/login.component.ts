@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     roleName: string;
     roles;
+    errorMessage = '';
     constructor(private fb: FormBuilder, private authService: ApiAuthService,
         private apiMedService: ApiMedecinService, private apiPatientService: ApiPatientService,
         private apiSecService: ApiSecretaireService, private router: Router) {
@@ -30,8 +31,10 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
+        this.errorMessage='';
         const val = this.loginForm.value;
         if (val.email && val.password) {
+            this.errorMessage = '';
             this.authService.login(val.email, val.password).subscribe((ress) => {
                 localStorage.setItem("token", ress['email']);
                 localStorage.setItem('userId', ress['@id']);
@@ -76,13 +79,17 @@ export class LoginComponent implements OnInit {
                     else if (this.roleName == "Super Admin" || this.roleName == "Super admin"
                         || this.roleName == "super Admin" || this.roleName == "super admin") {
                         localStorage.setItem('isSuperAdmin', 'true');
-                        this.router.navigate(['/admin'])
+                        this.router.navigate(['/superAdmin'])
                             .then(() => {
                                 window.location.reload();
                             });
                     }
                 });
-            });
+            },
+                (error) => {
+                    this.errorMessage = error.error['hydra:description'];
+                }
+            );
 
 
         }

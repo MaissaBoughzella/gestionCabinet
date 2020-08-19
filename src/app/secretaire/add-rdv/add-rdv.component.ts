@@ -29,6 +29,8 @@ export class AddRdvComponent implements OnInit {
   itemsPerPage: number;
   currentPage: number;
   term;
+  patient: any;
+  patientDetail: any;
 
   constructor(private router: Router, private apiAuthService: ApiAuthService, private apiPatientService: ApiPatientService, private apiRdvService: ApiRdvService, private apiSecretaireService: ApiSecretaireService) {
 
@@ -52,6 +54,16 @@ export class AddRdvComponent implements OnInit {
 
     this.apiRdvService.getRdvs().subscribe((res: any) => {
       this.rdvs = res['hydra:member'];
+      for (let j = 0; j < this.rdvs.length; j++) {
+        let patient = this.rdvs[j].patient.substring(14);
+        this.apiPatientService.getPatientById(patient).subscribe((res: any) => {
+          let userId = res.user.substring(11);
+          this.apiAuthService.getUserById(userId).subscribe((res: any) => {
+            this.patient= (res);
+            console.log(this.patient)
+          });
+        });
+      }
     });
 
     this.apiAuthService.getRoles().subscribe((res: any) => {
@@ -68,6 +80,15 @@ export class AddRdvComponent implements OnInit {
     
     this.apiPatientService.getPatients().subscribe((res: any) => {
         this.patients = res['hydra:member'];
+        for (let j = 0; j < this.patients.length; j++) {
+          this.apiPatientService.getPatientById(this.patients[j].id).subscribe((res: any) => {
+            let userId = res.user.substring(11);
+            this.apiAuthService.getUserById(userId).subscribe((res: any) => {
+              this.patientDetail = res;
+              //A VERIFIER
+            });
+          });
+        }
       });
   }
 

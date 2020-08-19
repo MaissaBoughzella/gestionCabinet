@@ -16,6 +16,14 @@ export class ApiSecretaireService {
     return this.http.get('http://127.0.0.1:8000/api/secretaires/getByUserId/' + userId);
   }
 
+  getSecretaires() {
+    return this.http.get('http://127.0.0.1:8000/api/secretaires');
+  }
+
+  getSecretaireByMedId(medId) {
+    return this.http.get('http://127.0.0.1:8000/api/secretaires/getSecByMedecin/' + medId);
+  }
+
   editSec(id, body) {
     return this.http.patch('http://127.0.0.1:8000/api/secretaires/' + id, body);
   }

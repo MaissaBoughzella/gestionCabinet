@@ -3,6 +3,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiRdvService } from 'src/app/shared/api-rdv.service';
 import { ApiConsultationService } from 'src/app/shared/api-consultation.service';
+import { ApiAuthService } from 'src/app/shared/api-auth.service';
+import { ApiPatientService } from 'src/app/shared/api-patient.service';
 @Component({
   selector: 'app-consultation',
   templateUrl: './consultation.component.html',
@@ -19,7 +21,10 @@ export class ConsultationComponent implements OnInit {
   itemsPerPage: number;
   currentPage: number;
   term;
-  constructor(private router: Router, private apiRdvService: ApiRdvService, private apiConsService: ApiConsultationService) {
+  patient = [];
+  constructor(private router: Router, private apiRdvService: ApiRdvService,
+    private apiConsService: ApiConsultationService, private apiAuthService: ApiAuthService,
+    private apiPatientService: ApiPatientService) {
     this.itemsPerPage = 10;
     this.currentPage = 1;
   }
@@ -32,6 +37,16 @@ export class ConsultationComponent implements OnInit {
     let medId = localStorage.getItem('id').substring(14);
     this.apiRdvService.getAllRdvsByMedecin(medId).subscribe((res: any) => {
       this.rdvs = res['hydra:member'];
+      for (let j = 0; j < this.rdvs.length; j++) {
+        let patient = this.rdvs[j].patient.substring(14);
+        this.apiPatientService.getPatientById(patient).subscribe((res: any) => {
+          let userId = res.user.substring(11);
+          this.apiAuthService.getUserById(userId).subscribe((res: any) => {
+            this.patient= (res);
+            console.log(this.patient)
+          });
+        });
+      }
     });
   }
 

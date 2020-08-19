@@ -20,6 +20,9 @@ export class AuthGuard implements CanActivate {
     if (localStorage.getItem('isSecretaire') == "true" && localStorage.getItem('token')) {
       return true;
     }
+    if (localStorage.getItem('isSuperAdmin') == "true" && localStorage.getItem('token')) {
+      return true;
+    }
     this.router.navigateByUrl('/login');
     return false;
 

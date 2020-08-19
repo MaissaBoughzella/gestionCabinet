@@ -1,8 +1,5 @@
-label {
-    font-weight: 500;
-    font-size: 13px;
-  }
-.table thead th{
+@import "../../../assets/examples/css/pages/profile.minfd53.css";
+  thead th{
     font-weight: 600;
     color: #616161;
     border-bottom-width: 1px;

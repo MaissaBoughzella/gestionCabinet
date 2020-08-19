@@ -1,0 +1,36 @@
+@import "../../../assets/global/vendor/bootstrap-select/bootstrap-select.minfd53.css";
+@import "../../../assets/examples/css/apps/documents.minfd53.css";
+.category {
+    height: 100%;
+    padding: 30px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: .286rem;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.btn-circle {
+    width: 60px;
+    height: 60px;
+    line-height: 45px;
+    text-align: center;
+    padding: 0;
+    border-radius: 50%;
+}
+
+label {
+    font-weight: 500;
+    font-size: 13px;
+    margin:0px;
+}
+
+thead th{
+    font-weight: 600;
+    color: #616161;
+    border-bottom-width: 1px;
+    font-size: 15px;
+  }
+.form-group .form-material .col-md-6 {
+    margin-bottom: 0px;
+}
