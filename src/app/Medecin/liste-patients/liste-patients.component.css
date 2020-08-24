@@ -1,0 +1,27 @@
+@import "../../../assets/global/vendor/slidepanel/slidePanel.minfd53.css";
+@import "../../../assets/global/vendor/chartist/chartist.minfd53.css";
+@import "../../../assets/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.minfd53.css";
+@import "../../../assets/global/vendor/jquery-selective/jquery-selective.minfd53.css";
+@import "../../../assets/examples/css/apps/work.minfd53.css";
+label {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.table thead th{
+  font-weight: 600;
+  color: #616161;
+  border-bottom-width: 1px;
+  font-size: 14px;
+}
+.btn-circle {
+  width: 60px;
+  height: 60px;
+  line-height: 45px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+}
+.form-group .form-material  .col-md-6 {
+  margin-bottom: 0px;
+}

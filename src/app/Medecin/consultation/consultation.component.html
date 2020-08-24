@@ -1,13 +1,23 @@
     <div class="panel">
       <div class="panel-heading">
         <h2 class="panel-title">Liste des rendez-vous</h2>
-        <div class="page-header-actions">
-          <form action="#" method="post">
-            <div class="input-search input-search-dark">
-              <i class="input-search-icon md-search" aria-hidden="true"></i>
-              <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
-            </div>
-          </form>
+        <div class="page-header-actions row">
+          <div class="col-md-6">
+            <select class="browser-default custom-select form-control" style="height: auto;" #etat (change)="filterByEtat(etat)">
+              <option>Tous les états</option>
+              <option>Non consulté</option>
+              <option>Consulté</option>
+              <option>Annulé</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <form action="#" method="post">
+              <div class="input-search input-search-dark">
+                <i class="input-search-icon md-search" aria-hidden="true"></i>
+                <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+              </div>
+            </form>
+          </div>
         </div>
       </div>
       <div class="panel-body">
@@ -41,7 +51,7 @@
                 <i class="icon md-time"></i>&nbsp;{{rdv?.heure | date:'shortTime'}}
               </td>
               <td class="subject">
-                {{patient?.prenom}} {{patient?.nom}}
+                {{patientNom[i]}}
               </td>
               <td class="actions" *ngIf = "rdv?.etat == 'Non consulté'">
                   <button id="consulterBtn" type="button" class="btn btn-primary btn-icon"

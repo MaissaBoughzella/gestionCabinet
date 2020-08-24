@@ -41,7 +41,6 @@ const routes: Routes = [
       { path: 'profil', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'rendezVous', component: ConsultationComponent, canActivate: [AuthGuard] },
       { path: 'consultation/:id', component: GestionConsultationComponent, canActivate: [AuthGuard] },
-      //{ path: '', redirectTo: 'register', pathMatch: 'full' },
     ]
   },
   {
@@ -49,12 +48,9 @@ const routes: Routes = [
     component: PatientComponent,
     canActivate: [AuthGuard],
     children: [
-      // { path: 'home', component: PatientComponent },
       { path: 'profil', component: ProfilePatientComponent, canActivate: [AuthGuard] },
-      { path: 'searchDoctor', component: DoctorSearchComponent },
       { path: 'rendezVous', component: RendezVousListComponent, canActivate: [AuthGuard] },
       { path: 'consultation/:id', component: ConsultationByPatientComponent, canActivate: [AuthGuard] },
-      //{ path: '', redirectTo: 'home', pathMatch: 'full' },
     ]
   },
   {
@@ -64,7 +60,8 @@ const routes: Routes = [
     children: [
       { path: 'profil', component: ProfileSecretaireComponent, canActivate: [AuthGuard] },
       { path: 'rendezVous', component: AddRdvComponent, canActivate: [AuthGuard] },
-      //{ path: '', redirectTo: 'register', pathMatch: 'full' },
+      { path: 'patients', component: ListePatientsComponent, canActivate: [AuthGuard] },
+
     ]
   },
 
@@ -81,8 +78,7 @@ const routes: Routes = [
   { path: 'medecin/register', component: RegisterComponent },
   { path: 'patient/register', component: RegisterPatientComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

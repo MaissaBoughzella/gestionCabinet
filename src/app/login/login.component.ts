@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit {
                     else if (this.roleName == "Secretaire" || this.roleName == "secretaire") {
                         this.apiSecService.getSecretaireByUserId(user).subscribe((res: any) => {
                             localStorage.setItem('id', res['@id']);
+                            localStorage.setItem('idMed', res.medecinId);
 
                             localStorage.setItem('isSecretaire', 'true');
                             this.router.navigate(['/secretaire'])

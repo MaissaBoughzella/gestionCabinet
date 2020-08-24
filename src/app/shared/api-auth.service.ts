@@ -62,6 +62,7 @@ export class ApiAuthService {
     localStorage.removeItem('isSecretaire');
     localStorage.removeItem('isSuperAdmin');
     localStorage.removeItem('id');
+    localStorage.removeItem('idMed');
     localStorage.removeItem('userId');
     this.router.navigate(['login']);
   }

@@ -37,6 +37,10 @@ export class ApiRadioService {
     return this.http.get('http://127.0.0.1:8000/api/imageradios');
   }
 
+  getRadiosByConsultation(id) {
+    return this.http.get('http://127.0.0.1:8000/api/imageradios/getByConsId/' + id);
+  } 
+
   getRadioById(id) {
     return this.http.get('http://127.0.0.1:8000/api/imageradios/' + id);
   }

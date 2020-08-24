@@ -31,10 +31,10 @@
             &nbsp;Patient: {{patient?.prenom}} {{patient?.nom}}</p>
         </div>
         <!-- Example Custom -->
-            <div class="list-group" *ngFor="let pres of prescriptions">
+            <div class="list-group" *ngFor="let pres of prescriptions;let i=index;">
               <div class="wrap-input100 bg1" id="{{pres?.id}}">
                 <h5 class="list-group-item-heading mt-0" style="font-size:16px;">
-                <i class="icon md-check-circle" aria-hidden="true"></i>&nbsp;{{pres?.medicament}}
+                <i class="icon md-check-circle" aria-hidden="true"></i>&nbsp;{{med[i]}}
                 </h5>
                 <p class="mb-0" style="font-family: inherit">
                     Forme: {{pres?.forme}} | Dosage: {{pres?.dosage}} | Quantité: {{pres?.quantite}}</p>

@@ -1,44 +1,52 @@
-<!-- <div class="panel">
+<div class="panel">
     <div class="panel-heading" style="margin-bottom: 30px;">
       <h2 class="panel-title">Liste des patients</h2>
+      <div class="page-header-actions">
+        <form action="#" method="post">
+          <div class="input-search input-search-dark">
+            <i class="input-search-icon md-search" aria-hidden="true"></i>
+            <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+          </div>
+        </form>
+        </div>
     </div>
     <div class="panel-body">
       <table class="table">
         <thead>
           <tr>
-            <th style="width:5%;"></th>
+            <th ></th>
             <th>Nom</th>
             <th>Prénom</th>
             <th>Email</th>
             <th>Genre</th>
             <th>Téléphone</th>
             <th>Adresse</th>
-            <th>Action</th>
+            <!-- <th style="width:10%">Action</th> -->
           </tr>
         </thead>
                     <tbody>
-                      <tr *ngFor="let sec of secretaires | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage }; let i=index;" >
-                        <td style="font-weight: 600;color: #616161;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
-                        <td>{{sec?.nom}}</td>
-                        <td>{{sec?.prenom}}</td>
-                        <td>{{sec?.email}}</td>
-                        <td>{{sec?.genre}}</td>
-                        <td>{{sec?.telephone}}</td>
-                        <td>{{sec?.adresse}}</td>
-                        <td class="text-nowrap">
+                      <tr *ngFor="let patient of patientDetail | filter:term | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage }; let i=index;" >
+                        <td style="font-weight: 600;color: #616161; WIDTH: 6%;PADDING-LEFT: 2%;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
+                        <td>{{patient?.nom}}</td>
+                        <td>{{patient?.prenom}}</td>
+                        <td>{{patient?.email}}</td>
+                        <td>{{patient?.genre}}</td>
+                        <td>{{patient?.telephone}}</td>
+                        <td>{{patient?.adresse}}</td>
+                        <!-- <td class="text-nowrap">
                           <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
                               <button type="button" class="btn btn-primary btn-icon"
                               tooltip="Modifier secretaire"
-                              (click)= "setSelectedSec(sec)"
+                              (click)= "setSelectedpatient(patient)"
                               data-toggle="modal" 
                               data-target="#editModal">
                                 <i class="icon md-edit" aria-hidden="true"></i>
                               </button>
-                              <button type="button" class="btn btn-danger btn-icon" (click)="deleteSec(sec?.id)">
+                              <button type="button" class="btn btn-danger btn-icon" (click)="deletepatient(patient?.id)">
                                 <i class="icon md-delete" aria-hidden="true"></i>
                               </button>
                             </div>
-                        </td>
+                        </td> -->
                       </tr>
                     </tbody>
                   </table>
@@ -49,9 +57,109 @@
                     <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                   </ul>
                 </nav>
-                </div>
-              </div> -->
+  </div>
+  <!-- Site Action -->
+  <!-- <div class="site-action" data-plugin="actionBtn">
+    <button type="button" class=" btn-circle site-action-toggle btn-raised btn btn-success btn-floating"
+    tooltip="Ajouter Médecin"
+    data-toggle="modal" 
+    data-target="#addModal">
+      <i class="front-icon md-account-add animation-scale-up" aria-hidden="true" style="FONT-SIZE: 30PX;"></i>
+    </button>
+ </div> -->
+  <!-- End Site Action -->
+</div>
 
+<!-- Modal -->
+<!-- <div class="modal fade" id="addModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
+role="dialog" tabindex="-1">
+<div class="modal-dialog modal-simple modal-center">
+  <div class="modal-content" style="width:700px;margin-left: -100px;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h4 class="modal-title">Ajouter un Patient</h4>
+    </div>
+    <div class="modal-body" style="padding: 2rem; margin-top: 5px;">
+      <form  [formGroup]="RegisterForm" method="post">
+        <div class="form-row">
+        <div class="form-group form-material col-md-6" data-plugin="formMaterial">
+          <input type="text" class="form-control"  formControlName="nom"/>
+          <label class="floating-label">Nom</label>
+        </div>
+        <div class="form-group form-material  col-md-6" data-plugin="formMaterial">
+          <input type="text" class="form-control"  formControlName="prenom"/>
+          <label class="floating-label">Prénom</label>
+        </div>
+        </div>
+        <div class="form-row">
+        <div class="form-group form-material  col-md-6" data-plugin="formMaterial">
+          <select class="browser-default custom-select form-control" formControlName="genre">
+            <option *ngFor="let gen of genre" [ngValue]="gen">
+              {{ gen }}
+            </option>
+          </select>              
+          <label class="floating-label">Genre</label>
+        </div>
+
+        <div class="form-group form-material  col-md-6" data-plugin="formMaterial">
+        <select class="browser-default custom-select form-control" formControlName="langue">
+          <option *ngFor="let lan of langue" [ngValue]="lan">
+            {{ lan }}
+          </option>
+        </select>
+        <label class="floating-label">La version de l'application</label>
+        </div>
+        </div>
+        <div class="form-row">
+        <div class="form-group form-material  col-md-6" data-plugin="formMaterial">
+          <input type="text" class="form-control"  formControlName="adresse"/>
+          <label class="floating-label">Adresse</label>
+        </div>
+
+        <div class="form-group form-material  col-md-6" data-plugin="formMaterial">
+          <input type="text" class="form-control"  formControlName="telephone"/>
+          <label class="floating-label">Téléphone</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-material col-md-6" data-plugin="formMaterial">
+          <input type="email" class="form-control"  formControlName="email"/>
+          <label class="floating-label">Email</label>
+        </div>
+
+        <div class="form-group form-material  col-md-6" data-plugin="formMaterial">
+          <input type="password" class="form-control"  formControlName="password"/>
+          <label class="floating-label">Mot de passe</label>
+        </div>
+      </div>
+      </form>
+      <form  [formGroup]="RegisterFormPatient" method="post">
+        <div class="form-row">
+        <div class="form-group form-material  col-md-6" data-plugin="formMaterial">
+          <input type="text" class="form-control"  formControlName="profession"/>
+          <label class="floating-label">Profession</label>
+        </div>
+        
+        <div class="form-group form-material  col-md-6" data-plugin="formMaterial">
+          <input type="date" class="form-control"  formControlName="dateNaiss"/>
+          <label class="floating-label">Date de naissance</label>
+        </div>
+      </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
+      style="font-size: 13px;font-weight: 500;">Annuler</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal"
+      style="font-size: 13px;font-weight: 500;"
+      (click)="addUser()">Ajouter</button>
+    </div>
+  </div>
+</div>
+</div> -->
+<!-- End Modal -->
 
   <!-- Plugins For This Page -->
   <script src="../../../assets/global/vendor/slidepanel/jquery-slidePanel.minfd53.js?v4.0.1"></script>
@@ -69,4 +177,4 @@
   <script src="../../../assets/js/BaseApp.minfd53.js?v4.0.1"></script>
   <script src="../../../assets/js/App/Work.minfd53.js?v4.0.1"></script>
   <script src="../../../assets/examples/js/apps/work.minfd53.js?v4.0.1"></script>
- 
+

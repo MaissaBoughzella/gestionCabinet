@@ -90,10 +90,11 @@
             </button>
         </form>
         <!-- Example Custom -->
-            <div class="list-group" *ngFor="let pres of prescriptions">
-              <div class="wrap-input100 bg1" id="{{pres?.id}}">
+            <div class="list-group" *ngFor="let pres of prescriptions;let i=index">
+              <div class="wrap-input100 bg1">
                 <h5 class="list-group-item-heading mt-0" *ngIf="!isEditContextPres(pres?.id)" style="font-size:16px;">
-                <i class="icon md-check-circle" aria-hidden="true"></i>&nbsp;{{pres?.medicament}}
+                <i class="icon md-check-circle" aria-hidden="true"></i>&nbsp;
+                <span>{{med[i]}}</span>
                 </h5>
                 <p class="mb-0" style="font-family: inherit" *ngIf="!isEditContextPres(pres?.id)">
                     Forme: {{pres?.forme}} | Dosage: {{pres?.dosage}} | Quantité: {{pres?.quantite}}</p>
@@ -129,7 +130,6 @@
                         </div>
                     </div>
                 </div>
-    
                 <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
                     <span class="label-input100">Forme </span>
                     <input type="text" class="input100 form-control" #forme1 value="{{selectedpres?.forme}}" 

@@ -36,9 +36,9 @@
                         <tr *ngFor="let rdv of rdvs  | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } | filter:term; let i=index;" >
                           <td style="font-weight: 600;color: #616161;padding-left: 30px;">
                             {{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
-                          <td><i class="icon md-calendar"></i>&nbsp;{{rdv?.date | date:'fullDate'}}</td>
+                          <td><i class="icon md-calendar"></i>&nbsp;{{rdv?.date | date:'dd/MM/yyyy'}}</td>
                           <td><i class="icon md-time"></i>&nbsp;{{rdv?.heure | date:'shortTime'}}</td>
-                          <td>{{patient?.prenom}} {{patient?.nom}}</td>
+                          <td>{{patientNom[i]}}</td>
                           <td class="work-status" *ngIf = "rdv?.etat == 'Annulé'">
                             <span class="badge badge-danger" style="font-size: 12px;">{{rdv?.etat}}</span>
                           </td>
@@ -106,8 +106,8 @@
                     <label class="col-md-3 col-form-label">Patient: </label>
                     <select class="form-control form-control-sm col-md-8" formControlName="patient" 
                     style="margin-left: 15px;">
-                    <option *ngFor="let patient of patients" [ngValue]="patient['@id']">
-                        {{ patientDetail?.prenom }} {{patientDetail?.nom}}
+                    <option *ngFor="let patient of patients;let i=index;" [ngValue]="patient['@id']">
+                        {{patientDetail[i]}}
                       </option>
                     </select>
                   </div>

@@ -20,6 +20,8 @@ export class RendezVousListComponent implements OnInit {
   currentPage: any;
   totalItems: any;
   term;
+  allRdvs = [];
+  
 
   constructor(private router: Router, private apiRdvService: ApiRdvService, private apiConsService: ApiConsultationService) {
     this.itemsPerPage = 10;
@@ -30,6 +32,7 @@ export class RendezVousListComponent implements OnInit {
     let patientId = localStorage.getItem('id').substring(14);
     this.apiRdvService.getAllRdvsByPatient(patientId).subscribe((res: any) => {
       this.rdvs = res['hydra:member'];
+      this.allRdvs = res['hydra:member'];
     });
   }
 
@@ -48,4 +51,42 @@ export class RendezVousListComponent implements OnInit {
   pageChanged(event) {
     this.currentPage = event;
   }
+
+  filterByEtat(etat) {
+    var offers = [];
+    if (etat.value == "Tous les états") {
+      this.ngOnInit();
+    }
+
+    if (etat.value == "Consulté") {
+      this.rdvs = this.allRdvs;
+      for (let i = 0; i < this.rdvs.length; i++) {
+        if (this.rdvs[i].etat == "Consulté") {
+          offers.push(this.rdvs[i]);
+        }
+      }
+      this.rdvs = offers;
+    }
+    else if (etat.value == "Non consulté") {
+      this.rdvs = this.allRdvs;
+      for (let i = 0; i < this.rdvs.length; i++) {
+        if (this.rdvs[i].etat == "Non consulté") {
+          offers.push(this.rdvs[i]);
+
+        }
+      }
+      this.rdvs = offers;
+    }
+    else if (etat.value == "Annulé") {
+      this.rdvs = this.allRdvs;
+      for (let i = 0; i < this.rdvs.length; i++) {
+        if (this.rdvs[i].etat == "Annulé") {
+          offers.push(this.rdvs[i]);
+
+        }
+      }
+      this.rdvs = offers;
+    }
+  }
+
 }

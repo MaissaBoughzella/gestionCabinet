@@ -20,22 +20,23 @@
         <app-ordonnance-patient></app-ordonnance-patient>            
         </div>
         <div class="tab-pane" id="exampleTopImages" role="tabpanel">
-          <div class="page-header-actions" style=" margin-top: -83px;">
-          <form action="#" method="post">
+          <form action="#" method="post" *ngIf="!isEmpty">
             <div class="input-search input-search-dark">
               <i class="input-search-icon md-search" aria-hidden="true"></i>
               <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
             </div>
           </form>
-          </div>
-          <div id="exampleCustomGridField">
+          <div id="exampleCustomGridField" style="margin-top: 40px;
+          width: 80%;
+          margin-left: 10%;
+          MARGIN-BOTTOM: 40px;">
                     <table class="table">
                       <thead >
-                        <tr>
+                        <tr *ngIf="!isEmpty">
                           <th style="width:12%;"></th>
                           <th>Nom</th>
                           <th>Description</th>
-                          <th style="width: 25%;">Type</th>
+                          <th style="width: 15%;">Type</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -43,34 +44,35 @@
                           <td style="font-weight: 600;color: #616161;padding-left: 60px;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
                           <td>{{radio?.nom}}</td>
                           <td>{{radio?.description}}</td>
-                          <td>{{radio?.typeradio}}</td>
+                          <td>{{rad[i]}}</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                  <nav>
+                  <nav *ngIf="!isEmpty">
                     <ul class="pagination page-item" style="margin-left: 40%;">
                       <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                     </ul>
                   </nav>
                 </div>
         <div class="tab-pane" id="exampleTopAnalyses" role="tabpanel">
-          <div class="page-header-actions" style=" margin-top: -83px;">
-            <form action="#" method="post">
+            <form action="#" method="post" *ngIf="!isEmptyAnal">
               <div class="input-search input-search-dark">
                 <i class="input-search-icon md-search" aria-hidden="true"></i>
                 <input type="text" [(ngModel)]="term2" class="form-control" name="search" placeholder="Search...">
               </div>
             </form>
-            </div>
-                <div id="exampleCustomGridField">
+                <div id="exampleCustomGridField" style="margin-top: 40px;
+                width: 80%;
+                margin-left: 10%;
+                MARGIN-BOTTOM: 40px;">
                             <table class="table">
-                              <thead>
-                                <tr>
+                              <thead >
+                                <tr *ngIf="!isEmptyAnal">
                                   <th style="width:12%;"></th>
                                   <th>Nom</th>
                                   <th>Description</th>
-                                  <th style="width: 25%;">Type</th>
+                                  <th style="width: 15%;">Type</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -78,12 +80,12 @@
                                   <td style="font-weight: 600;color: #616161;padding-left: 60px;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
                                   <td>{{analyse?.nom}}</td>
                                   <td>{{analyse?.description}}</td>
-                                  <td>{{analyse?.typeanalyse}}</td>
+                                  <td>{{anal[i]}}</td>
                                 </tr>
                               </tbody>
                             </table>
                           </div>
-                          <nav>
+                          <nav *ngIf="!isEmptyAnal">
                             <ul class="pagination page-item" style="margin-left: 40%;">
                               <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                             </ul>

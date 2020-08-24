@@ -18,6 +18,10 @@ export class ApiPrescriptionService {
     return this.http.get('http://127.0.0.1:8000/api/prescriptions/getByOrdId/' + id);
   }
 
+  getPrescriptionById(id) {
+    return this.http.get('http://127.0.0.1:8000/api/prescriptions/' + id);
+  }
+  
   addPrescription(body) {
     return this.http.post('http://127.0.0.1:8000/api/prescriptions', body);
   }

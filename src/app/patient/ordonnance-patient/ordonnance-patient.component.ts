@@ -25,13 +25,16 @@ export class OrdonnancePatientComponent implements OnInit {
   medicaments: any;
   prescriptions: any;
   medecin: any;
-
+  med = [];
+  tab = [];
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
     private apiConsService: ApiConsultationService, private apiAuthService: ApiAuthService,
     private apiRdvService: ApiRdvService, private apiMedicamentService: ApiMedicamentService, private apiOrdService: ApiOrdonnanceService,
     private apiPrescriptionService: ApiPrescriptionService, private apiMedecinService: ApiMedecinService) { }
 
   ngOnInit(): void {
+    this.med = [];
+    this.tab = [];
     let idCons = this.activatedRoute.snapshot.paramMap.get('id');
     let idPatient = localStorage.getItem('userId').substring(11);
     this.apiConsService.getConsById(idCons).subscribe((res: any) => {
@@ -55,6 +58,14 @@ export class OrdonnancePatientComponent implements OnInit {
       this.ordId = res.id;
       this.apiPrescriptionService.getPrescriptionByOrdId(this.ordId).subscribe((res: any) => {
         this.prescriptions = res['hydra:member'];
+        for (let j = 0; j < this.prescriptions.length; j++) {
+          this.tab.push(this.prescriptions[j].medicament.substring(17));
+        }
+        for (let i = 0; i < this.tab.length; i++) {
+          this.apiMedicamentService.getMedicamentById(this.tab[i]).subscribe((res: any) => {
+            this.med.push(res.nom);
+          });
+        }
       });
     });
   }

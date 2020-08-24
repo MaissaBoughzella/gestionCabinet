@@ -22,7 +22,7 @@ export class OrdonnanceComponent implements OnInit {
   isAddContext: boolean = false;
   addOrdonnanceForm: FormGroup;
   addPrescriptionForm: FormGroup;
-  prescriptions: any;
+  prescriptions = [];
   isAddPresContext: boolean = false;
   selectedpres: any;
   medicamentId: any;
@@ -32,7 +32,8 @@ export class OrdonnanceComponent implements OnInit {
   selectedMedId: any;
   editedId: any;
   ordId: any;
-
+  med = [];
+  tab = [];
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
     private apiConsService: ApiConsultationService, private apiAuthService: ApiAuthService,
     private apiRdvService: ApiRdvService, private apiPatientService: ApiPatientService,
@@ -49,7 +50,8 @@ export class OrdonnanceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.med = [];
+    this.tab = [];
     const idCons = this.activatedRoute.snapshot.paramMap.get('id');
     this.apiOrdService.getOrdonnanceByConsultationId(idCons).subscribe((res: any) => {
       this.ordId = res.id;
@@ -77,10 +79,19 @@ export class OrdonnanceComponent implements OnInit {
     this.apiMedicamentService.getMedicaments().subscribe((res: any) => {
       this.medicaments = res['hydra:member'];
     });
+
     this.apiOrdService.getOrdonnanceByConsultationId(idCons).subscribe((res: any) => {
       this.ordId = res.id;
       this.apiPrescriptionService.getPrescriptionByOrdId(this.ordId).subscribe((res: any) => {
         this.prescriptions = res['hydra:member'];
+        for (let j = 0; j < this.prescriptions.length; j++) {
+          this.tab.push(this.prescriptions[j].medicament.substring(17));
+        }
+        for (let i = 0; i < this.tab.length; i++) {
+          this.apiMedicamentService.getMedicamentById(this.tab[i]).subscribe((res: any) => {
+            this.med.push(res.nom);
+          });
+        }
       });
     });
 
@@ -107,9 +118,7 @@ export class OrdonnanceComponent implements OnInit {
       this.apiPrescriptionService.addPrescription(this.addPrescriptionForm.value).subscribe((res: any) => {
         this.isAddPresContext = false;
         document.getElementById("addPresButton").style.visibility = "visible";
-        this.apiPrescriptionService.getPrescriptionByOrdId(this.ordId).subscribe((res: any) => {
-          this.prescriptions = res['hydra:member'];
-        });
+        this.ngOnInit();
       });
     });
   }
@@ -164,27 +173,14 @@ export class OrdonnanceComponent implements OnInit {
       quantite: Number(qte1),
       medicament: this.selectedMedId,
     };
-    const idCons = this.activatedRoute.snapshot.paramMap.get('id');
     this.apiPrescriptionService.editPrescription(this.editedId, form).subscribe((res: any) => {
       this.isEditPresContext = false;
-      this.apiOrdService.getOrdonnanceByConsultationId(idCons).subscribe((res: any) => {
-        this.ordId = res.id;
-        this.apiPrescriptionService.getPrescriptionByOrdId(this.ordId).subscribe((res: any) => {
-          this.prescriptions = res['hydra:member'];
-        });
-      });
+      this.ngOnInit();
     });
   }
 
   setAnnulerEditPresContext() {
     this.isEditPresContext = false;
-  }
-
-  getNameMed(medId) {
-    let id = medId.substring(17);
-    this.apiMedicamentService.getMedicamentById(id).subscribe((res: any) => {
-      return res.nom;
-    });
   }
 }
 

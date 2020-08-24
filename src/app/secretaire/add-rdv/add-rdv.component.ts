@@ -16,7 +16,6 @@ import { stringify } from '@angular/compiler/src/util';
 export class AddRdvComponent implements OnInit {
 
   addRdvForm: FormGroup;
-  patients;
   medecinId;
   rdvs = [];
   selectedRdv;
@@ -30,8 +29,12 @@ export class AddRdvComponent implements OnInit {
   currentPage: number;
   term;
   patient: any;
-  patientDetail: any;
-
+  patientDetail = [];
+  patients = [];
+  tab = [];
+  table = [];
+  patientNom = [];
+  userp = [];
   constructor(private router: Router, private apiAuthService: ApiAuthService, private apiPatientService: ApiPatientService, private apiRdvService: ApiRdvService, private apiSecretaireService: ApiSecretaireService) {
 
     this.addRdvForm = new FormGroup({
@@ -41,29 +44,35 @@ export class AddRdvComponent implements OnInit {
       patient: new FormControl(''),
 
     });
-    
+
     this.itemsPerPage = 10;
     this.currentPage = 1;
   }
 
   ngOnInit(): void {
-
+    this.patients = [];
+    this.userp = [];
+    this.patientNom = [];
+    this.tab = [];
+    this.table = [];
     this.apiSecretaireService.getSecretaireByUserId(localStorage.getItem('userId').substring(11)).subscribe((res: any) => {
       this.medecinId = res.medecinId
-    });
 
-    this.apiRdvService.getRdvs().subscribe((res: any) => {
-      this.rdvs = res['hydra:member'];
-      for (let j = 0; j < this.rdvs.length; j++) {
-        let patient = this.rdvs[j].patient.substring(14);
-        this.apiPatientService.getPatientById(patient).subscribe((res: any) => {
-          let userId = res.user.substring(11);
-          this.apiAuthService.getUserById(userId).subscribe((res: any) => {
-            this.patient= (res);
-            console.log(this.patient)
+
+      this.apiRdvService.getAllRdvsByMedecin(this.medecinId.substring(14)).subscribe((res: any) => {
+        this.rdvs = res['hydra:member'];
+        for (let j = 0; j < this.rdvs.length; j++) {
+          this.tab.push(this.rdvs[j].patient.substring(14));
+        }
+        for (let i = 0; i < this.tab.length; i++) {
+          this.apiPatientService.getPatientById(this.tab[i]).subscribe((res: any) => {
+            this.userp.push(res.user.substring(11));
+            this.apiAuthService.getUserById(this.userp[i]).subscribe((res: any) => {
+              this.patientNom.push(res.prenom + ' ' + res.nom);
+            });
           });
-        });
-      }
+        }
+      });
     });
 
     this.apiAuthService.getRoles().subscribe((res: any) => {
@@ -77,19 +86,20 @@ export class AddRdvComponent implements OnInit {
         this.users = res['hydra:member'];
       });
     });
-    
+
     this.apiPatientService.getPatients().subscribe((res: any) => {
-        this.patients = res['hydra:member'];
-        for (let j = 0; j < this.patients.length; j++) {
-          this.apiPatientService.getPatientById(this.patients[j].id).subscribe((res: any) => {
-            let userId = res.user.substring(11);
-            this.apiAuthService.getUserById(userId).subscribe((res: any) => {
-              this.patientDetail = res;
-              //A VERIFIER
-            });
-          });
-        }
-      });
+      this.patients = res['hydra:member'];
+      for (let j = 0; j < this.patients.length; j++) {
+        this.table.push(this.patients[j].user.substring(11));
+      }
+      console.log(this.table)
+      for (let i = 0; i < this.table.length; i++) {
+        this.apiAuthService.getUserById(this.table[i]).subscribe((res: any) => {
+          this.patientDetail.push(res.prenom + ' ' + res.nom);
+          console.log(this.patientDetail)
+        });
+      }
+    });
   }
 
   addRdv() {
@@ -109,11 +119,6 @@ export class AddRdvComponent implements OnInit {
     this.selectedRdv = rdv;
     this.etatToEdit = rdv.etat;
   }
-
-  // setSelectedUser(user) {
-  //   this.selectedUser = user;
-  //   console.log(this.selectedUser)
-  // }
 
   editRdv(dat, heur) {
     var body = {
@@ -135,24 +140,6 @@ export class AddRdvComponent implements OnInit {
   pageChanged(event) {
     this.currentPage = event;
   }
-
-  // filter() {
-  //   var dates = [];
-  //   var filtered = [];
-
-  //   for (let i = 0; i < this.rdvs.length; i++) {
-  //     dates[i] = this.rdvs[i].date;
-  //   }
-  //   dates.sort();
-  //   for (let j = 0; j < dates.length; j++) {
-  //     for (let i = 0; i < this.rdvs.length; i++) {
-  //       if (this.rdvs[i].date == dates[j]) {
-  //         filtered.push(this.rdvs[i]);
-  //       }
-  //     }
-  //   }
-  //   this.rdvs = filtered;
-  // }
 
   setEtat(etat: HTMLElement) {
     var etat1 = etat.innerHTML;

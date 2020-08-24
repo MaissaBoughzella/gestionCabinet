@@ -41,6 +41,10 @@ export class ApiAnalyseService {
     return this.http.get('http://127.0.0.1:8000/api/analyses');
   }
 
+  getAnalysesByConsultation(id) {
+    return this.http.get('http://127.0.0.1:8000/api/analyses/getByConsId/' + id);
+  }
+
   addAnalyse(body) {
     return this.http.post('http://127.0.0.1:8000/api/analyses', body);
   }

@@ -115,13 +115,19 @@
             <li class="site-menu-item" routerLinkActive="active">
               <a routerLink="/medecin/rendezVous">
                 <i class="site-menu-icon md-view-list" aria-hidden="true"></i>
-                <span class="site-menu-title">Gestion des consultations</span>
+                <span style="max-width: 180px;" class="site-menu-title" >Gestion des consultations</span>
               </a>
             </li>
             <li class="site-menu-item">
               <a routerLink="/medecin/secretaires" routerLinkActive="active">
                 <i class="site-menu-icon md-accounts" aria-hidden="true"></i>
                 <span class="site-menu-title">Gestion des secretaires</span>
+              </a>
+            </li>
+            <li class="site-menu-item">
+              <a routerLink="/medecin/patients" routerLinkActive="active">
+                <i class="site-menu-icon md-accounts" aria-hidden="true"></i>
+                <span class="site-menu-title">Gestion des patients</span>
               </a>
             </li>
           </ul>
@@ -132,14 +138,20 @@
                 <span class="site-menu-title">Gestion des rendez-vous</span>
               </a>
             </li>
+            <li class="site-menu-item">
+              <a routerLink="/secretaire/patients" routerLinkActive="active">
+                <i class="site-menu-icon md-accounts" aria-hidden="true"></i>
+                <span class="site-menu-title">Gestion des patients</span>
+              </a>
+            </li>
           </ul>
           <ul class="site-menu" data-plugin="menu" *ngIf="isPatient()">
-            <!-- <li class="site-menu-item active">
-              <a routerLink="/secretaire/rendezVous">
-                <i class="site-menu-icon md-calendar-alt" aria-hidden="true"></i>
-                <span class="site-menu-title">Gestion des rendez-vous</span>
+            <li class="site-menu-item">
+              <a routerLink="/patient/rendezVous" routerLinkActive="active">
+                <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+                <span class="site-menu-title">Les Rendez-vous</span>
               </a>
-            </li> -->
+            </li>
           </ul>
           <ul class="site-menu" data-plugin="menu" *ngIf="isSuperAdmin()">
             <li class="site-menu-item">

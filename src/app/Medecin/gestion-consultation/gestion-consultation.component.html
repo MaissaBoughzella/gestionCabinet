@@ -31,7 +31,7 @@
               Ajouter image radio</button>
               <form action="#" method="post" style="float: left;
               margin-right: 685PX;
-              width: 400PX;">
+              width: 400PX;" *ngIf="!isEmpty">
                 <div class="input-search input-search-dark">
                   <i class="input-search-icon md-search" aria-hidden="true"></i>
                   <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
@@ -44,7 +44,7 @@
             
                     <table class="table">
                       <thead>
-                        <tr>
+                        <tr *ngIf="!isEmpty">
                           <th style="width:12%;"></th>
                           <th>Nom</th>
                           <th>Description</th>
@@ -57,7 +57,7 @@
                           <td style="font-weight: 600;color: #616161;padding-left: 60px;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
                           <td>{{radio?.nom}}</td>
                           <td>{{radio?.description}}</td>
-                          <td>{{radio?.typeradio}}</td>
+                          <td>{{rad[i]}}</td>
                           <!-- <td>{{getAnalyseName(analyse?.typeanalyse)}}</td> -->
                           <td class="text-nowrap">
                             <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
@@ -78,7 +78,7 @@
                       </tbody>
                     </table>
                   </div>
-                  <nav>
+                  <nav *ngIf="!isEmpty">
                     <ul class="pagination page-item" style="margin-left: 40%;">
                       <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                     </ul>
@@ -96,7 +96,7 @@
                       Ajouter analyse</button>
                       <form action="#" method="post" style="float: left;
                         margin-right: 715PX;
-                        width: 400PX;">
+                        width: 400PX;" *ngIf="!isEmptyAnal">
                 <div class="input-search input-search-dark">
                   <i class="input-search-icon md-search" aria-hidden="true"></i>
                   <input type="text" [(ngModel)]="term2" class="form-control" name="search" placeholder="Search...">
@@ -105,7 +105,7 @@
                     </div>
                             <table class="table">
                               <thead>
-                                <tr>
+                                <tr *ngIf="!isEmptyAnal">
                                   <th style="width:12%;"></th>
                                   <th>Nom</th>
                                   <th>Description</th>
@@ -118,7 +118,7 @@
                                   <td style="font-weight: 600;color: #616161;padding-left: 60px;">{{ itemsPerPage * (currentPage - 1) + (i+1) }}</td>
                                   <td>{{analyse?.nom}}</td>
                                   <td>{{analyse?.description}}</td>
-                                  <td>{{analyse?.typeanalyse}}</td>
+                                  <td>{{anal[i]}}</td>
                                   <!-- <td>{{getAnalyseName(analyse?.typeanalyse)}}</td> -->
                                   <td class="text-nowrap">
                                     <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
@@ -141,7 +141,7 @@
                               </tbody>
                             </table>
                           </div>
-                          <nav>
+                          <nav *ngIf="!isEmptyAnal"> 
                             <ul class="pagination page-item" style="margin-left: 40%;">
                               <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                             </ul>

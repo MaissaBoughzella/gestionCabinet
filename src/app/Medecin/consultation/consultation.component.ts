@@ -21,7 +21,10 @@ export class ConsultationComponent implements OnInit {
   itemsPerPage: number;
   currentPage: number;
   term;
-  patient = [];
+  tab = [];
+  user = [];
+  patientNom = [];
+  allRdvs = [];
   constructor(private router: Router, private apiRdvService: ApiRdvService,
     private apiConsService: ApiConsultationService, private apiAuthService: ApiAuthService,
     private apiPatientService: ApiPatientService) {
@@ -30,20 +33,25 @@ export class ConsultationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.patientNom = [];
+    this.tab = [];
+    this.user = [];
     this.apiConsService.getConsultations().subscribe((res: any) => {
       this.consultations = res['hydra:member'];
     });
+
     let medId = localStorage.getItem('id').substring(14);
     this.apiRdvService.getAllRdvsByMedecin(medId).subscribe((res: any) => {
       this.rdvs = res['hydra:member'];
+      this.allRdvs = res['hydra:member'];
       for (let j = 0; j < this.rdvs.length; j++) {
-        let patient = this.rdvs[j].patient.substring(14);
-        this.apiPatientService.getPatientById(patient).subscribe((res: any) => {
-          let userId = res.user.substring(11);
-          this.apiAuthService.getUserById(userId).subscribe((res: any) => {
-            this.patient= (res);
-            console.log(this.patient)
+        this.tab.push(this.rdvs[j].patient.substring(14));
+      }
+      for (let i = 0; i < this.tab.length; i++) {
+        this.apiPatientService.getPatientById(this.tab[i]).subscribe((res: any) => {
+          this.user.push(res.user.substring(11));
+          this.apiAuthService.getUserById(this.user[i]).subscribe((res: any) => {
+            this.patientNom.push(res.prenom + ' ' + res.nom);
           });
         });
       }
@@ -89,5 +97,42 @@ export class ConsultationComponent implements OnInit {
 
   pageChanged(event) {
     this.currentPage = event;
+  }
+
+  filterByEtat(etat) {
+    var offers = [];
+    if (etat.value == "Tous les états") {
+      this.rdvs = this.allRdvs;
+    }
+
+    if (etat.value == "Consulté") {
+      this.rdvs = this.allRdvs;
+      for (let i = 0; i < this.rdvs.length; i++) {
+        if (this.rdvs[i].etat == "Consulté") {
+          offers.push(this.rdvs[i]);
+        }
+      }
+      this.rdvs = offers;
+    }
+    else if (etat.value == "Non consulté") {
+      this.rdvs = this.allRdvs;
+      for (let i = 0; i < this.rdvs.length; i++) {
+        if (this.rdvs[i].etat == "Non consulté") {
+          offers.push(this.rdvs[i]);
+
+        }
+      }
+      this.rdvs = offers;
+    }
+    else if (etat.value == "Annulé") {
+      this.rdvs = this.allRdvs;
+      for (let i = 0; i < this.rdvs.length; i++) {
+        if (this.rdvs[i].etat == "Annulé") {
+          offers.push(this.rdvs[i]);
+
+        }
+      }
+      this.rdvs = offers;
+    }
   }
 }
