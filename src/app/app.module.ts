@@ -14,7 +14,6 @@ import { FooterComponent } from './footer/footer.component';
 // import ngx-translate and the http loader
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import { DoctorSearchComponent } from './patient/doctor-search/doctor-search.component';
 import { RegisterPatientComponent } from './register-patient/register-patient.component';
 import { MedecinComponent } from './medecin/medecin.component';
 import { PatientComponent } from './patient/patient.component';
@@ -42,6 +41,9 @@ import { ProfilAdminComponent } from './admin/profil-admin/profil-admin.componen
 import { MedecinsComponent } from './admin/medecins/medecins.component';
 import { MedecinByIdComponent } from './admin/medecin-by-id/medecin-by-id.component';
 import { MedicamentsComponent } from './admin/medicaments/medicaments.component';
+import { PatientsComponent } from './admin/patients/patients.component';
+import { PatientByIdComponent } from './admin/patient-by-id/patient-by-id.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,6 @@ import { MedicamentsComponent } from './admin/medicaments/medicaments.component'
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    DoctorSearchComponent,
     RegisterPatientComponent,
     MedecinComponent,
     PatientComponent,
@@ -77,6 +78,9 @@ import { MedicamentsComponent } from './admin/medicaments/medicaments.component'
     MedecinsComponent,
     MedecinByIdComponent,
     MedicamentsComponent,
+    PatientsComponent,
+    PatientByIdComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,4 +109,8 @@ export class AppModule { }
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
+}
+
+export function TRANSLATE(str: string) {
+  return str;
 }

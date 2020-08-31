@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="page">
     <div class="page-header">
-      <h1 class="page-title mb-10">{{ 'componentTitles.medecin' | translate }}</h1>
+      <h1 class="page-title mb-10">{{ 'patient.title' | translate }}</h1>
     </div>
     <div class="page-content">
         <form action="#" method="post">
@@ -13,29 +13,29 @@
         </form>
       <div class="documents-wrap categories" data-plugin="animateList" data-child="li">
         <ul class="blocks blocks-100 blocks-xxl-4 blocks-lg-3 blocks-sm-2" data-plugin="matchHeight">
-          <li *ngFor= "let med of medecins | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } | filter:term; let i=index;">
+          <li *ngFor= "let patient of patients | paginate: { currentPage: currentPage, itemsPerPage: itemsPerPage } | filter:term; let i=index;">
             <div class="category">
               <div class="icon-wrap">
                 <a class="avatar avatar-lg" style="width: 30%;">
-                  <img src="../../../assets/images/avatar.jpg" alt="...">
+                    <img src="../../../assets/images/avatar.jpg" alt="...">
                 </a>
               </div>
-              <h4 style="margin-top: 15px;">{{med?.prenom | titlecase}} {{med?.nom | titlecase}}</h4>
-            <small><cite>{{med?.adresse}}
+              <h4 style="margin-top: 15px;">{{patient?.prenom | titlecase}} {{patient?.nom | titlecase}}</h4>
+            <small><cite>{{patient?.adresse}}
             &nbsp;<i class="icon md-pin" aria-hidden="true"></i></cite></small>
             <p>
-                <i class="icon md-email" aria-hidden="true"></i> &nbsp;{{med?.email}}
+                <i class="icon md-email" aria-hidden="true"></i> &nbsp;{{patient?.email}}
                 <br/>
-                <i class="icon md-phone" aria-hidden="true"></i> &nbsp;{{med?.telephone}}
+                <i class="icon md-phone" aria-hidden="true"></i> &nbsp;{{patient?.telephone}}
             </p>
               <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
                 <button type="button" class="btn btn-primary btn-icon"
-                (click)="viewProfile(med?.id)">
+                (click)="viewProfile(patient?.id)">
                   <i class="icon md-account" aria-hidden="true"></i>
                   <span>{{ 'profile.view' | translate }}</span>
                 </button>
                 <button type="button" class="btn btn-danger btn-icon"
-                (click)= "setSelectedMed(med)"
+                (click)= "setSelectedpatient(patient)"
                 data-toggle="modal" 
                 data-target="#cancelModal">
                 <i class="icon md-delete" aria-hidden="true"></i>
@@ -56,7 +56,7 @@
      <!-- Site Action -->
      <div class="site-action" data-plugin="actionBtn">
         <button type="button" class=" btn-circle site-action-toggle btn-raised btn btn-success btn-floating"
-        tooltip="Ajouter Médecin"
+        tooltip="Ajouter un Patient"
         data-toggle="modal" 
         data-target="#addModal">
           <i class="front-icon md-account-add animation-scale-up" aria-hidden="true" style="FONT-SIZE: 30PX;"></i>
@@ -70,15 +70,15 @@
     <div class="modal-dialog modal-simple modal-center">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 >{{ 'modal.delete-title-medecin' | translate }}?</h4>
+          <h4 >{{ 'modal.delete-title-patient' | translate }}?</h4>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default btn-pure" 
           style="font-size: 13px;font-weight: 500;"
-          data-dismiss="modal">{{ 'modal.cancelBtn' | translate }}</button>
+          data-dismiss="modal">{{ 'modal.closeBtn' | translate }}</button>
           <button type="button" class="btn btn-primary"
            data-dismiss="modal" style="font-size: 13px;font-weight: 500;"
-           (click)="deleteMed()">{{ 'modal.confirmBtn' | translate }}</button>
+           (click)="deletepatient()">{{ 'modal.confirmBtn' | translate }}</button>
         </div>
       </div>
     </div>
@@ -93,7 +93,7 @@ role="dialog" tabindex="-1">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
-      <h4 class="modal-title">{{ 'modal.add-title-medecin' | translate }}</h4>
+      <h4 class="modal-title">{{ 'modal.add-title-patient' | translate }}</h4>
     </div>
     <div class="modal-body">
         <form [formGroup]="addUserForm" method="post">
@@ -146,30 +146,15 @@ role="dialog" tabindex="-1">
               </div>
             </div>
           </form>
-          <form [formGroup]="addMedForm" method="post">
+          <form [formGroup]="addPatientForm" method="post">
             <div class="form-row">
               <div class="form-group form-material col-md-6">
-                <label class="form-control-label" for="inputBasicLastName">{{ 'register.qualification' | translate }}</label>
-                <textarea rows="1" class="form-control" formControlName="qualification"></textarea>
+                <label class="form-control-label" for="inputBasicLastName">{{ 'register.birthDate' | translate }}</label>
+                <input type="date" class="form-control" formControlName="dateNaiss">
               </div>
-              <div class="dropdown form-group form-material col-md-6" >
-                <label class="form-control-label" for="inputBasicGenre">{{ 'register.speciality' | translate }}</label>
-                <select class="browser-default custom-select form-control" 
-                formControlName="specialite" style="height: 2.3rem;">
-                    <option *ngFor="let spec of specialite" [ngValue]="spec['@id']">
-                      {{ spec?.specialite }}
-                    </option>
-                </select> 
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group form-material col-md-6">
-                    <label class="form-control-label" for="inputBasicEmail">{{ 'register.formation' | translate }}</label>
-                    <textarea rows="1" class="form-control" formControlName="formation"></textarea>
-                </div>
               <div class="form-group form-material col-md-6">
-                <label class="form-control-label" for="inputBasicFirstName">{{ 'register.experience' | translate }}</label>
-                <textarea rows="1" class="form-control" formControlName="experience"></textarea>
+                <label class="form-control-label" for="inputBasicLastName">{{ 'register.profession' | translate }}</label>
+                <input type="text" class="form-control" formControlName="profession">
               </div>
             </div>
           </form>

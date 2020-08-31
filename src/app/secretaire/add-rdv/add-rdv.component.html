@@ -1,35 +1,35 @@
 <div class="panel">
       <header class="panel-heading">
-        <h2 class="panel-title">Liste des rendez-vous</h2>
-        <div class="page-header-actions">
-        <form action="#" method="post">
-          <div class="input-search input-search-dark">
-            <i class="input-search-icon md-search" aria-hidden="true"></i>
-            <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+        <h2 class="panel-title">{{ 'componentTitles.rdv' | translate }}</h2>
+        <div class="page-header-actions row" *ngIf="!isEmpty">
+          <div class="col-md-6">
+            <select class="browser-default custom-select form-control" style="height: auto;" #etat (change)="filterByEtat(etat)">
+              <option>Tous les états</option>
+              <option>Non consulté</option>
+              <option>Consulté</option>
+              <option>Annulé</option>
+            </select>
           </div>
-        </form>
-        </div>
-        <div style="float: right;
-        margin-top: 10px;
-        MARGIN-BOTTOM: 20PX;
-        margin-right: 30px;">
-            <button type="button" class="btn btn-round btn-primary waves-effect waves-light waves-round" 
-            data-toggle="modal" 
-            data-target="#addModal">
-                <i class="icon md-plus" aria-hidden="true"></i>
-                Ajouter un rendez-vous</button>
+          <div class="col-md-6">
+            <form action="#" method="post">
+              <div class="input-search input-search-dark">
+                <i class="input-search-icon md-search" aria-hidden="true"></i>
+                <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="{{ 'search.placeholder' | translate }}...">
+              </div>
+            </form>
+          </div>
         </div>
       </header>
       <div class="panel-body">
-                    <table class="table">
+                    <table class="table" style="margin-top: 30PX;">
                       <thead>
-                        <tr >
+                        <tr *ngIf="!isEmpty">
                           <th ></th>
-                          <th >Date</th>
-                          <th>Heure</th>
-                          <th >Patient</th>
-                          <th >Etat</th>
-                          <th style="width: 120px;">Action</th>
+                          <th >{{ 'rdv.date' | translate }}</th>
+                          <th>{{ 'rdv.hour' | translate }}</th>
+                          <th >{{ 'rdv.patient' | translate }}</th>
+                          <th >{{ 'rdv.state' | translate }}</th>
+                          <th style="width: 120px;">{{ 'register.action' | translate }}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -58,7 +58,10 @@
                                   <i class="icon md-edit" aria-hidden="true"></i>
                                 </button>
         
-                                <button type="button" class="btn btn-danger btn-icon" (click)="deleteRdv(rdv?.id)">
+                                <button type="button" class="btn btn-danger btn-icon"  
+                                (click)= "setSelectedRdv(rdv)"
+                                data-toggle="modal" 
+                                data-target="#cancelModal">
                                   <i class="icon md-delete" aria-hidden="true"></i>
                                 </button>
                               </div>
@@ -69,14 +72,42 @@
                 </div>
                 <!-- End Example Bordered Table -->
                 <!-- Example Basic Pagination -->
-                  <nav>
+                  <nav *ngIf="!isEmpty">
                     <ul class="pagination page-item" style="margin-left: 40%;">
                       <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                     </ul>
                   </nav>
               <!-- End Example Basic Pagination -->
               </div>
-
+              <!-- Site Action -->
+  <div class="site-action" data-plugin="actionBtn">
+    <button type="button" class=" btn-circle site-action-toggle btn-raised btn btn-success btn-floating"
+    tooltip="Ajouter Médecin"
+    data-toggle="modal" 
+    data-target="#addModal">
+      <i class="front-icon md-account-add animation-scale-up" aria-hidden="true" style="FONT-SIZE: 30PX;"></i>
+    </button>
+ </div>
+  <!-- End Site Action -->
+<!-- Modal -->
+<div class="modal" id="cancelModal">
+  <div class="modal-dialog modal-simple modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>{{ 'rdv.delete' | translate }}?</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-pure" 
+        style="font-size: 13px;font-weight: 500;"
+        data-dismiss="modal">{{ 'modal.closeBtn' | translate }}</button>
+        <button type="button" class="btn btn-primary"
+         data-dismiss="modal" style="font-size: 13px;font-weight: 500;"
+         (click)="deleteRdv()">{{ 'modal.confirmBtn' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
       <!-- Modal -->
       <div class="modal fade" id="addModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
       role="dialog" tabindex="-1">
@@ -86,24 +117,24 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title">Ajouter un rendez-vous</h4>
+            <h4 class="modal-title">{{ 'rdv.add' | translate }}</h4>
           </div>
           <div class="modal-body">
             <form [formGroup]="addRdvForm" method="post">
                 <div class="form-group form-material row">
-                  <label class="col-md-3 col-form-label">Date</label>
+                  <label class="col-md-3 col-form-label">{{ 'rdv.date' | translate }}</label>
                   <div class="col-md-9">
                     <input type="date" class="form-control" formControlName="date">
                   </div>
                 </div>
                 <div class="form-group form-material row">
-                    <label class="col-md-3 col-form-label">Heure</label>
+                    <label class="col-md-3 col-form-label">{{ 'rdv.hour' | translate }}</label>
                     <div class="col-md-9">
                       <input type="time" class="form-control" formControlName="heure">
                     </div>
                   </div>
                 <div class="form-group example row">
-                    <label class="col-md-3 col-form-label">Patient: </label>
+                    <label class="col-md-3 col-form-label">{{ 'rdv.patient' | translate }} </label>
                     <select class="form-control form-control-sm col-md-8" formControlName="patient" 
                     style="margin-left: 15px;">
                     <option *ngFor="let patient of patients;let i=index;" [ngValue]="patient['@id']">
@@ -115,9 +146,9 @@
               </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">{{ 'modal.cancelBtn' | translate }}</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal"
-            (click)="addRdv()">Enregister</button>
+            (click)="addRdv()">{{ 'modal.saveBtn' | translate }}</button>
           </div>
         </div>
       </div>
@@ -133,24 +164,24 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title">Modifier le rendez-vous</h4>
+          <h4 class="modal-title">{{ 'rdv.edit' | translate }}</h4>
         </div>
         <div class="modal-body">
           <form>
               <div class="form-group form-material row">
-                <label class="col-md-3 col-form-label">Date</label>
+                <label class="col-md-3 col-form-label">{{ 'rdv.date' | translate }}</label>
                 <div class="col-md-9">
                   <input type="date" class="form-control"  #date1 value="{{selectedRdv?.date |  date : 'yyyy-MM-dd'}}">
                 </div>
               </div>
               <div class="form-group form-material row">
-                  <label class="col-md-3 col-form-label">Heure</label>
+                  <label class="col-md-3 col-form-label">{{ 'rdv.hour' | translate }}</label>
                   <div class="col-md-9">
                     <input type="time" class="form-control" #heure1 value="{{selectedRdv?.heure | date:'hh:mm'}}">
                   </div>
               </div>
               <div class="dropdown form-group form-material row" >
-                <label class="col-md-3 col-form-label">Etat</label>
+                <label class="col-md-3 col-form-label">{{ 'rdv.state' | translate }}</label>
                 <button 
                 style="background-color: white;color: black;border-color: #d0d0d0;margin-left: 15px;"
                 class="btn btn-secondary dropdown-toggle col-md-8" type="button" id="dropdownMenuButton" 
@@ -168,9 +199,9 @@
             </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">{{ 'modal.cancelBtn' | translate }}</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal"
-          (click)="editRdv(date1.value, heure1.value)">Modifier</button>
+          (click)="editRdv(date1.value, heure1.value)">{{ 'modal.editBtn' | translate }}</button>
         </div>
       </div>
     </div>

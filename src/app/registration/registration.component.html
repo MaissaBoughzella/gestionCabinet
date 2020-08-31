@@ -1,0 +1,259 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container register">
+                <div class="row">
+                    <div class="col-md-8 register-right">
+
+                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">{{ 'register.title1' | translate }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">{{ 'register.title2' | translate }}</a>
+                            </li>
+                        </ul>
+                        <div class="row" style="margin-left: 20px; MARGIN-TOP: 30px;width: 30%;">
+                            <div class="col-md-2" style="padding: 0;"><a style="cursor: pointer;" (click)="useLanguage('fr')" role="menuitem">
+                              <span class="flag-icon flag-icon-fr"></span></a></div>
+                              <div class="col-md-2" style="padding: 0;"><a style="cursor: pointer;" (click)="useLanguage('en')" role="menuitem">
+                              <span class="flag-icon flag-icon-gb"></span></a></div>
+                              <div class="col-md-2" style="padding: 0;"><a style="cursor: pointer;" (click)="useLanguage('de')" role="menuitem">
+                              <span class="flag-icon flag-icon-de"></span></a></div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <span class="login100-form-title p-b-26">
+                                    {{ 'register.formTitle1' | translate }}                                  
+                                </span>                                
+                                  <div style="margin: 10%;margin-top: 20%;">
+                                    <form [formGroup]="RegisterForm" method="post">
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="{{ 'register.lastName' | translate }} *" formControlName="nom">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="{{ 'register.firstName' | translate }} *" formControlName="nom">
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                            <select class="form-control" formControlName="genre">
+                                            <option value="" disabled selected>{{ 'register.gender' | translate }} *</option>
+                                            <option *ngFor="let gen of genre" [ngValue]="gen">
+                                            {{ gen }}
+                                            </option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <select class="form-control" formControlName="langue">
+                                                    <option value="" disabled selected>{{ 'register.langue' | translate }} *</option>
+                                                    <option *ngFor="let lan of langue" [ngValue]="lan">
+                                                        {{ lan }}
+                                                      </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="{{ 'register.address' | translate }}" formControlName="adresse">
+                                        </div>
+                                        </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="{{ 'register.phone' | translate }}" formControlName="email">
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="{{ 'login.email' | translate }} *" formControlName="telephone">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" placeholder="{{ 'register.password' | translate }} *" formControlName="password">
+                                        </div>
+                                    </div>
+                                    </div>
+                                </form>
+                                <form  [formGroup]="RegisterFormMedecin" method="post">
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <textarea rows="1" class="form-control" placeholder="{{ 'register.qualification' | translate }}" formControlName="qualification"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <textarea rows="1" class="form-control" placeholder="{{ 'register.formation' | translate }}" formControlName="formation"></textarea>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <select class="form-control" formControlName="specialite">
+                                                <option value="" disabled selected>{{ 'register.speciality' | translate }} *</option>
+                                                <option *ngFor="let spec of specialite" [ngValue]="spec['@id']">
+                                                    {{ spec?.specialite }}
+                                                  </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <textarea rows="1" class="form-control" placeholder="{{ 'register.experience' | translate }}" formControlName="experience"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                                    <div class="col-md-6" style="margin-left: 25%;margin-top: 2%;">
+                                        <div class="container-login100-form-btn">
+                                            <div class="wrap-login100-form-btn">
+                                              <div class="login100-form-bgbtn"></div>
+                                              <button type="submit" class="login100-form-btn" 
+                                              style="background-color:#3949ab"
+                                              (click)="addUser()">
+                                              {{ 'login.link' | translate }}
+                                              </button>
+                                            </div>
+                                          </div>
+                                          <div class="text-center p-t-115" style="padding-top: 30px;">
+                                            <span class="txt1">
+                                                {{ 'register.span' | translate }}?
+                                            </span>
+                                            <a class="txt2" style="color: #3949ab;" routerLink="/login">
+                                                {{ 'login.submit' | translate }}
+                                            </a>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <span class="login100-form-title p-b-26">
+                                    {{ 'register.formTitle2' | translate }}                                  
+                                </span>                                
+                                  <div style="margin: 10%;margin-top: 20%;">
+                                    <form [formGroup]="RegistForm" method="post">
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="{{ 'register.lastName' | translate }} *" formControlName="nom">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="{{ 'register.firstName' | translate }} *" formControlName="nom">
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                            <select class="form-control" formControlName="genre">
+                                            <option value="" disabled selected>{{ 'register.gender' | translate }} *</option>
+                                            <option *ngFor="let gen of genre" [ngValue]="gen">
+                                            {{ gen }}
+                                            </option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <select class="form-control" formControlName="langue">
+                                                    <option value="" disabled selected>{{ 'register.langue' | translate }} *</option>
+                                                    <option *ngFor="let lan of langue" [ngValue]="lan">
+                                                        {{ lan }}
+                                                      </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="{{ 'register.address' | translate }}" formControlName="adresse">
+                                        </div>
+                                        </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="{{ 'register.phone' | translate }} " formControlName="email">
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="{{ 'login.email' | translate }} *" formControlName="telephone">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" placeholder="{{ 'login.password' | translate }} *" formControlName="password">
+                                        </div>
+                                    </div>
+                                    </div>
+                                </form>
+                                <form  [formGroup]="RegisterFormPatient" method="post">
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" placeholder="{{ 'register.birthDate' | translate }} " formControlName="dateNaiss">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="{{ 'register.profession' | translate }} " formControlName="profession">
+                                        </div>
+                                    </div>
+                                    </div>
+                                </form>
+                                    <div class="col-md-6" style="margin-left: 25%;margin-top: 2%;">
+                                        <div class="container-login100-form-btn">
+                                            <div class="wrap-login100-form-btn">
+                                              <div class="login100-form-bgbtn"></div>
+                                              <button type="submit" class="login100-form-btn" 
+                                              style="background-color:#3949ab"
+                                              (click)="addPatient()">
+                                              {{ 'login.link' | translate }}
+                                              </button>
+                                            </div>
+                                          </div>
+                                          <div class="text-center p-t-115" style="padding-top: 40px;">
+                                            <span class="txt1">
+                                                {{ 'register.span' | translate }}?
+                                            </span>
+                                            <a class="txt2" style="color: #3949ab;" routerLink="/login">
+                                                {{ 'login.submit' | translate }}
+                                            </a>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+<script src="../../assets/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../assets/login/vendor/animsition/js/animsition.min.js"></script>
+<script src="../../assets/login/vendor/bootstrap/js/popper.js"></script>
+<script src="../../assets/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../assets/login/vendor/select2/select2.min.js"></script>
+<script src="../../assets/login/vendor/daterangepicker/moment.min.js"></script>
+<script src="../../assets/login/vendor/daterangepicker/daterangepicker.js"></script>
+<script src="../../assets/login/vendor/countdowntime/countdowntime.js"></script>
+<script src="../../assets/login/js/main.js"></script>

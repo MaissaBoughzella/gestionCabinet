@@ -1,7 +1,7 @@
 <div class="panel">
     <div class="panel-heading">
-      <h2 class="panel-title">Liste des rendez-vous pris</h2>
-      <div class="page-header-actions row">
+      <h2 class="panel-title">{{ 'rdv.title' | translate }}</h2>
+      <div class="page-header-actions row" *ngIf="!isEmpty">
         <div class="col-md-6">
           <select class="browser-default custom-select form-control" style="height: auto;" #etat (change)="filterByEtat(etat)">
             <option>Tous les états</option>
@@ -14,7 +14,7 @@
           <form action="#" method="post">
             <div class="input-search input-search-dark">
               <i class="input-search-icon md-search" aria-hidden="true"></i>
-              <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+              <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="{{ 'search.placeholder' | translate }}...">
             </div>
           </form>
         </div>
@@ -23,12 +23,12 @@
     <div class="panel-body" style="margin-top: 30px;">
       <table class="table">
         <thead>
-          <tr>
+          <tr *ngIf="!isEmpty">
             <th style="width: 9%;"></th>
-            <th>Etat</th>
-            <th>Date</th>
-            <th>Heure</th>
-            <th style="width: 15%;">Actions</th>
+            <th>{{ 'rdv.state' | translate }}</th>
+            <th>{{ 'rdv.date' | translate }}</th>
+            <th>{{ 'rdv.hour' | translate }}</th>
+            <th style="width: 15%;">{{ 'register.action' | translate }}</th>
           </tr>
         </thead>
         <tbody>
@@ -58,7 +58,7 @@
               color: #4caf50;
               background-color: #fff;"
               (click)="AfficherConsultation(rdv?.id)">
-              Afficher consultation
+              {{ 'rdv.showBtn' | translate }}
               </button>
             </td>
             <td class="actions" *ngIf = "rdv?.etat == 'Annulé' || rdv?.etat == 'Non consulté'"></td>
@@ -67,7 +67,7 @@
       </table>
     </div>
     <div class="panel-footer">
-      <nav>
+      <nav *ngIf="!isEmpty">
         <ul class="pagination page-item" style="margin-left: 40%;">
           <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
         </ul>

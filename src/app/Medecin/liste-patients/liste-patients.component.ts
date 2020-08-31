@@ -26,6 +26,9 @@ export class ListePatientsComponent implements OnInit {
   RegisterFormPatient: FormGroup;
   specialite: any;
   roleId: any;
+  isEmpty: boolean = false;
+
+
   constructor(private router: Router, private apiAuthService: ApiAuthService, private apiRdvService: ApiRdvService,
     private apiPatientService: ApiPatientService) {
     this.itemsPerPage = 10;
@@ -56,9 +59,18 @@ export class ListePatientsComponent implements OnInit {
     this.patientDetail = [];
     this.table = [];
     this.rdvs = [];
-    let medId = localStorage.getItem('idMed').substring(14);
+    if(localStorage.getItem('isSecretaire')=='true'){
+      var medId = localStorage.getItem('idMed').substring(14);
+    }
+    else if(localStorage.getItem('isMedecin')=='true'){
+      var medId = localStorage.getItem('id').substring(14);
+    }
     this.apiRdvService.getAllRdvsByMedecin(medId).subscribe((res: any) => {
       this.rdvs = res['hydra:member'];
+      if (this.rdvs.length == 0) {
+        this.isEmpty = true;
+      }
+      else this.isEmpty = false;
       let exists = false;
       for (let i = 0; i < this.rdvs.length; i++) {
         this.patients.push(this.rdvs[i].patient)
@@ -74,7 +86,6 @@ export class ListePatientsComponent implements OnInit {
                 }
                 if (!exists) {
                   this.patientDetail.push(res);
-                  console.log(this.patientDetail)
                 }
               });
             }

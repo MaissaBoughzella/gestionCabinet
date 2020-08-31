@@ -1,17 +1,17 @@
 <!-- Example Tabs In The Panel -->
 <div class="panel nav-tabs-horizontal" data-plugin="tabs">
     <div class="panel-heading">
-      <h2 class="panel-title" style="margin-bottom: 15px;">Consultation</h2>
+      <h2 class="panel-title" style="margin-bottom: 15px;">{{'consultation.title' | translate}}</h2>
     </div>
     <ul class="nav nav-tabs nav-tabs-line" role="tablist">
       <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#exampleTopOrdonnance"
-          aria-controls="exampleTopHome" role="tab">Ordonnance</a>
+          aria-controls="exampleTopHome" role="tab">{{'consultation.tab1' | translate}}</a>
       </li>
       <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopImages" aria-controls="exampleTopCss"
-          role="tab">Images Radio</a>
+          role="tab">{{'consultation.tab2' | translate}}</a>
       </li>
       <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopAnalyses"
-          aria-controls="exampleTopJavascript" role="tab">Analyses</a>
+          aria-controls="exampleTopJavascript" role="tab">{{'consultation.tab3' | translate}}</a>
       </li>
     </ul>
     <div class="panel-body">
@@ -28,28 +28,24 @@
               data-target="#addImgRadioModal"
               style="font-size: 14px;font-weight: 500;margin-bottom: 20px;">
               <i class="icon md-plus" aria-hidden="true"></i>
-              Ajouter image radio</button>
+              {{'consultation.addRadio' | translate}}</button>
               <form action="#" method="post" style="float: left;
               margin-right: 685PX;
               width: 400PX;" *ngIf="!isEmpty">
                 <div class="input-search input-search-dark">
                   <i class="input-search-icon md-search" aria-hidden="true"></i>
-                  <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+                  <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="{{'search.placeholder' | translate}}...">
                 </div>
               </form>
             </div>
-            
-           
-          
-            
                     <table class="table">
                       <thead>
                         <tr *ngIf="!isEmpty">
                           <th style="width:12%;"></th>
-                          <th>Nom</th>
-                          <th>Description</th>
-                          <th>Type</th>
-                          <th style="width:12%">Action</th>
+                          <th>{{'register.lastName' | translate}}</th>
+                          <th>{{'consultation.description' | translate}}</th>
+                          <th>{{'consultation.type' | translate}}</th>
+                          <th style="width:12%">{{'register.action' | translate}}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -93,13 +89,13 @@
                       data-target="#addModal"
                       style="font-size: 14px;font-weight: 500;margin-bottom: 20px;">
                       <i class="icon md-plus" aria-hidden="true"></i>
-                      Ajouter analyse</button>
+                      {{'consultation.addAnalyse' | translate}}</button>
                       <form action="#" method="post" style="float: left;
                         margin-right: 715PX;
                         width: 400PX;" *ngIf="!isEmptyAnal">
                 <div class="input-search input-search-dark">
                   <i class="input-search-icon md-search" aria-hidden="true"></i>
-                  <input type="text" [(ngModel)]="term2" class="form-control" name="search" placeholder="Search...">
+                  <input type="text" [(ngModel)]="term2" class="form-control" name="search" placeholder="{{'search.placeholder' | translate}}...">
                 </div>
               </form>
                     </div>
@@ -107,10 +103,10 @@
                               <thead>
                                 <tr *ngIf="!isEmptyAnal">
                                   <th style="width:12%;"></th>
-                                  <th>Nom</th>
-                                  <th>Description</th>
-                                  <th>Type</th>
-                                  <th style="width:12%">Action</th>
+                                  <th>{{'register.lastName' | translate}}</th>
+                                  <th>{{'consultation.description' | translate}}</th>
+                                  <th>{{'consultation.type' | translate}}</th>
+                                  <th style="width:12%">{{'register.action' | translate}}</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -160,24 +156,24 @@ role="dialog" tabindex="-1">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
-      <h4 class="modal-title">Ajouter une analyse</h4>
+      <h4 class="modal-title">{{'modal.add-title-analyse' | translate}}</h4>
     </div>
     <div class="modal-body">
       <form [formGroup]="addAnalyseForm" method="post">
           <div class="form-group form-material row">
-            <label class="col-md-3 col-form-label">Nom: </label>
+            <label class="col-md-3 col-form-label">{{'register.lastName' | translate}}: </label>
             <div class="col-md-9">
               <input type="text" class="form-control" formControlName="nom">
             </div>
           </div>
           <div class="form-group form-material row">
-              <label class="col-md-3 col-form-label">Description: </label>
+              <label class="col-md-3 col-form-label">{{'consultation.description' | translate}}: </label>
               <div class="col-md-9">
                 <input type="textarea" class="form-control" formControlName="description">
               </div>
             </div>
           <div class="form-group example row">
-              <label class="col-md-3 col-form-label">Type: </label>
+              <label class="col-md-3 col-form-label">{{'consultation.type' | translate}}: </label>
               <select class="form-control form-control-sm col-md-8" formControlName="typeanalyse" 
               style="margin-left: 15px;">
               <option *ngFor="let type of types" [ngValue]="type['@id']">
@@ -190,11 +186,10 @@ role="dialog" tabindex="-1">
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
-      style="font-size: 13px;font-weight: 500;"
-      >Annuler</button>
+      style="font-size: 13px;font-weight: 500;">{{'modal.cancelBtn' | translate}}</button>
       <button type="button" class="btn btn-primary" data-dismiss="modal"
       style="font-size: 13px;font-weight: 500;"
-      (click)="addAnalyse()">Ajouter</button>
+      (click)="addAnalyse()">{{'modal.addBtn' | translate}}</button>
     </div>
   </div>
 </div>
@@ -209,24 +204,24 @@ role="dialog" tabindex="-1">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
-      <h4 class="modal-title">Modifier l'analyse</h4>
+      <h4 class="modal-title">{{'modal.edit-title-analyse' | translate}}</h4>
     </div>
     <div class="modal-body">
       <form>
           <div class="form-group form-material row">
-            <label class="col-md-3 col-form-label">Nom: </label>
+            <label class="col-md-3 col-form-label">{{'register.lastName' | translate}}: </label>
             <div class="col-md-9">
               <input type="text" class="form-control"  #nom1 value="{{selectedAnalyse?.nom}}">
             </div>
           </div>
           <div class="form-group form-material row">
-              <label class="col-md-3 col-form-label">Description: </label>
+              <label class="col-md-3 col-form-label">{{'consultation.description' | translate}}: </label>
               <div class="col-md-9">
                 <input type="textarea" class="form-control" #desc1 value="{{selectedAnalyse?.description}}">
               </div>
           </div>
           <div class="dropdown form-group form-material row" >
-            <label class="col-md-3 col-form-label">Type: </label>
+            <label class="col-md-3 col-form-label">{{'consultation.type' | translate}}: </label>
             <button 
             style="background-color: white;color: black;border-color: #d0d0d0;margin-left: 15px;"
             class="btn btn-secondary dropdown-toggle col-md-8" type="button" id="dropdownMenuButton" 
@@ -242,10 +237,10 @@ role="dialog" tabindex="-1">
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
-      style="font-size: 13px;font-weight: 500;">Annuler</button>
+      style="font-size: 13px;font-weight: 500;">{{'modal.cancelBtn' | translate}}</button>
       <button type="button" class="btn btn-primary" data-dismiss="modal"
       (click)="editAnalyse(nom1.value, desc1.value)"
-      style="font-size: 13px;font-weight: 500;">Modifier</button>
+      style="font-size: 13px;font-weight: 500;">{{'modal.editBtn' | translate}}</button>
     </div>
   </div>
 </div>
@@ -261,24 +256,24 @@ role="dialog" tabindex="-1">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
-      <h4 class="modal-title">Ajouter une image radio</h4>
+      <h4 class="modal-title">{{'modal.add-title-radio' | translate}}</h4>
     </div>
     <div class="modal-body">
       <form [formGroup]="addRadioForm" method="post">
           <div class="form-group form-material row">
-            <label class="col-md-3 col-form-label">Nom: </label>
+            <label class="col-md-3 col-form-label">{{'register.lastName' | translate}}: </label>
             <div class="col-md-9">
               <input type="text" class="form-control" formControlName="nom">
             </div>
           </div>
           <div class="form-group form-material row">
-              <label class="col-md-3 col-form-label">Description: </label>
+              <label class="col-md-3 col-form-label">{{'consultation.description' | translate}}: </label>
               <div class="col-md-9">
                 <input type="textarea" class="form-control" formControlName="description">
               </div>
             </div>
           <div class="form-group example row">
-              <label class="col-md-3 col-form-label">Type: </label>
+              <label class="col-md-3 col-form-label">{{'consultation.type' | translate}}: </label>
               <select class="form-control form-control-sm col-md-8" formControlName="typeradio" 
               style="margin-left: 15px;">
               <option *ngFor="let typer of typesradios" [ngValue]="typer['@id']">
@@ -291,10 +286,10 @@ role="dialog" tabindex="-1">
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
-      style="font-size: 13px;font-weight: 500;">Annuler</button>
+      style="font-size: 13px;font-weight: 500;">{{'modal.cancelBtn' | translate}}</button>
       <button type="button" class="btn btn-primary" data-dismiss="modal"
       style="font-size: 13px;font-weight: 500;"
-      (click)="addImgRadio()">Ajouter</button>
+      (click)="addImgRadio()">{{'modal.addBtn' | translate}}</button>
     </div>
   </div>
 </div>
@@ -310,24 +305,24 @@ role="dialog" tabindex="-1">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
-      <h4 class="modal-title">Modifier l'image radio</h4>
+      <h4 class="modal-title">{{'modal.edit-title-radio'| translate}}</h4>
     </div>
     <div class="modal-body">
       <form>
           <div class="form-group form-material row">
-            <label class="col-md-3 col-form-label">Nom: </label>
+            <label class="col-md-3 col-form-label">{{'register.lastName' | translate}}: </label>
             <div class="col-md-9">
               <input type="text" class="form-control"  #nomz value="{{selectedRadio?.nom}}">
             </div>
           </div>
           <div class="form-group form-material row">
-              <label class="col-md-3 col-form-label">Description: </label>
+              <label class="col-md-3 col-form-label">{{'consultation.description' | translate}}: </label>
               <div class="col-md-9">
                 <input type="textarea" class="form-control" #descz value="{{selectedRadio?.description}}">
               </div>
           </div>
           <div class="dropdown form-group form-material row" >
-            <label class="col-md-3 col-form-label">Type: </label>
+            <label class="col-md-3 col-form-label">{{'consultation.type' | translate}}: </label>
             <button 
             style="background-color: white;color: black;border-color: #d0d0d0;margin-left: 15px;"
             class="btn btn-secondary dropdown-toggle col-md-8" type="button" id="dropdownMenuButton" 
@@ -342,10 +337,10 @@ role="dialog" tabindex="-1">
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
-      style="font-size: 13px;font-weight: 500;">Annuler</button>
+      style="font-size: 13px;font-weight: 500;">{{'modal.cancelBtn' | translate}}</button>
       <button type="button" class="btn btn-primary" data-dismiss="modal"
       (click)="editRadio(nomz.value, descz.value)"
-      style="font-size: 13px;font-weight: 500;">Modifier</button>
+      style="font-size: 13px;font-weight: 500;">{{'modal.editBtn' | translate}}</button>
     </div>
   </div>
 </div>

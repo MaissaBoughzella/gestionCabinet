@@ -9,13 +9,13 @@
             <div class="panel-body nav-tabs-animate nav-tabs-horizontal" data-plugin="tabs">
               <ul class="nav nav-tabs nav-tabs-line" role="tablist">
                 <li class="nav-item" role="presentation"><a class="active nav-link" data-toggle="tab" href="#profile" aria-controls="profile"
-                    role="tab">Informations Générales</a>
+                    role="tab">{{ 'profile.title1' | translate }}</a>
                 </li>
                 <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#activities"
-                    aria-controls="activities" role="tab">Informations Professionnelles</a>
+                    aria-controls="activities" role="tab">{{ 'profile.title2' | translate }}</a>
                 </li>
                 <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#secretaires"
-                    aria-controls="secretaires" role="tab">Liste des Secretaires</a>
+                    aria-controls="secretaires" role="tab">{{ 'componentTitles.secretaire' | translate }}</a>
                 </li>
               </ul>
               <div class="tab-content">
@@ -24,25 +24,27 @@
                 <div class="example-wrap" style="margin: 50PX 50PX 80PX 50PX;">
                     <!-- Panel Projects -->
           <div class="panel">
+            <div class="panel-heading">
             <form action="#" method="post">
                 <div class="input-search input-search-dark">
                   <i class="input-search-icon md-search" aria-hidden="true"></i>
                   <input type="text" [(ngModel)]="term" class="form-control" name="search" 
-                  placeholder="Search..." style="MARGIN-TOP: -20PX; margin-bottom: 30PX;">
+                  placeholder="{{ 'search.placeholder' | translate }}..." style="MARGIN-TOP: -20PX; margin-bottom: 30PX;">
                 </div>
           </form>
-            <div class="table-responsive">
-              <table class="table table-striped">
+        </div>
+            <div class="panel-body" style="padding:0%">
+              <table class="table">
                 <thead>
                     <tr>
                       <th style="width: 10%;"></th>
-                      <th>Nom</th>
-                      <th>Prénom</th>
-                      <th>Email</th>
-                      <th>Genre</th>
-                      <th>Téléphone</th>
-                      <th>Adresse</th>
-                      <!-- <th>Actions</th> -->
+                      <th>{{ 'register.lastName' | translate }}</th>
+                      <th>{{ 'register.firstName' | translate }}</th>
+                      <th>{{ 'login.email' | translate }}</th>
+                      <th>{{ 'register.gender' | translate }}</th>
+                      <th>{{ 'register.phone' | translate }}</th>
+                      <th>{{ 'register.address' | translate }}</th>
+                      <th style="width: 9%;">{{ 'register.action' | translate }}</th>
                     </tr>
                   </thead>
                               <tbody>
@@ -54,20 +56,7 @@
                                   <td>{{sec?.genre}}</td>
                                   <td>{{sec?.telephone}}</td>
                                   <td>{{sec?.adresse}}</td>
-                                  <!-- <td>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-default"
-                                      data-toggle="tooltip" data-original-title="Edit"
-                                      (click)= "setSelectedSec(sec)"
-                                        data-toggle="modal" 
-                                        data-target="#editModal">
-                                      <i class="icon md-edit" aria-hidden="true"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-icon btn-pure btn-default"
-                                      data-toggle="tooltip" data-original-title="Delete">
-                                      <i class="icon md-close" aria-hidden="true"></i>
-                                    </button>
-                                  </td> -->
-                                  <!-- <td class="text-nowrap">
+                                  <td class="text-nowrap">
                                     <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
                                         <button type="button" class="btn btn-primary btn-icon"
                                         tooltip="Modifier secretaire"
@@ -76,14 +65,19 @@
                                         data-target="#editModal">
                                           <i class="icon md-edit" aria-hidden="true"></i>
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-icon" (click)="deleteSec(sec?.id)">
+                                        <button type="button" class="btn btn-danger btn-icon" 
+                                        (click)= "setSelectedSec(sec)"
+                                        data-toggle="modal" 
+                                        data-target="#cancelModal">
                                           <i class="icon md-delete" aria-hidden="true"></i>
                                         </button>
                                       </div>
-                                  </td> -->
+                                  </td>
                                 </tr>
                               </tbody>
                             </table>
+            </div>
+            <div class="panel-footer">
             </div>
           </div>
           <!-- End Panel Projects -->
@@ -93,20 +87,32 @@
                   <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                 </ul>
             </nav>
+                       <!-- Site Action -->
+  <div class="site-action" data-plugin="actionBtn">
+    <button type="button" class=" btn-circle site-action-toggle btn-raised btn btn-success btn-floating"
+    style="margin-bottom:-140%;"
+    tooltip="Ajouter Secrétaire"
+    data-toggle="modal" 
+    data-target="#addModal">
+      <i class="front-icon md-account-add animation-scale-up" aria-hidden="true" style="FONT-SIZE: 30PX;"></i>
+    </button>
+ </div>
+  <!-- End Site Action -->
             </div>
+ 
             <div class="tab-pane  animation-slide-left" id="activities" role="tabpanel">
                   <!-- Example Basic Form (Form row) -->
               <div class="example-wrap" style="margin: 50PX 50PX 80PX 50PX;">
                 <div class="example">
                   <form autocomplete="off">
                       <div class="form-group form-material">
-                        <label class="form-control-label">Formation</label>
+                        <label class="form-control-label">{{ 'register.formation' | translate }}</label>
                         <textarea rows="5" class="form-control" 
                         #form1 autocomplete="off">{{medecin?.formation}}</textarea>
                       </div>
 
                       <div class="dropdown form-group form-material" >
-                        <label class="form-control-label" for="inputBasicGenre">Spécialité</label>
+                        <label class="form-control-label" for="inputBasicGenre">{{ 'register.speciality' | translate }}</label>
                         <button class="btn btn-secondary dropdown-toggle col-md-12" type="button" id="inputBasicGenre" 
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                         style="background-color: white;color: black;border-color: #d0d0d0;" >
@@ -119,13 +125,13 @@
                       </div>
 
                       <div class="form-group form-material">
-                        <label class="form-control-label">Qualification</label>
+                        <label class="form-control-label">{{ 'register.qualification' | translate }}</label>
                         <textarea rows="5" class="form-control" 
                         #qualif1 autocomplete="off">{{medecin?.qualification}}</textarea>
                       </div>
 
                       <div class="form-group form-material">
-                        <label class="form-control-label">Experience</label>
+                        <label class="form-control-label">{{ 'register.experience' | translate }}</label>
                         <textarea rows="5" class="form-control" 
                         #exp1 autocomplete="off">{{medecin?.experience}}</textarea>
                       </div>
@@ -134,10 +140,10 @@
                         <button type="submit" class="btn btn-primary" 
                         style="margin-right:5px;background-color: #36459b;border-color: #36459b;height: 37px;"
                         (click)="editInfoProf(form1.value, qualif1.value, exp1.value)">
-                        Enregistrer</button>
+                        {{ 'modal.saveBtn' | translate }}</button>
                         <button type="reset" class="btn btn-light" style="background-color: rgb(192 189 189);border-color: rgb(192 189 189);
                         height: 37px;"
-                         (click)="resetBtn()">Annuler</button>
+                         (click)="resetBtn()">{{ 'modal.cancelBtn' | translate }}</button>
                       </div>
                   </form>
                 </div>
@@ -152,19 +158,19 @@
                   <form autocomplete="off">
                     <div class="form-row">
                       <div class="form-group form-material col-md-6">
-                        <label class="form-control-label" for="inputBasicFirstName">Nom</label>
+                        <label class="form-control-label" for="inputBasicFirstName">{{ 'register.lastName' | translate }}</label>
                         <input type="text" class="form-control" id="inputBasicFirstName" 
                         #nom1 value="{{user?.nom}}" autocomplete="off" />
                       </div>
                       <div class="form-group form-material col-md-6">
-                        <label class="form-control-label" for="inputBasicLastName">Prénom</label>
+                        <label class="form-control-label" for="inputBasicLastName">{{ 'register.firstName' | translate }}</label>
                         <input type="text" class="form-control" id="inputBasicLastName" 
                         #prenom1 value="{{user?.prenom}}" autocomplete="off" />
                       </div>
                     </div>
                   <div class="form-row">
                    <div class="dropdown form-group form-material col-md-6" >
-                    <label class="form-control-label" for="inputBasicGenre">Genre</label>
+                    <label class="form-control-label" for="inputBasicGenre">{{ 'register.gender' | translate }}</label>
                     <button class="btn btn-secondary dropdown-toggle col-md-12" type="button" id="inputBasicGenre" 
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                     style="background-color: white;color: black;border-color: #d0d0d0;" >
@@ -176,7 +182,7 @@
                     </div>
                     </div>
                     <div class="dropdown form-group form-material col-md-6" >
-                      <label class="form-control-label" for="inputBasicLangue">La version de l'application</label><br>
+                      <label class="form-control-label" for="inputBasicLangue">{{ 'register.langue' | translate }}</label><br>
                       <button class="btn btn-secondary dropdown-toggle col-md-12" type="button" id="inputBasicLangue" 
                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                       style="background-color: white;color: black;border-color: #d0d0d0;">
@@ -191,24 +197,24 @@
                     </div>
                     <div class="form-row">
                       <div class="form-group form-material col-md-6">
-                        <label class="form-control-label" for="inputBasicEmail">Email</label>
+                        <label class="form-control-label" for="inputBasicEmail">{{ 'login.email' | translate }}</label>
                         <input type="email" class="form-control" id="inputBasicEmail" 
                         #email1 value="{{user?.email}}" autocomplete="off" />
                       </div>
                       <div class="form-group form-material col-md-6">
-                        <label class="form-control-label" for="inputBasicPassword">Mot de passe</label>
+                        <label class="form-control-label" for="inputBasicPassword">{{ 'login.password' | translate }}</label>
                         <input type="password" class="form-control" id="inputBasicPassword" 
                         #pass1 value="{{user?.password}}" autocomplete="off" />
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group form-material col-md-6">
-                        <label class="form-control-label" for="inputBasicFirstName">Adresse</label>
+                        <label class="form-control-label" for="inputBasicFirstName">{{ 'register.address' | translate }}</label>
                         <input type="text" class="form-control" id="inputBasicFirstName"
                         #add1 value="{{user?.adresse}}" autocomplete="off" />
                       </div>
                       <div class="form-group form-material col-md-6">
-                        <label class="form-control-label" for="inputBasicLastName">Téléphone</label>
+                        <label class="form-control-label" for="inputBasicLastName">{{ 'register.phone' | translate }}</label>
                         <input type="text" class="form-control" id="inputBasicLastName"
                         #tel1 value="{{user?.telephone}}" autocomplete="off" />
                       </div>
@@ -217,10 +223,10 @@
                       <button type="submit" class="btn btn-primary" 
                       style="margin-right:5px;background-color: #36459b;border-color: #36459b;height: 37px;"
                       (click)="editInfoGen(nom1.value, prenom1.value,email1.value, pass1.value, add1.value, tel1.value)">
-                      Enregistrer</button>
+                      {{ 'modal.saveBtn' | translate }}</button>
                       <button type="reset" class="btn btn-light" style="background-color: rgb(192 189 189);border-color: rgb(192 189 189);
                       height: 37px;"
-                       (click)="resetBtn()">Annuler</button>
+                       (click)="resetBtn()">{{ 'modal.cancelBtn' | translate }}</button>
                     </div>
                   </form>
                 </div>
@@ -236,6 +242,195 @@
     </div>
   </div>
   <!-- End Page -->
+  <!-- Modal -->
+  <div class="modal fade" id="addModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
+  role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-simple modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">{{ 'modal.add-title-sec' | translate }}</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="RegisterForm" method="post">
+            <div class="form-group form-material row">
+              <label class="col-md-3 col-form-label">{{ 'register.lastName' | translate }}: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" formControlName="nom">
+              </div>
+            </div>
+            <div class="form-group form-material row">
+              <label class="col-md-3 col-form-label">{{ 'register.firstName' | translate }}: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" formControlName="prenom">
+              </div>
+            </div>
+            <div class="form-group form-material row">
+                <label class="col-md-3 col-form-label">{{ 'login.email' | translate }}: </label>
+                <div class="col-md-9">
+                  <input type="email" class="form-control" formControlName="email">
+                </div>
+            </div>
+            <div class="form-group form-material row">
+              <label class="col-md-3 col-form-label">{{ 'login.password' | translate }}: </label>
+              <div class="col-md-9">
+                <input type="password" class="form-control" formControlName="password">
+              </div>
+          </div>
+            <div class="form-group example row">
+                <label class="col-md-3 col-form-label">{{ 'register.gender' | translate }}: </label>
+                <select class="form-control form-control-sm col-md-8" formControlName="genre" 
+                style="margin-left: 15px;">
+                <option *ngFor="let gen of genre" [ngValue]="gen">
+                  {{ gen }}
+                  </option>
+                </select>
+            </div>
+              <div class="form-group example row">
+                <label class="col-md-3 col-form-label">{{ 'register.langue' | translate }}: </label>
+                <select class="form-control form-control-sm col-md-8" formControlName="langue" 
+                style="margin-left: 15px;">
+                <option *ngFor="let lan of langue" [ngValue]="lan">
+                  {{ lan }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group form-material row">
+                <label class="col-md-3 col-form-label">{{ 'register.address' | translate }}: </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" formControlName="adresse">
+                </div>
+            </div>
+            <div class="form-group form-material row">
+              <label class="col-md-3 col-form-label">{{ 'register.phone' | translate }}: </label>
+              <div class="col-md-9">
+                <input type="tel" class="form-control" formControlName="telephone">
+              </div>
+          </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
+        style="font-size: 13px;font-weight: 500;">{{ 'modal.cancelBtn' | translate }}</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+        style="font-size: 13px;font-weight: 500;"
+        (click)="addUser()">{{ 'modal.addBtn' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal" id="cancelModal">
+  <div class="modal-dialog modal-simple modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>{{ 'secretaire.delete' | translate }}?</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-pure" 
+        style="font-size: 13px;font-weight: 500;"
+        data-dismiss="modal">{{ 'modal.closeBtn' | translate }}</button>
+        <button type="button" class="btn btn-primary"
+         data-dismiss="modal" style="font-size: 13px;font-weight: 500;"
+         (click)="deleteSec()">{{ 'modal.confirmBtn' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+<!-- Modal -->
+<div class="modal fade" id="editModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
+role="dialog" tabindex="-1">
+<div class="modal-dialog modal-simple modal-center">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h4 class="modal-title">{{ 'modal.edit-title-sec' | translate }}</h4>
+    </div>
+   <div class="modal-body">
+       <form>
+          <div class="form-group form-material row">
+            <label class="col-md-3 col-form-label">{{ 'register.lastName' | translate }}: </label>
+            <div class="col-md-9">
+              <input type="text" class="form-control"  #nom2 value="{{selectedSec?.nom}}">
+            </div>
+          </div>
+          <div class="form-group form-material row">
+              <label class="col-md-3 col-form-label">{{ 'register.firstName' | translate }}: </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" #prenom2 value="{{selectedSec?.prenom}}">
+              </div>
+          </div>
+          <div class="form-group form-material row">
+            <label class="col-md-3 col-form-label">{{ 'login.email' | translate }}: </label>
+            <div class="col-md-9">
+              <input type="email" class="form-control" #email2 value="{{selectedSec?.email}}">
+            </div>
+        </div>
+        <div class="form-group form-material row">
+          <label class="col-md-3 col-form-label">{{ 'login.password' | translate }}: </label>
+          <div class="col-md-9">
+            <input  type="password" class="form-control" value="{{selectedSec?.password}}">
+          </div>
+      </div>
+      <div class="dropdown form-group form-material row" >
+        <label class="col-md-3 col-form-label">{{ 'register.gender' | translate }}: </label>
+        <button 
+        style="background-color: white;color: black;border-color: #d0d0d0;margin-left: 15px;"
+        class="btn btn-secondary dropdown-toggle col-md-8" type="button" id="dropdownMenuButton" 
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ getGenre1(genreToEdit)}}   
+        </button>
+        <div class="dropdown-menu col-md-8" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item col-lg-11" #femme1 style="cursor: pointer;" (click)="setGenre1(femme1)">Femme</a>
+          <a class="dropdown-item col-lg-11" #homme1 style="cursor: pointer;" (click)="setGenre1(homme1)">Homme</a>
+        </div>
+      </div>
+      <div class="dropdown form-group form-material row" >
+        <label class="col-md-3 col-form-label">{{ 'register.langue' | translate }}: </label>
+        <button 
+        style="background-color: white;color: black;border-color: #d0d0d0;margin-left: 15px;height: 34px;"
+        class="btn btn-secondary dropdown-toggle col-md-8" type="button" id="dropdownMenuButton" 
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ getLangue1(langueToEdit)}}   
+        </button>
+        <div class="dropdown-menu col-md-8" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item col-lg-11" #fr1 style="cursor: pointer;" (click)="setLangue1(fr1)">Français</a>
+          <a class="dropdown-item col-lg-11" #en1 style="cursor: pointer;" (click)="setLangue1(en1)">Anglais</a>
+          <a class="dropdown-item col-lg-11" #de1 style="cursor: pointer;" (click)="setLangue1(de1)">Allemand</a>
+        </div>
+      </div>
+      <div class="form-group form-material row">
+        <label class="col-md-3 col-form-label">{{ 'register.address' | translate }}: </label>
+        <div class="col-md-9">
+          <input type="text" class="form-control"  #adresse2 value="{{selectedSec?.adresse}}">
+        </div>
+      </div><div class="form-group form-material row">
+        <label class="col-md-3 col-form-label">{{ 'register.phone' | translate }}: </label>
+        <div class="col-md-9">
+          <input type="tel" class="form-control"  #tel2 value="{{selectedSec?.telephone}}">
+        </div>
+      </div>
+        </form> 
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
+      style="font-size: 13px;font-weight: 500;">{{ 'modal.cancelBtn' | translate }}</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal"
+      style="font-size: 13px;font-weight: 500;"
+      (click)="editSec(nom2.value, prenom2.value, email2.value,adresse2.value,tel2.value)">
+      {{ 'modal.editBtn' | translate }}</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- End Modal -->
 
 <app-footer></app-footer>
   <!-- Page -->

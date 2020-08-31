@@ -3,15 +3,15 @@
     <div class="wrap-login100" style="margin-top: -250px;margin-bottom: -100px;position: fixed;">
       <form [formGroup]="loginForm" method="post" class="login100-form validate-form" novalidate>
         <span class="login100-form-title p-b-26">
-          Connexion
+          {{ 'login.title' | translate }}
         </span>
         <div class="form-group wrap-input100 validate-input">
-          <label><span class="focus-input100" >Email</span></label>
-          <input class="input100 form-control"  formControlName="email" type="text" name="email">
+          <label><span class="focus-input100" >{{ 'login.email' | translate }}</span></label>
+          <input class="input100 form-control"  formControlName="email" type="email" name="email">
         </div>
 
         <div class="wrap-input100 validate-input">
-          <label><span class="focus-input100" >Mot de passe</span></label>
+          <label><span class="focus-input100" >{{ 'login.password' | translate }}</span></label>
           <input class="input100 form-control" formControlName="password" type="password" name="pass">
         </div>
         <div *ngIf="errorMessage!=''" style="font-weight: 500;
@@ -20,24 +20,31 @@
         margin-top: -30px;
         margin-bottom: 10px;
         font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji">
-          {{errorMessage}}
+          {{ errorMessage }}
         </div>
         <div class="container-login100-form-btn">
           <div class="wrap-login100-form-btn">
             <div class="login100-form-bgbtn"></div>
             <button type="submit" class="login100-form-btn" style="background-color:#3949ab"
             (click)="login()">
-              Se connecter
+            {{ 'login.submit' | translate }}
             </button>
           </div>
         </div>
+        <div class="row" style="margin-left: 90px; MARGIN-TOP: 20px;">
+                  <div class="col-md-2" style="padding: 0;"><a style="cursor: pointer;" (click)="useLanguage('fr')" role="menuitem">
+                    <span class="flag-icon flag-icon-fr"></span></a></div>
+                    <div class="col-md-2" style="padding: 0;"><a style="cursor: pointer;" (click)="useLanguage('en')" role="menuitem">
+                    <span class="flag-icon flag-icon-gb"></span></a></div>
+                    <div class="col-md-2" style="padding: 0;"><a style="cursor: pointer;" (click)="useLanguage('de')" role="menuitem">
+                    <span class="flag-icon flag-icon-de"></span></a></div>
+        </div>    
         <div class="text-center p-t-115" style="padding-top: 50px;">
           <span class="txt1">
-            Vous n’avez pas de compte?
+            {{ 'login.span' | translate }}?
           </span>
-
-          <a class="txt2" href="#">
-           S'inscrire
+          <a class="txt2" style="color: #3949ab;" routerLink="/register">
+            {{ 'login.link' | translate }}
           </a>
         </div>
       </form>

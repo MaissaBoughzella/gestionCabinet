@@ -3,5 +3,44 @@
         "title": "Übersetzungs-Demo",
         "text": "Dies ist eine einfache Applikation um die Funktionen von ngx-transalte zu demonstrieren.",
         "greeting": "Hallo {{name}}!"
+    },
+    "login": {
+        "title": "Anmeldung",
+        "email": "Email",
+        "password": "Passwort",
+        "errorMsg": "",
+        "submit": "Einloggen",
+        "span": "Sie haben kein Konto",
+        "link": "Registrieren"
+    },
+    "header": {
+        "french": "Français",
+        "english": "Anglais",
+        "german": "Allemand",
+        "profile": "Profil",
+        "logout": "Se déconnecter",
+        "medecin": {
+            "title1": "Gestion des consultations",
+            "title2": "Gestion des secretaires",
+            "title3": "Gestion des patients"
+        },
+        "secretaire": {
+            "title1": "Gestion des rendez-vous",
+            "title2": "Gestion des patients",
+            "title3": "Gestion des patients"
+        },
+        "patient": {
+            "title1": "Les Rendez-vous"
+        },
+        "admin": {
+            "title1": "Tableau de Bord",
+            "title2": "Roles",
+            "title3": "Spécialités",
+            "title4": "Types d'Analyses",
+            "title5": "Types d'Images Radios",
+            "title6": "Medecins",
+            "title7": "Patients",
+            "title8": "Medicaments"
+        }
     }
 }

@@ -1,12 +1,21 @@
 <app-header></app-header>
+<!-- Page -->
 <div class="page">
-    <div class="page-header" style="MARGIN-BOTTOM: -20px;">
-      <h1 class="page-title mb-10">{{ 'profile.title5' | translate }}</h1>
-    </div>
-    <div class="page-content">
-    <div class="panel">
-    <div class="panel-body">
-      <div class="example-wrap" style="margin: 40PX 80PX 80PX 80PX;">
+    <div class="page-content container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- Panel -->
+ <div class="panel">
+    <div class="panel-body nav-tabs-animate nav-tabs-horizontal" data-plugin="tabs">
+      <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+        <li class="nav-item" role="presentation"><a class="active nav-link" data-toggle="tab" href="#profile" aria-controls="profile"
+            role="tab">{{ 'profile.title3' | translate }}</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active animation-slide-left" id="profile" role="tabpanel">
+            <!-- Example Basic Form (Form row) -->
+      <div class="example-wrap" style="margin: 70PX 80PX 80PX 80PX;">
         <div class="example">
           <form autocomplete="off">
             <div class="form-row">
@@ -21,6 +30,17 @@
                 #prenom1 value="{{user?.prenom}}" autocomplete="off" />
               </div>
             </div>
+            <div class="form-row">
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">{{ 'register.birthDate' | translate }}</label>
+                  <input type="date" class="form-control"#daten1 
+                  value="{{patient?.dateNaiss |  date : 'yyyy-MM-dd'}}">
+                </div>
+                <div class="form-group form-material col-md-6">
+                  <label class="form-control-label">{{ 'register.profession' | translate }}</label>
+                  <input type="text" class="form-control" #prof1 value="{{patient?.profession}}">
+                </div>
+              </div>
           <div class="form-row">
            <div class="dropdown form-group form-material col-md-6" >
             <label class="form-control-label" for="inputBasicGenre">{{ 'register.gender' | translate }}</label>
@@ -75,13 +95,16 @@
             <div class="form-group form-material" style="margin-top: 20px;">
               <button type="submit" class="btn btn-primary" 
               style="margin-right:5px;background-color: #36459b;border-color: #36459b;height: 37px;"
-              (click)="editProfile(nom1.value, prenom1.value, email1.value, pass1.value, add1.value, tel1.value)">
+              (click)="editProfile(nom1.value, prenom1.value, daten1.value, prof1.value, email1.value, pass1.value, add1.value, tel1.value)">
               {{ 'modal.saveBtn' | translate }}</button>
               <button type="reset" class="btn btn-light" style="background-color: rgb(192 189 189);border-color: rgb(192 189 189);
               height: 37px;"
                (click)="resetBtn()">{{ 'modal.cancelBtn' | translate }}</button>
             </div>
           </form>
+        </div>
+      </div>
+      <!-- End Example Basic Form (Form row) -->
     </div>
   </div>
 </div>
@@ -89,7 +112,9 @@
 <!-- End Panel -->
 </div>
 </div>
-<app-footer></app-footer>
+</div>
+</div>
+<!-- End Page -->
 
 <!-- Page -->
 <script src="../../../assets/js/Site.minfd53.js?v4.0.1"></script>

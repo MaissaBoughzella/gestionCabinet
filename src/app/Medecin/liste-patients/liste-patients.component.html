@@ -1,11 +1,11 @@
 <div class="panel">
     <div class="panel-heading" style="margin-bottom: 30px;">
-      <h2 class="panel-title">Liste des patients</h2>
-      <div class="page-header-actions">
+      <h2 class="panel-title">{{'patient.title' | translate}}</h2>
+      <div class="page-header-actions" *ngIf="!isEmpty">
         <form action="#" method="post">
           <div class="input-search input-search-dark">
             <i class="input-search-icon md-search" aria-hidden="true"></i>
-            <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+            <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="{{'search.placeholder' | translate}}...">
           </div>
         </form>
         </div>
@@ -13,14 +13,14 @@
     <div class="panel-body">
       <table class="table">
         <thead>
-          <tr>
+          <tr *ngIf="!isEmpty">
             <th ></th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Email</th>
-            <th>Genre</th>
-            <th>Téléphone</th>
-            <th>Adresse</th>
+            <th>{{'register.lastName' | translate}}</th>
+            <th>{{'register.firstName' | translate}}</th>
+            <th>{{'login.email' | translate}}</th>
+            <th>{{'register.gender' | translate}}</th>
+            <th>{{'register.phone' | translate}}</th>
+            <th>{{'register.address' | translate}}</th>
             <!-- <th style="width:10%">Action</th> -->
           </tr>
         </thead>
@@ -52,7 +52,7 @@
                   </table>
                 </div>
                 <div class="panel-footer">
-                <nav>
+                <nav *ngIf="!isEmpty">
                   <ul class="pagination page-item" style="margin-left: 40%;">
                     <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                   </ul>

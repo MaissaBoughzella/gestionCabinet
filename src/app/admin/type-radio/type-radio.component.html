@@ -1,14 +1,14 @@
 <app-header></app-header>
 <div class="page">
     <div class="page-header">
-      <h1 class="page-title mb-10">Liste Des Types Des Images Radios</h1>
+      <h1 class="page-title mb-10">{{ 'componentTitles.radioType' | translate }}</h1>
     </div>
     <div class="page-content">
         <form action="#" method="post">
               <div class="input-search input-search-dark">
                 <i class="input-search-icon md-search" aria-hidden="true"></i>
                 <input type="text" [(ngModel)]="term" class="form-control" name="search" 
-                placeholder="Search..." style="MARGIN-TOP: -20PX; margin-bottom: 30PX;">
+                placeholder="{{ 'search.placeholder' | translate }}..." style="MARGIN-TOP: -20PX; margin-bottom: 30PX;">
               </div>
         </form>
       <div class="documents-wrap categories" data-plugin="animateList" data-child="li">
@@ -68,12 +68,12 @@ role="dialog" tabindex="-1">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
-      <h4 class="modal-title">Ajouter Un Type D'Image Radio</h4>
+      <h4 class="modal-title">{{ 'modal.add-radioType-title' | translate }}</h4>
     </div>
     <div class="modal-body">
       <form [formGroup]="addForm" method="post">
           <div class="form-group form-material row">
-            <label class="col-md-3 col-form-label">Nom: </label>
+            <label class="col-md-3 col-form-label">{{ 'register.lastName' | translate }}</label>
             <div class="col-md-9">
               <input type="text" class="form-control" formControlName="radio">
             </div>
@@ -82,10 +82,10 @@ role="dialog" tabindex="-1">
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
-      style="font-size: 13px;font-weight: 500;">Annuler</button>
+      style="font-size: 13px;font-weight: 500;">{{ 'modal.cancelBtn' | translate }}</button>
       <button type="button" class="btn btn-primary" data-dismiss="modal"
       style="font-size: 13px;font-weight: 500;"
-      (click)="addTypeImageRadio()">Ajouter</button>
+      (click)="addTypeImageRadio()">{{ 'modal.addBtn' | translate }}</button>
     </div>
   </div>
 </div>
@@ -96,15 +96,15 @@ role="dialog" tabindex="-1">
     <div class="modal-dialog modal-simple modal-center">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 >Supprimer Le Type D'Image Radio? </h4>
+          <h4 >{{ 'modal.delete-title-radioType' | translate }}?</h4>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default btn-pure" 
           style="font-size: 13px;font-weight: 500;"
-          data-dismiss="modal">Fermer</button>
+          data-dismiss="modal">{{ 'modal.closeBtn' | translate }}</button>
           <button type="button" class="btn btn-primary"
            data-dismiss="modal" style="font-size: 13px;font-weight: 500;"
-           (click)="deleteTypeImageRadio()">Confirmer</button>
+           (click)="deleteTypeImageRadio()">{{ 'modal.confirmBtn' | translate }}</button>
         </div>
       </div>
     </div>
@@ -119,12 +119,12 @@ role="dialog" tabindex="-1">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">×</span>
     </button>
-    <h4 class="modal-title">Modifier Le Type D'Image Radio</h4>
+    <h4 class="modal-title">{{ 'modal.edit-title-radioType' | translate }}</h4>
   </div>
  <div class="modal-body">
      <form>
         <div class="form-group form-material row">
-          <label class="col-md-3 col-form-label">Nom: </label>
+          <label class="col-md-3 col-form-label">{{ 'register.lastName' | translate }}</label>
           <div class="col-md-9">
             <input type="text" class="form-control"  #nom1 value="{{isSelectedType?.radio}}">
           </div>
@@ -133,11 +133,11 @@ role="dialog" tabindex="-1">
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default btn-pure" data-dismiss="modal"
-    style="font-size: 13px;font-weight: 500;">Annuler</button>
+    style="font-size: 13px;font-weight: 500;">{{ 'modal.cancelBtn' | translate }}</button>
     <button type="button" class="btn btn-primary" data-dismiss="modal"
     style="font-size: 13px;font-weight: 500;"
     (click)="editTypeImageRadio(nom1.value)">
-    Modifier</button>
+    {{ 'modal.editBtn' | translate }}</button>
   </div>
 </div>
 </div>

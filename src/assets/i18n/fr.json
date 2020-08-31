@@ -1,8 +1,189 @@
-
 {
     "demo": {
-    "title": "demo de translation",
-    "text": "c'est une simple demonstration de ngx-translate",
-    "greeting": "Bonjour {{name}}!"
-}
+        "title": "demo de translation",
+        "text": "c'est une simple demonstration de ngx-translate",
+        "greeting": "Bonjour {{name}}!"
+    },
+    "login": {
+        "title": "Connexion",
+        "email": "Email",
+        "password": "Mot de passe",
+        "errorMsg": "",
+        "submit": "Se connecter",
+        "span": "Vous n’avez pas de compte",
+        "link": "S'inscrire"
+    },
+    "header": {
+        "french": "Français",
+        "english": "Anglais",
+        "german": "Allemand",
+        "profile": "Profil",
+        "logout": "Se déconnecter",
+        "medecin": {
+            "title1": "Gestion des consultations",
+            "title2": "Gestion des secretaires",
+            "title3": "Liste des patients"
+        },
+        "secretaire": {
+            "title1": "Gestion des rendez-vous",
+            "title2": "Liste des patients"
+        },
+        "patient": {
+            "title1": "Les Rendez-vous"
+        },
+        "admin": {
+            "title1": "Tableau de Bord",
+            "title2": "Roles",
+            "title3": "Spécialités",
+            "title4": "Types d'Analyses",
+            "title5": "Types d'Images Radios",
+            "title6": "Medecins",
+            "title7": "Patients",
+            "title8": "Medicaments"
+        }
+    },
+    "footer": {
+        "title": "Gestion Cabinet",
+        "right": "Tous droits réservés"
+    },
+    "register": {
+        "title1": "Medecin",
+        "title2": "Patient",
+        "formTitle1": "S'insrire en tant que medecin",
+        "formTitle2": "S'insrire en tant que patient",
+        "lastName": "Nom",
+        "firstName": "Prénom",
+        "gender": "Genre",
+        "langue": "La version de l'application",
+        "address": "Adresse",
+        "phone": "Téléphone",
+        "qualification": "Qualification",
+        "formation": "Formation",
+        "speciality": "Spécialité",
+        "experience": "Expérience",
+        "span": "Vous avez un compte",
+        "birthDate": "Date de naissance",
+        "profession": "Profession",
+        "action": "Actions"
+    },
+    "search": {
+        "placeholder": "Recherche"
+    },
+    "modal": {
+        "add-title-sec": "Ajouter une secretaire",
+        "add-title-analyseType": "Ajouter un Type d'Analyse",
+        "add-title-spec": "Ajouter une spécialité",
+        "add-title-cons": "Ajouter une consultation",
+        "add-title-analyse": "Ajouter une analyse",
+        "add-title-radio": "Ajouter une image radio",
+        "add-title-medecin": "Ajouter un Médecin",
+        "add-title-medicament": "Ajouter un médicament",
+        "add-title-patient": "Ajouter un patient",
+        "add-role-title": "Ajouter un role",
+        "add-radioType-title": "Ajouter un Type d'Image Radio",
+
+        "edit-title-sec": "Modifier les informations de secretaire",
+        "edit-title-analyse": "Modifier l'analyse",
+        "edit-title-radio": "Modifier l'image radio",
+        "edit-title-medicament": "Modifier le Médicament",
+        "edit-title-role": "Modifier le Role",
+        "edit-title-spec": "Modifier la Spécialité",
+        "edit-title-analyseType": "Modifier le Type d'Analyse",
+        "edit-title-radioType": "Modifier le Type d'Analyse",
+
+        "cancelRdv-title": "Annuler le rendez-vous?",
+        "delete-title-medecin": "Supprimer Le Medecin",
+        "delete-title-patient": "Supprimer Le Patient",
+        "delete-title-medicament": "Supprimer le Médicament",
+        "delete-title-role": "Supprimer le Role",
+        "delete-title-spec": "Supprimer la Spécialité",
+        "delete-title-analyseType": "Supprimer le Type d'Analyse",
+        "delete-title-radioType": "Supprimer le Type d'Image Radio",
+
+        "addBtn": "Ajouter",
+        "editBtn": "Modifier",
+        "cancelBtn": "Annuler",
+        "closeBtn": "Fermer",
+        "confirmBtn": "Confirmer",
+        "saveBtn": "Enregister",
+        "female": "Femme",
+        "male": "Homme"
+    },
+    "componentTitles": {
+        "secretaire": "Liste des secretaires",
+        "rdv": "Liste des rendez-vous",
+        "medecin": "Liste des Medecins",
+        "medicament": "Liste des Médicaments",
+        "role": "Liste des Roles",
+        "speciality":"Liste des Spécialités",
+        "analyseType":"Liste des Types des Analyses",
+        "radioType":"Liste des Types des Images Radios"
+    },
+    "rdv": {
+        "state": "Etat",
+        "date": "Date",
+        "hour": "Heure",
+        "price": "Prix",
+        "pricePlaceholder": "Précisez le prix de le consultation",
+        "patient": "Patient",
+        "consulterBtn": "Consulter",
+        "showBtn": "Afficher consultation",
+        "title": "Liste des rendez-vous pris",
+        "add": "Ajouter un rendez-vous",
+        "edit": "Modifier le rendez-vous",
+        "delete": "Annuler Le Rdv"
+    },
+    "consultation": {
+        "title": "Consultation",
+        "tab1": "Ordonnance",
+        "tab2": "Images Radio",
+        "tab3": "Analyses",
+        "addRadio": "Ajouter image radio",
+        "addAnalyse": "Ajouter analyse",
+        "description": "Description",
+        "type": "Type"
+    },
+    "ordonnance": {
+        "addOrd": "Ajouter ordonnance",
+        "doctor": "Docteur",
+        "patient": "Patient",
+        "addMed": "Ajouter médicament",
+        "labelMed": "Medicament",
+        "labelForme": "Forme",
+        "labelDosage": "Dosage",
+        "labelQte": "Quantité"
+    },
+    "patient": {
+        "title": "Liste des patients"
+    },
+    "profile": {
+        "title1": "Informations Générales",
+        "title2": "Informations Professionnelles",
+        "title3": "Fiche d'Informations",
+        "title4": "Informations",
+        "title5": "Profil",
+        "view": "Voir le Profil"
+    },
+    "secretaire": {
+        "delete": "Supprimer la secretaire"
+    },
+    "role":{
+        "name":"Nom du role",
+        "view":"Voir tous les roles"
+    },
+    "dashboard":{
+        "users":"Utilisateurs",
+        "medecins":"Médecins",
+        "secretaires":"Secrétaires",
+        "patients":"Patients",
+        "roles":"Roles",
+        "speciality":"Spécialités de Medecins",
+        "allspecialities":"Voir toutes les spécialités",
+        "alltypes":"Voir tous les types",
+        "radio":"Types d'Images Radio",
+        "analyse":"Types des Analyses",
+        "medicament":"Médicaments",
+        "allmedicaments":"Voir tous les médicaments"
+        
+    }
 }

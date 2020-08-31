@@ -5,6 +5,18 @@
       <h2>{{ 'demo.title' | translate }}</h2>
       <p>Page content goes here</p>
     </div>
+    <div>
+      <!-- translation: translation pipe -->
+      <h1>{{ 'demo.title' | translate }}</h1>
+  
+      <!-- translation: directive (key as attribute)-->
+      <p [translate]="'demo.text'"></p>
+  
+      <!-- translation: directive (key as content of element) -->
+      <p translate>demo.text</p>
+      <p>{{ 'demo.greeting' | translate:{'name':'Andreas'} }}</p>
+
+  </div>
   </div>
 <!-- End Page -->
 <app-footer></app-footer>

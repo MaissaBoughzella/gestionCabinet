@@ -6,6 +6,7 @@ import { error } from '@angular/compiler/src/util';
 import { ApiMedecinService } from '../shared/api-medecin.service';
 import { ApiPatientService } from '../shared/api-patient.service';
 import { ApiSecretaireService } from '../shared/api-secretaire.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-login',
@@ -20,7 +21,10 @@ export class LoginComponent implements OnInit {
     errorMessage = '';
     constructor(private fb: FormBuilder, private authService: ApiAuthService,
         private apiMedService: ApiMedecinService, private apiPatientService: ApiPatientService,
-        private apiSecService: ApiSecretaireService, private router: Router) {
+        private apiSecService: ApiSecretaireService, private translate: TranslateService, 
+        private router: Router) {
+
+        translate.setDefaultLang('fr');
 
         this.loginForm = this.fb.group({
             email: ['', Validators.required],
@@ -28,10 +32,11 @@ export class LoginComponent implements OnInit {
         });
     }
     ngOnInit(): void {
+         
     }
 
     login() {
-        this.errorMessage='';
+        this.errorMessage = '';
         const val = this.loginForm.value;
         if (val.email && val.password) {
             this.errorMessage = '';
@@ -48,7 +53,7 @@ export class LoginComponent implements OnInit {
                             localStorage.setItem('id', res['@id']);
 
                             localStorage.setItem('isMedecin', 'true');
-                            this.router.navigate(['/medecin'])
+                            this.router.navigate(['/medecin/rendezVous'])
                                 .then(() => {
                                     window.location.reload();
                                 });
@@ -59,7 +64,7 @@ export class LoginComponent implements OnInit {
                             localStorage.setItem('id', res['@id']);
 
                             localStorage.setItem('isPatient', 'true');
-                            this.router.navigate(['/patient'])
+                            this.router.navigate(['/patient/rendezVous'])
                                 .then(() => {
                                     window.location.reload();
                                 });
@@ -71,7 +76,7 @@ export class LoginComponent implements OnInit {
                             localStorage.setItem('idMed', res.medecinId);
 
                             localStorage.setItem('isSecretaire', 'true');
-                            this.router.navigate(['/secretaire'])
+                            this.router.navigate(['/secretaire/rendezVous'])
                                 .then(() => {
                                     window.location.reload();
                                 });
@@ -94,5 +99,9 @@ export class LoginComponent implements OnInit {
 
 
         }
+    }
+
+    useLanguage(language: string) {
+        this.translate.use(language);
     }
 }

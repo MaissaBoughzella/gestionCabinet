@@ -35,6 +35,9 @@ export class AddRdvComponent implements OnInit {
   table = [];
   patientNom = [];
   userp = [];
+  allRdvs = [];
+  isEmpty: boolean = false;
+
   constructor(private router: Router, private apiAuthService: ApiAuthService, private apiPatientService: ApiPatientService, private apiRdvService: ApiRdvService, private apiSecretaireService: ApiSecretaireService) {
 
     this.addRdvForm = new FormGroup({
@@ -56,11 +59,14 @@ export class AddRdvComponent implements OnInit {
     this.tab = [];
     this.table = [];
     this.apiSecretaireService.getSecretaireByUserId(localStorage.getItem('userId').substring(11)).subscribe((res: any) => {
-      this.medecinId = res.medecinId
-
-
+      this.medecinId = res.medecinId;
       this.apiRdvService.getAllRdvsByMedecin(this.medecinId.substring(14)).subscribe((res: any) => {
         this.rdvs = res['hydra:member'];
+        if (this.rdvs.length == 0) {
+          this.isEmpty = true;
+        }
+        else this.isEmpty = false;
+        this.allRdvs = res['hydra:member'];
         for (let j = 0; j < this.rdvs.length; j++) {
           this.tab.push(this.rdvs[j].patient.substring(14));
         }
@@ -92,11 +98,9 @@ export class AddRdvComponent implements OnInit {
       for (let j = 0; j < this.patients.length; j++) {
         this.table.push(this.patients[j].user.substring(11));
       }
-      console.log(this.table)
       for (let i = 0; i < this.table.length; i++) {
         this.apiAuthService.getUserById(this.table[i]).subscribe((res: any) => {
           this.patientDetail.push(res.prenom + ' ' + res.nom);
-          console.log(this.patientDetail)
         });
       }
     });
@@ -131,8 +135,8 @@ export class AddRdvComponent implements OnInit {
     });
   }
 
-  deleteRdv(id) {
-    this.apiRdvService.deleteRdv(id).subscribe((res: any) => {
+  deleteRdv() {
+    this.apiRdvService.deleteRdv(this.selectedRdv.id).subscribe((res: any) => {
       this.ngOnInit();
     });
   }
@@ -159,5 +163,79 @@ export class AddRdvComponent implements OnInit {
       return "Consulté";
     if (etat1 == "Annulé")
       return "Annulé";
+  }
+
+  filterByEtat(etat) {
+    var offers = [];
+    this.patientNom = [];
+    this.tab = [];
+    this.userp = [];
+
+    if (etat.value == "Tous les états") {
+    this.ngOnInit();
+    }
+
+    if (etat.value == "Consulté") {
+      this.rdvs = this.allRdvs;
+      for (let i = 0; i < this.rdvs.length; i++) {
+        if (this.rdvs[i].etat == "Consulté") {
+          offers.push(this.rdvs[i]);
+        }
+      }
+      this.rdvs = offers;
+      for (let j = 0; j < this.rdvs.length; j++) {
+        this.tab.push(this.rdvs[j].patient.substring(14));
+      }
+      for (let i = 0; i < this.tab.length; i++) {
+        this.apiPatientService.getPatientById(this.tab[i]).subscribe((res: any) => {
+          this.userp.push(res.user.substring(11));
+          this.apiAuthService.getUserById(this.userp[i]).subscribe((res: any) => {
+            this.patientNom.push(res.prenom + ' ' + res.nom);
+          });
+        });
+      }
+    }
+    else if (etat.value == "Non consulté") {
+      this.rdvs = this.allRdvs;
+      for (let i = 0; i < this.rdvs.length; i++) {
+        if (this.rdvs[i].etat == "Non consulté") {
+          offers.push(this.rdvs[i]);
+
+        }
+      }
+      this.rdvs = offers;
+      for (let j = 0; j < this.rdvs.length; j++) {
+        this.tab.push(this.rdvs[j].patient.substring(14));
+      }
+      for (let i = 0; i < this.tab.length; i++) {
+        this.apiPatientService.getPatientById(this.tab[i]).subscribe((res: any) => {
+          this.userp.push(res.user.substring(11));
+          this.apiAuthService.getUserById(this.userp[i]).subscribe((res: any) => {
+            this.patientNom.push(res.prenom + ' ' + res.nom);
+          });
+        });
+      }
+    }
+    else if (etat.value == "Annulé") {
+      this.rdvs = this.allRdvs;
+      for (let i = 0; i < this.rdvs.length; i++) {
+        if (this.rdvs[i].etat == "Annulé") {
+          offers.push(this.rdvs[i]);
+
+        }
+      }
+      this.rdvs = offers;
+      for (let j = 0; j < this.rdvs.length; j++) {
+        this.tab.push(this.rdvs[j].patient.substring(14));
+      }
+      for (let i = 0; i < this.tab.length; i++) {
+        this.apiPatientService.getPatientById(this.tab[i]).subscribe((res: any) => {
+          this.userp.push(res.user.substring(11));
+          this.apiAuthService.getUserById(this.userp[i]).subscribe((res: any) => {
+            this.patientNom.push(res.prenom + ' ' + res.nom);
+          });
+        });
+      }
+    }
   }
 }

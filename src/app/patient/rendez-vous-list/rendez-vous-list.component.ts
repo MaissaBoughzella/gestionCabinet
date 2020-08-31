@@ -21,7 +21,7 @@ export class RendezVousListComponent implements OnInit {
   totalItems: any;
   term;
   allRdvs = [];
-  
+  isEmpty: boolean = false;
 
   constructor(private router: Router, private apiRdvService: ApiRdvService, private apiConsService: ApiConsultationService) {
     this.itemsPerPage = 10;
@@ -33,6 +33,10 @@ export class RendezVousListComponent implements OnInit {
     this.apiRdvService.getAllRdvsByPatient(patientId).subscribe((res: any) => {
       this.rdvs = res['hydra:member'];
       this.allRdvs = res['hydra:member'];
+      if (this.rdvs.length == 0) {
+        this.isEmpty = true;
+      }
+      else this.isEmpty = false;
     });
   }
 

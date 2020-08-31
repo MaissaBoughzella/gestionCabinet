@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiAuthService } from 'src/app/shared/api-auth.service';
 import { ApiSecretaireService } from 'src/app/shared/api-secretaire.service';
-import { CONTENT_ATTR } from '@angular/compiler';
 
 @Component({
   selector: 'app-add-secretaire',
@@ -33,6 +32,7 @@ export class AddSecretaireComponent implements OnInit {
   term;
   medId: string;
   secMedecin = [];
+  isEmpty: boolean = false;
 
   constructor(private router: Router, private apiAuthService: ApiAuthService, private apiSecService: ApiSecretaireService) {
     this.RegisterForm = new FormGroup({
@@ -54,6 +54,7 @@ export class AddSecretaireComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.secMedecin = [];
     this.medId = localStorage.getItem('id');
     this.apiSecService.getSecretaires().subscribe((res: any) => {
       this.secretaires = res['hydra:member'];
@@ -62,7 +63,22 @@ export class AddSecretaireComponent implements OnInit {
           let userId = this.secretaires[j].user.substring(11);
           this.apiAuthService.getUserById(userId).subscribe((res: any) => {
             this.secMedecin.push(res);
+            if (this.secMedecin.length == 0) {
+              this.isEmpty = true;
+            }
+            else this.isEmpty = false;
           });
+        }
+      }
+    });
+
+    this.apiAuthService.getRoles().subscribe((res: any) => {
+      this.roles = res['hydra:member'];
+
+      for (const role of this.roles) {
+
+        if (role.role == "Secretaire" || role.role == "secretaire") {
+          this.roleId = role["@id"];
         }
       }
     });
@@ -152,19 +168,10 @@ export class AddSecretaireComponent implements OnInit {
       return "Allemand";
   }
 
-  deleteSec(id) {
-    this.apiAuthService.deleteUser(id).subscribe((res: any) => {
+  deleteSec() {
+    this.apiAuthService.deleteUser(this.selectedSec.id).subscribe((res: any) => {
       this.ngOnInit();
     });
   }
-
-  // public isEmpty(): boolean {
-  //   if (this.apiSecService.secretaire == undefined
-  //     || this.apiSecService.secretaire == null) {
-  //     return true;
-  //   }
-  //   else return false;
-  // }
-
 
 }

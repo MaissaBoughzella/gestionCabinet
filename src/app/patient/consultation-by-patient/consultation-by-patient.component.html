@@ -1,17 +1,17 @@
 
 <div class="panel nav-tabs-horizontal" data-plugin="tabs">
     <div class="panel-heading">
-      <h2 class="panel-title" style="margin-bottom: 15px;">Consultation</h2>
+      <h2 class="panel-title" style="margin-bottom: 15px;">{{ 'consultation.title' | translate }}</h2>
     </div>
     <ul class="nav nav-tabs nav-tabs-line" role="tablist">
       <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#exampleTopOrdonnance"
-          aria-controls="exampleTopHome" role="tab">Ordonnance</a>
+          aria-controls="exampleTopHome" role="tab">{{ 'consultation.tab1' | translate }}</a>
       </li>
       <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopImages" aria-controls="exampleTopCss"
-          role="tab">Images Radio</a>
+          role="tab">{{ 'consultation.tab2' | translate }}</a>
       </li>
       <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopAnalyses"
-          aria-controls="exampleTopJavascript" role="tab">Analyses</a>
+          aria-controls="exampleTopJavascript" role="tab">{{ 'consultation.tab3' | translate }}</a>
       </li>
     </ul>
     <div class="panel-body">
@@ -23,7 +23,7 @@
           <form action="#" method="post" *ngIf="!isEmpty">
             <div class="input-search input-search-dark">
               <i class="input-search-icon md-search" aria-hidden="true"></i>
-              <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="Search...">
+              <input type="text" [(ngModel)]="term" class="form-control" name="search" placeholder="{{ 'search.placeholder' | translate }}...">
             </div>
           </form>
           <div id="exampleCustomGridField" style="margin-top: 40px;
@@ -34,8 +34,8 @@
                       <thead >
                         <tr *ngIf="!isEmpty">
                           <th style="width:12%;"></th>
-                          <th>Nom</th>
-                          <th>Description</th>
+                          <th>{{ 'register.lastName' | translate }}</th>
+                          <th>{{ 'consultation.description' | translate }}</th>
                           <th style="width: 15%;">Type</th>
                         </tr>
                       </thead>
@@ -59,7 +59,7 @@
             <form action="#" method="post" *ngIf="!isEmptyAnal">
               <div class="input-search input-search-dark">
                 <i class="input-search-icon md-search" aria-hidden="true"></i>
-                <input type="text" [(ngModel)]="term2" class="form-control" name="search" placeholder="Search...">
+                <input type="text" [(ngModel)]="term2" class="form-control" name="search" placeholder="{{ 'search.placeholder' | translate }}...">
               </div>
             </form>
                 <div id="exampleCustomGridField" style="margin-top: 40px;
@@ -70,8 +70,8 @@
                               <thead >
                                 <tr *ngIf="!isEmptyAnal">
                                   <th style="width:12%;"></th>
-                                  <th>Nom</th>
-                                  <th>Description</th>
+                                  <th>{{ 'register.lastName' | translate }}</th>
+                                  <th>{{ 'consultation.description' | translate }}</th>
                                   <th style="width: 15%;">Type</th>
                                 </tr>
                               </thead>

@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { DoctorSearchComponent } from './patient/doctor-search/doctor-search.component';
 import { RegisterPatientComponent } from './register-patient/register-patient.component';
 import { MedecinComponent } from './medecin/medecin.component';
 import { PatientComponent } from './patient/patient.component';
@@ -28,6 +27,9 @@ import { ProfilAdminComponent } from './admin/profil-admin/profil-admin.componen
 import { MedecinsComponent } from './admin/medecins/medecins.component';
 import { MedecinByIdComponent } from './admin/medecin-by-id/medecin-by-id.component';
 import { MedicamentsComponent } from './admin/medicaments/medicaments.component';
+import { PatientsComponent } from './admin/patients/patients.component';
+import { PatientByIdComponent } from './admin/patient-by-id/patient-by-id.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 const routes: Routes = [
@@ -74,10 +76,15 @@ const routes: Routes = [
   { path: 'superAdmin/medecins', component: MedecinsComponent, canActivate: [AuthGuard] },
   { path: 'superAdmin/profil', component: ProfilAdminComponent, canActivate: [AuthGuard] },
   { path: 'superAdmin/medecin/:id', component: MedecinByIdComponent, canActivate: [AuthGuard] },
+  { path: 'superAdmin/patients', component: PatientsComponent, canActivate: [AuthGuard] },
+  { path: 'superAdmin/patient/:id', component: PatientByIdComponent, canActivate: [AuthGuard] },
 
-  { path: 'medecin/register', component: RegisterComponent },
-  { path: 'patient/register', component: RegisterPatientComponent },
+
+  // { path: 'medecin/register', component: RegisterComponent },
+  // { path: 'patient/register', component: RegisterPatientComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegistrationComponent },
+  { path: 'home', component: HomeComponent },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 

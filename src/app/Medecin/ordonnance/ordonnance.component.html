@@ -3,7 +3,7 @@
         style="width: 20%"
         (click)="ajouterOrdonnance()">
         <span>
-        Ajouter ordonnance        
+        {{'ordonnance.addOrd' | translate}}        
             <i class="icon md-plus" aria-hidden="true"></i>
         </span>
     </button>
@@ -13,7 +13,7 @@
     <div class="wrap-contact100" style="padding: 40px 55px 80px 55px;">
         <div class="row pb-4" >
             <div class="col-md-6" style="TEXT-ALIGN: left;">
-                <p class="mb-1" style=" font-family: Montserrat-SemiBold;font: inherit;">Docteur {{medecin?.prenom}} {{medecin?.nom}}</p>
+                <p class="mb-1" style=" font-family: Montserrat-SemiBold;font: inherit;">{{'ordonnance.doctor' | translate}} {{medecin?.prenom}} {{medecin?.nom}}</p>
                 <p style=" font-family: Montserrat-SemiBold;font: inherit;">
                     &nbsp;&nbsp;<i class="icon md-pin" aria-hidden="true"></i> &nbsp;{{medecin?.adresse}}</p>
                 <p class="mb-1" style=" font-family: Montserrat-SemiBold;font: inherit;">
@@ -25,7 +25,7 @@
                 margin-top: 100PX;
                 MARGIN-RIGHT: 30px;">
                     <i class="icon md-calendar" aria-hidden="true"></i> 
-                    &nbsp;Le {{consultation?.date | date:'dd/MM/yyyy'}}
+                    &nbsp;{{consultation?.date | date:'dd/MM/yyyy'}}
                 </p>
             </div>
             <hr class="my-5">
@@ -39,18 +39,18 @@
             font-weight: bold;
             margin-left: 20px;
             color: black;">
-            &nbsp;Patient: {{patient?.prenom}} {{patient?.nom}}</p>
+            &nbsp;{{'ordonnance.patient' | translate}}: {{patient?.prenom}} {{patient?.nom}}</p>
         </div>
         <button id="addPresButton" class="contact100-form-btn" 
         style="width: 30%;
         margin-left: 70%;
         margin-bottom: 20PX;" 
         (click)="setAddPresContext()">
-        <span>Ajouter médicament &nbsp;<i class="icon md-plus" aria-hidden="true"></i></span>
+        <span>{{'ordonnance.addMed' | translate}} &nbsp;<i class="icon md-plus" aria-hidden="true"></i></span>
         </button>
         <form [formGroup]="addPrescriptionForm" method="post" class="contact100-form" *ngIf="isAddPresContext">
             <div class="form-group wrap-input100 input100-select bg1" style="margin-top: -50px;">
-                <span class="label-input100">Medicament</span>
+                <span class="label-input100">{{'ordonnance.labelMed' | translate}} </span>
                 <div>
                     <select class="js-select2 form-control" formControlName="medicament">
                         <option class="input100"  style="font-size: 14px;" *ngFor="let med of medicaments" [ngValue]="med['@id']">
@@ -62,31 +62,31 @@
             </div>
 
             <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
-                <span class="label-input100">Forme </span>
+                <span class="label-input100">{{'ordonnance.labelForme' | translate}} </span>
                 <input type="text" class="input100 form-control" formControlName="forme"  
                 placeholder="Préciser la forme " style="height: 30px;font-size: 14px;border:none;">
             </div>
 
             <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
-                <span class="label-input100">Dosage </span>
+                <span class="label-input100">{{'ordonnance.labelDosage' | translate}} </span>
                 <input type="text" class="input100 form-control" formControlName="dosage" 
                 placeholder="Préciser le dosage" style="height: 30px;font-size: 14px;border:none;">
             </div>
 
             <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
-                <span class="label-input100">Quantité </span>
+                <span class="label-input100">{{'ordonnance.labelQte' | translate}} </span>
                 <input type="number" class="input100 form-control" formControlName="quantite" 
                 placeholder="Préciser la quantité" style="height: 30px;font-size: 14px;border:none;">
             </div>
             <button class="col md-5 rs1-wrap-input100 contact100-form-btn"
              style="margin-bottom: 40px; margin-right: 10px;background-color: #36459b;"
             (click)="ajouterPrescription()">
-            <span>Confirmer</span>
+            <span>{{'modal.confirmBtn' | translate}}</span>
             </button>
             <button type="reset" class="col md-5 rs1-wrap-input100 contact100-form-btn"
             style="margin-bottom: 40px;background-color: rgb(192 189 189);"
             (click)="setAnnulerAddPresContext()">
-                <span>Annuler</span>
+                <span>{{'modal.cancelBtn' | translate}}</span>
             </button>
         </form>
         <!-- Example Custom -->
@@ -97,7 +97,7 @@
                 <span>{{med[i]}}</span>
                 </h5>
                 <p class="mb-0" style="font-family: inherit" *ngIf="!isEditContextPres(pres?.id)">
-                    Forme: {{pres?.forme}} | Dosage: {{pres?.dosage}} | Quantité: {{pres?.quantite}}</p>
+                    {{'ordonnance.labelForme' | translate}}: {{pres?.forme}} | {{'ordonnance.labelDosage' | translate}}: {{pres?.dosage}} | {{'ordonnance.labelQte' | translate}}: {{pres?.quantite}}</p>
                 <div class="btn-group hidden-sm-down" *ngIf="!isEditContextPres(pres?.id)" id="exampleTableEventsToolbar" role="group"
                 style="margin-left: 91%;MARGIN-TOP: -45PX;">
                     <button type="button" class="btn btn-primary btn-icon"
@@ -114,7 +114,7 @@
               </div>
               <form class="contact100-form" *ngIf="isEditContextPres(pres?.id)" id="form">
                 <div class="form-group wrap-input100 input100-select bg1" style="margin-top: -50px;">
-                    <span class="label-input100">Medicament</span>
+                    <span class="label-input100">{{'ordonnance.labelMed' | translate}}</span>
                     <div>
                         <button 
                         style="background-color: white;color: black;border: none;font-family: Montserrat-SemiBold;font-size: 14px;"
@@ -131,31 +131,31 @@
                     </div>
                 </div>
                 <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
-                    <span class="label-input100">Forme </span>
+                    <span class="label-input100">{{'ordonnance.labelForme' | translate}} </span>
                     <input type="text" class="input100 form-control" #forme1 value="{{selectedpres?.forme}}" 
                     style="height: 30px;font-size: 14px;border:none;">
                 </div>
     
                 <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
-                    <span class="label-input100">Dosage </span>
+                    <span class="label-input100">{{'ordonnance.labelDosage' | translate}} </span>
                     <input type="text" class="input100 form-control" #dosage1 value="{{selectedpres?.dosage}}"
                      style="height: 30px;font-size: 14px;border:none;">
                 </div>
     
                 <div class="form-group wrap-input100 bg1 rs1-wrap-input100" style="height: 70px;">
-                    <span class="label-input100">Quantité </span>
+                    <span class="label-input100">{{'ordonnance.labelQte' | translate}} </span>
                     <input type="number" class="input100 form-control" #qte1 value="{{selectedpres?.quantite}}"
                     style="height: 30px;font-size: 14px;border:none;">
                 </div>
                 <button class="col md-5 rs1-wrap-input100 contact100-form-btn"
                  style="margin-bottom: 40px; margin-right: 10px;background-color: #36459b;"
                 (click)="editPrescription(forme1.value, dosage1.value, qte1.value)">
-                <span>Modifier</span>
+                <span>{{'modal.editBtn' | translate}}</span>
                 </button>
                 <button type="reset" class="col md-5 rs1-wrap-input100 contact100-form-btn"
                 style="margin-bottom: 40px;background-color: rgb(192 189 189);"
                 (click)="setAnnulerEditPresContext()">
-                    <span>Annuler</span>
+                    <span>{{'modal.cancelBtn' | translate}}</span>
                 </button>
             </form>
             </div>

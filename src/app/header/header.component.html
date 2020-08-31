@@ -46,11 +46,11 @@
             </a>
             <div class="dropdown-menu" role="menu">
               <a class="dropdown-item" style="width: 92.5%;" (click)="useLanguage('fr')" role="menuitem">
-                <span class="flag-icon flag-icon-fr"></span> French</a>
+                <span class="flag-icon flag-icon-fr"></span> {{ 'header.french' | translate }}</a>
               <a class="dropdown-item" style="width: 92.5%;" (click)="useLanguage('en')" role="menuitem">
-                <span class="flag-icon flag-icon-gb"></span> English</a>
+                <span class="flag-icon flag-icon-gb"></span> {{ 'header.english' | translate }}</a>
               <a class="dropdown-item" style="width: 92.5%;" (click)="useLanguage('de')" role="menuitem">
-                <span class="flag-icon flag-icon-de"></span> German</a>
+                <span class="flag-icon flag-icon-de"></span> {{ 'header.german' | translate }}</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -63,34 +63,40 @@
             </a>
             <div class="dropdown-menu" role="menu"  *ngIf="isSuperAdmin()">
               <a class="dropdown-item" role="menuitem" style="width: 94%;" routerLink="/superAdmin/profil"><i class="icon md-account" 
-                aria-hidden="true"></i> Profil</a>
+                aria-hidden="true"></i> {{ 'header.profile' | translate }}</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" style="width: 94%;" (click)="logout()"><i class="icon md-power" aria-hidden="true"></i> Se déconnecter</a>
+              <a class="dropdown-item" style="width: 94%;" (click)="logout()"><i class="icon md-power" aria-hidden="true"></i> {{ 'header.logout' | translate }}</a>
             </div>
             <div class="dropdown-menu" role="menu"  *ngIf="isMedecin()">
               <a class="dropdown-item" role="menuitem" style="width: 94%;" routerLink="/medecin/profil"><i class="icon md-account" 
-                aria-hidden="true"></i> Profil</a>
+                aria-hidden="true"></i> {{ 'header.profile' | translate }}</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" style="width: 94%;" (click)="logout()"><i class="icon md-power" aria-hidden="true"></i> Se déconnecter</a>
+              <a class="dropdown-item" style="width: 94%;" (click)="logout()"><i class="icon md-power" aria-hidden="true"></i> {{ 'header.logout' | translate }}</a>
             </div>
             <div class="dropdown-menu" role="menu"  *ngIf="isPatient()">
               <a class="dropdown-item" role="menuitem" style="width: 94%;" routerLink="/patient/profil"><i class="icon md-account" 
-                aria-hidden="true"></i> Profil</a>
+                aria-hidden="true"></i> {{ 'header.profile' | translate }}</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" style="width: 94%;" (click)="logout()"><i class="icon md-power" aria-hidden="true"></i> Se déconnecter</a>
+              <a class="dropdown-item" style="width: 94%;" (click)="logout()"><i class="icon md-power" aria-hidden="true"></i> {{ 'header.logout' | translate }}</a>
             </div>
             <div class="dropdown-menu" role="menu"  *ngIf="isSecretaire()">
               <a class="dropdown-item" role="menuitem" style="width: 94%;" routerLink="/secretaire/profil"><i class="icon md-account" 
-                aria-hidden="true"></i> Profil</a>
+                aria-hidden="true"></i> {{ 'header.profile' | translate }}</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" style="width: 94%;" (click)="logout()"><i class="icon md-power" aria-hidden="true"></i> Se déconnecter</a>
+              <a class="dropdown-item" style="width: 94%;" (click)="logout()"><i class="icon md-power" aria-hidden="true"></i> {{ 'header.logout' | translate }}</a>
             </div>
           </li>
         </ul>
         <!-- End Navbar Toolbar Right -->
 
-        <div class="navbar-brand navbar-brand-center">
-          <a href="index.html">
+        <div class="navbar-brand navbar-brand-center" *ngIf="isSuperAdmin()">
+          <a routerLink="/superAdmin">
+            <img class="navbar-brand-logo" src="../../assets/images/logo4.1.png"
+              title="Gestion Cabinet" style="height: 45px;">
+          </a>
+        </div>
+        <div class="navbar-brand navbar-brand-center" *ngIf="!isSuperAdmin()">
+          <a>
             <img class="navbar-brand-logo" src="../../assets/images/logo4.1.png"
               title="Gestion Cabinet" style="height: 45px;">
           </a>
@@ -115,19 +121,19 @@
             <li class="site-menu-item" routerLinkActive="active">
               <a routerLink="/medecin/rendezVous">
                 <i class="site-menu-icon md-view-list" aria-hidden="true"></i>
-                <span style="max-width: 180px;" class="site-menu-title" >Gestion des consultations</span>
+                <span style="max-width: 180px;" class="site-menu-title" >{{ 'header.medecin.title1' | translate }}</span>
               </a>
             </li>
             <li class="site-menu-item">
               <a routerLink="/medecin/secretaires" routerLinkActive="active">
                 <i class="site-menu-icon md-accounts" aria-hidden="true"></i>
-                <span class="site-menu-title">Gestion des secretaires</span>
+                <span class="site-menu-title">{{ 'header.medecin.title2' | translate }}</span>
               </a>
             </li>
             <li class="site-menu-item">
               <a routerLink="/medecin/patients" routerLinkActive="active">
                 <i class="site-menu-icon md-accounts" aria-hidden="true"></i>
-                <span class="site-menu-title">Gestion des patients</span>
+                <span class="site-menu-title">{{ 'header.medecin.title3' | translate }}</span>
               </a>
             </li>
           </ul>
@@ -135,13 +141,13 @@
             <li class="site-menu-item">
               <a routerLink="/secretaire/rendezVous" routerLinkActive="active">
                 <i class="site-menu-icon md-calendar-alt" aria-hidden="true"></i>
-                <span class="site-menu-title">Gestion des rendez-vous</span>
+                <span class="site-menu-title">{{ 'header.secretaire.title1' | translate }}</span>
               </a>
             </li>
             <li class="site-menu-item">
               <a routerLink="/secretaire/patients" routerLinkActive="active">
                 <i class="site-menu-icon md-accounts" aria-hidden="true"></i>
-                <span class="site-menu-title">Gestion des patients</span>
+                <span class="site-menu-title">{{ 'header.secretaire.title2' | translate }}</span>
               </a>
             </li>
           </ul>
@@ -149,7 +155,7 @@
             <li class="site-menu-item">
               <a routerLink="/patient/rendezVous" routerLinkActive="active">
                 <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
-                <span class="site-menu-title">Les Rendez-vous</span>
+                <span class="site-menu-title">{{ 'header.patient.title1' | translate }}</span>
               </a>
             </li>
           </ul>
@@ -157,43 +163,49 @@
             <li class="site-menu-item">
               <a routerLink="/superAdmin" routerLinkActive="active">
                 <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
-                <span class="site-menu-title">Dashboard</span>
+                <span class="site-menu-title">{{ 'header.admin.title1' | translate }}</span>
               </a>
             </li>
             <li class="site-menu-item">
               <a routerLink="/superAdmin/roles" routerLinkActive="active" class="nav-link">
                 <i class="site-menu-icon md-account-box-o" aria-hidden="true"></i>
-                <span class="site-menu-title">Roles</span>
+                <span class="site-menu-title">{{ 'header.admin.title2' | translate }}</span>
               </a>
             </li>
             <li class="site-menu-item">
               <a routerLink="/superAdmin/specialites" routerLinkActive="active" class="nav-link">
                 <i class="site-menu-icon md-wrench" aria-hidden="true"></i>
-                <span class="site-menu-title">Spécialités</span>
+                <span class="site-menu-title">{{ 'header.admin.title3' | translate }}</span>
               </a>
             </li>
             <li class="site-menu-item">
               <a routerLink="/superAdmin/typesAnalyses" routerLinkActive="active" class="nav-link">
                 <i class="site-menu-icon md-file-text" aria-hidden="true"></i>
-                <span class="site-menu-title">Types d'Analyses</span>
+                <span class="site-menu-title">{{ 'header.admin.title4' | translate }}</span>
               </a>
             </li>
             <li class="site-menu-item">
               <a routerLink="/superAdmin/typesImagesRadios" routerLinkActive="active" class="nav-link">
                 <i class="site-menu-icon md-file-text" aria-hidden="true"></i>
-                <span class="site-menu-title">Types d'Images Radios</span>
+                <span class="site-menu-title">{{ 'header.admin.title5' | translate }}</span>
               </a>
             </li>
             <li class="site-menu-item">
               <a routerLink="/superAdmin/medecins" routerLinkActive="active" class="nav-link">
                 <i class="site-menu-icon md-accounts-list-alt" aria-hidden="true"></i>
-                <span class="site-menu-title">Medecins</span>
+                <span class="site-menu-title">{{ 'header.admin.title6' | translate }}</span>
+              </a>
+            </li>
+            <li class="site-menu-item">
+              <a routerLink="/superAdmin/patients" routerLinkActive="active" class="nav-link">
+                <i class="site-menu-icon md-accounts-list-alt" aria-hidden="true"></i>
+                <span class="site-menu-title">{{ 'header.admin.title7' | translate }}</span>
               </a>
             </li>
             <li class="site-menu-item">
               <a routerLink="/superAdmin/medicaments" routerLinkActive="active" class="nav-link">
                 <i class="site-menu-icon md-drink" aria-hidden="true"></i>
-                <span class="site-menu-title">Medicaments</span>
+                <span class="site-menu-title">{{ 'header.admin.title8' | translate }}</span>
               </a>
             </li>
           </ul>

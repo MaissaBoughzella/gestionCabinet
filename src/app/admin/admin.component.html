@@ -10,7 +10,7 @@
               <div class="clearfix">
                 <div class="grey-800 float-left py-10">
                   <i class="icon md-account grey-600 font-size-24 vertical-align-bottom mr-3"></i>
-                  <span style="text-transform: uppercase;">Utilisateurs</span>
+                  <span style="text-transform: uppercase;">{{ 'dashboard.users' | translate }}</span>
                 </div>
                 <span class="float-right grey-700 font-size-30">{{users?.length}}</span>
               </div>
@@ -28,7 +28,9 @@
               <div class="clearfix">
                 <div class="grey-800 float-left py-10">
                   <i class="icon md-account grey-600 font-size-24 vertical-align-bottom mr-3"></i>
-                  <span style="text-transform: uppercase;">médecins</span>
+                  <a style="text-decoration:none;color: #616161;" routerLink="/superAdmin/medecins">
+                  <span style="text-transform: uppercase;">{{ 'dashboard.medecins' | translate }}</span>
+                  </a>
                 </div>
                 <span class="float-right grey-700 font-size-30">{{meds?.length}}</span>
               </div>
@@ -46,7 +48,7 @@
               <div class="clearfix">
                 <div class="grey-800 float-left py-10">
                   <i class="icon md-account grey-600 font-size-24 vertical-align-bottom mr-3"></i>
-                  <span style="text-transform: uppercase;">secretaires</span>
+                  <span style="text-transform: uppercase;">{{ 'dashboard.secretaires' | translate }}</span>
                 </div>
                 <span class="float-right grey-700 font-size-30">{{secretaires?.length}}</span>
               </div>
@@ -64,7 +66,9 @@
               <div class="clearfix">
                 <div class="grey-800 float-left py-10">
                   <i class="icon md-account grey-600 font-size-24 vertical-align-bottom mr-3"></i>
-                  <span style="text-transform: uppercase;">patients</span>
+                  <a style="text-decoration:none;color: #616161;" routerLink="/superAdmin/patients">
+                  <span style="text-transform: uppercase;">{{ 'dashboard.patients' | translate }}</span>
+                  </a>
                 </div>
                 <span class="float-right grey-700 font-size-30">{{patients?.length}}</span>
               </div>
@@ -79,14 +83,14 @@
           <!-- Panel Projects -->
           <div class="panel" id="projects">
             <div class="panel-heading">
-              <h3 class="panel-title">Roles</h3>
+              <h3 class="panel-title">{{ 'dashboard.roles' | translate }}</h3>
             </div>
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
                     <td></td>
-                    <td style="width: 70%;">Nom</td>
+                    <td style="width: 70%;">{{ 'register.lastName' | translate }}</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -105,7 +109,7 @@
             <div class="panel-footer">
             <a style="text-decoration:none;" routerLink="/superAdmin/roles">
               <button type="button" class="btn btn-info btn-block" style="margin-top:10px;text-transform: capitalize;">
-              <i class="icon md-menu" aria-hidden="true"></i>Voir tous les roles</button></a>
+              <i class="icon md-menu" aria-hidden="true"></i>{{ 'role.view' | translate }}</button></a>
           </div>
           </div>
           
@@ -116,14 +120,14 @@
           <!-- Panel Projects -->
           <div class="panel" id="projects">
             <div class="panel-heading">
-              <h3 class="panel-title">Spécialités de Medecins</h3>
+              <h3 class="panel-title">{{ 'dashboard.speciality' | translate }}</h3>
             </div>
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
                     <td></td>
-                    <td style="width: 70%;">Nom</td>
+                    <td style="width: 70%;"></td>
                   </tr>
                 </thead>
                 <tbody>
@@ -143,7 +147,7 @@
             <a style="text-decoration:none;" routerLink="/superAdmin/specialites">
               <button type="button" class="btn btn-info btn-block" 
               style="margin-top:10px;text-transform: capitalize;">
-              <i class="icon md-menu" aria-hidden="true"></i>Voir toutes les spécialités</button></a>
+              <i class="icon md-menu" aria-hidden="true"></i>{{ 'dashboard.allspecialities' | translate }}</button></a>
           </div>
           </div>
           <!-- End Panel Projects -->
@@ -152,14 +156,14 @@
           <!-- Panel Projects -->
           <div class="panel" id="projects">
             <div class="panel-heading">
-              <h3 class="panel-title">Types d'Images Radio</h3>
+              <h3 class="panel-title">{{ 'dashboard.radio' | translate }}</h3>
             </div>
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
                     <td></td>
-                    <td style="width: 70%;">Type</td>
+                    <td style="width: 70%;">{{ 'consultation.type' | translate }}</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -179,7 +183,7 @@
             <a style="text-decoration:none;" routerLink="/superAdmin/roles">
               <button type="button" class="btn btn-info btn-block" 
               style="margin-top:10px;text-transform: capitalize;">
-              <i class="icon md-menu" aria-hidden="true"></i>Voir tous les types</button></a>
+              <i class="icon md-menu" aria-hidden="true"></i>{{ 'dashboard.alltypes' | translate }}</button></a>
           </div>
           </div>
           <!-- End Panel Projects -->
@@ -188,14 +192,14 @@
           <!-- Panel Projects -->
           <div class="panel" id="projects">
             <div class="panel-heading">
-              <h3 class="panel-title">Types des Analyses</h3>
+              <h3 class="panel-title">{{ 'dashboard.analyse' | translate }}</h3>
             </div>
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
                     <td></td>
-                    <td style="width: 70%;">Type</td>
+                    <td style="width: 70%;">{{ 'consultation.type' | translate }}</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -215,7 +219,7 @@
             <a style="text-decoration:none;" routerLink="/superAdmin/roles">
               <button type="button" class="btn btn-info btn-block" 
               style="margin-top:10px;text-transform: capitalize;">
-              <i class="icon md-menu" aria-hidden="true"></i>Voir tous les types</button></a>
+              <i class="icon md-menu" aria-hidden="true"></i>{{ 'dashboard.alltypes' | translate }}</button></a>
           </div>
           </div>
           <!-- End Panel Projects -->
@@ -224,15 +228,15 @@
           <!-- Panel Projects -->
           <div class="panel" id="projects">
             <div class="panel-heading">
-              <h3 class="panel-title">Médicaments</h3>
+              <h3 class="panel-title">{{ 'dashboard.medicament' | translate }}</h3>
             </div>
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
                     <td></td>
-                    <td>Nom</td>
-                    <td>Description</td>
+                    <td>{{ 'register.lastName' | translate }}</td>
+                    <td>{{ 'consultation.description' | translate }}</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -255,7 +259,9 @@
             <a style="text-decoration:none;" routerLink="/superAdmin/medicaments">
               <button type="button" class="btn btn-info btn-block" 
               style="margin-top:10px;text-transform: capitalize;">
-              <i class="icon md-menu" aria-hidden="true"></i>Voir tous les médicaments</button></a>
+              <i class="icon md-menu" aria-hidden="true"></i>{{ 'dashboard.allmedicaments' | translate }}
+            </button>
+          </a>
           </div>
           </div>
           <!-- End Panel Projects -->
