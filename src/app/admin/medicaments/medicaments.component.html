@@ -11,11 +11,11 @@
                 placeholder="{{ 'search.placeholder' | translate }}..." style="MARGIN-TOP: -20PX; margin-bottom: 30PX;">
               </div>
         </form>
-        <div class="table-responsive" style="width: 90%;margin-left: 65px;">
-            <table class="table table-striped">
+        <div class="panel-body" style="width: 90%;margin-left: 65px;">
+            <table class="table">
               <thead>
                   <tr>
-                    <th style="width: 10%;"></th>
+                    <th style="width: 15%;"></th>
                     <th>{{ 'register.lastName' | translate }}</th>
                     <th>{{ 'consultation.description' | translate }}</th>
                     <th style="width: 10%;">{{ 'register.action' | translate }}</th>
@@ -27,21 +27,21 @@
                             <td>{{med?.nom}}</td>
                             <td>{{med?.description}}</td>
                             <td>
-                                <button type="button" class="btn btn-sm btn-icon btn-pure btn-default"
-                                data-toggle="tooltip" data-original-title="Edit"
-                                (click)="setSelectedMed(med)"
+                              <div class="btn-group hidden-sm-down" id="exampleTableEventsToolbar" role="group">
+                                <button type="button" class="btn btn-primary btn-icon"
+                                (click)= "setSelectedMed(med)"
                                 data-toggle="modal" 
                                 data-target="#editModal">
-                                <i class="icon md-edit" aria-hidden="true"></i>
+                                  <i class="icon md-edit" aria-hidden="true"></i>
                                 </button>
-                                <button type="button" class="btn btn-sm btn-icon btn-pure btn-default"
-                                data-toggle="tooltip" data-original-title="Delete"
-                                (click)="setSelectedMed(med)"
+                                <button type="button" class="btn btn-danger btn-icon"
+                                (click)= "setSelectedMed(med)"
                                 data-toggle="modal" 
                                 data-target="#cancelModal">
-                                <i class="icon md-close" aria-hidden="true"></i>
+                                <i class="icon md-delete" aria-hidden="true"></i>
                                 </button>
-                                </td>
+                              </div>
+                            </td>
                         </tr> 
                     </tbody>
             </table>

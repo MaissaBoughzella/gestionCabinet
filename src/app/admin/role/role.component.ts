@@ -52,11 +52,11 @@ export class RoleComponent implements OnInit {
     });
   }
 
-  deleteRole() {
-    this.apiRolesService.deleteRole(this.isSelectedRole.id).subscribe((res: any) => {
-      this.ngOnInit();
-    });
-  }
+  // deleteRole() {
+  //   this.apiRolesService.deleteRole(this.isSelectedRole.id).subscribe((res: any) => {
+  //     this.ngOnInit();
+  //   });
+  // }
 
   pageChanged(event) {
     this.currentPage = event;

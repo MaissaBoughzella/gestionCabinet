@@ -1,5 +1,14 @@
 <div class="container-contact100" style="min-height:0px">
-    <div class="wrap-contact100">
+    <div class="container-contact100-form-btn">
+        <button type="button" class="contact100-form-btn" 
+            style="width: 15%;margin-left: 82%;margin-top: -20PX;margin-bottom: 15PX;"
+            (click)="htmlToPdf()">
+            <span>{{'consultation.imprimer' | translate}}</span>
+            &nbsp;<i class="icon md-collection-pdf" aria-hidden="true"></i>
+            
+        </button>
+    </div>
+    <div class="wrap-contact100" id="contentToConvert">
         <div class="row pb-4" >
             <div class="col-md-6" style="TEXT-ALIGN: left;">
                 <p class="mb-1" style=" font-family: Montserrat-SemiBold;font: inherit;">{{ 'ordonnance.doctor' | translate }} {{medecin?.prenom}} {{medecin?.nom}}</p>
@@ -40,6 +49,10 @@
                     {{ 'ordonnance.labelForme' | translate }}: {{pres?.forme}} | {{ 'ordonnance.labelDosage' | translate }}: {{pres?.dosage}} | {{ 'ordonnance.labelQte' | translate }}: {{pres?.quantite}}</p>
               </div>
             </div>
+            <hr class="my-5">
+            <p style="font-family: Montserrat-SemiBold;text-align: right; MARGIN-RIGHT: 30px;">
+            {{'consultation.signature' | translate}}
+            </p>
           <!-- End Example Custom -->
     </div>
 </div>

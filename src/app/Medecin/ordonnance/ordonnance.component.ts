@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiConsultationService } from 'src/app/shared/api-consultation.service';
 import { ApiAuthService } from 'src/app/shared/api-auth.service';
@@ -8,6 +8,8 @@ import { ApiMedicamentService } from 'src/app/shared/api-medicament.service';
 import { ApiOrdonnanceService } from 'src/app/shared/api-ordonnance.service';
 import { ApiPrescriptionService } from 'src/app/shared/api-prescription.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-ordonnance',
@@ -181,6 +183,22 @@ export class OrdonnanceComponent implements OnInit {
 
   setAnnulerEditPresContext() {
     this.isEditPresContext = false;
+  }
+  public htmlToPdf() {
+    var data = document.getElementById('contentToConvert');  //Id of the table
+    html2canvas(data).then(canvas => {
+      // Few necessary setting options  
+      let imgWidth = 208;
+      let pageHeight = 295;
+      let imgHeight = canvas.height * imgWidth / canvas.width;
+      let heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      let position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('ordonnance.pdf'); // Generated PDF   
+    });
   }
 }
 

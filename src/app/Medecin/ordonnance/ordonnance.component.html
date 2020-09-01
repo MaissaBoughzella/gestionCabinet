@@ -8,9 +8,17 @@
         </span>
     </button>
 </div>
-
+<div class="container-contact100-form-btn" *ngIf="isAddContext">
+    <button type="button" class="contact100-form-btn" 
+        style="width: 15%;margin-left: 82%;margin-top: -34PX; ;margin-bottom: 15PX;"
+        (click)="htmlToPdf()">
+        <span>{{'consultation.imprimer' | translate}}</span>
+        &nbsp;<i class="icon md-collection-pdf" aria-hidden="true"></i>
+        
+    </button>
+</div>
 <div class="container-contact100" *ngIf="isAddContext">
-    <div class="wrap-contact100" style="padding: 40px 55px 80px 55px;">
+    <div class="wrap-contact100" id="contentToConvert" style="padding: 40px 55px 80px 55px;">
         <div class="row pb-4" >
             <div class="col-md-6" style="TEXT-ALIGN: left;">
                 <p class="mb-1" style=" font-family: Montserrat-SemiBold;font: inherit;">{{'ordonnance.doctor' | translate}} {{medecin?.prenom}} {{medecin?.nom}}</p>
@@ -159,6 +167,10 @@
                 </button>
             </form>
             </div>
+            <hr class="my-5">
+            <p style="font-family: Montserrat-SemiBold;text-align: right; MARGIN-RIGHT: 30px;">
+            {{'consultation.signature' | translate}}
+            </p>
           <!-- End Example Custom -->
     </div>
 </div>

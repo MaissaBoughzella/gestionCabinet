@@ -142,7 +142,9 @@
         "addRadio": "Ajouter image radio",
         "addAnalyse": "Ajouter analyse",
         "description": "Description",
-        "type": "Type"
+        "type": "Type",
+        "signature":"Signature et Cachet",
+        "imprimer":"Imprimer"
     },
     "ordonnance": {
         "addOrd": "Ajouter ordonnance",

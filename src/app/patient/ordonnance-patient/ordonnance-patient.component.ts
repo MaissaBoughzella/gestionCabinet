@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ApiConsultationService } from 'src/app/shared/api-consultation.service';
@@ -11,6 +11,8 @@ import { ApiOrdonnanceService } from 'src/app/shared/api-ordonnance.service';
 import { ApiPrescriptionService } from 'src/app/shared/api-prescription.service';
 import { ApiMedicamentService } from 'src/app/shared/api-medicament.service';
 import { ApiMedecinService } from 'src/app/shared/api-medecin.service';
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-ordonnance-patient',
@@ -18,7 +20,7 @@ import { ApiMedecinService } from 'src/app/shared/api-medecin.service';
   styleUrls: ['./ordonnance-patient.component.css']
 })
 export class OrdonnancePatientComponent implements OnInit {
-  
+
   ordId: any;
   consultation: any;
   patient: any;
@@ -67,6 +69,23 @@ export class OrdonnancePatientComponent implements OnInit {
           });
         }
       });
+    });
+  }
+
+  public htmlToPdf() {
+    var data = document.getElementById('contentToConvert');  //Id of the table
+    html2canvas(data).then(canvas => {
+      // Few necessary setting options  
+      let imgWidth = 208;
+      let pageHeight = 295;
+      let imgHeight = canvas.height * imgWidth / canvas.width;
+      let heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      let position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('ordonnance.pdf'); // Generated PDF   
     });
   }
 }
