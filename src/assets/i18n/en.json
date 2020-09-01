@@ -11,7 +11,8 @@
         "errorMsg": "",
         "submit": "Login",
         "span": "Don’t have an account",
-        "link": "Register"
+        "link": "Register",
+        "errorMessage":"Wrong Email or Password"
     },
     "header": {
         "french": "French",

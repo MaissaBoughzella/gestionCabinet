@@ -33,7 +33,6 @@
                 </i>
               </a>
           </li>
-          
         </ul>
         <!-- End Navbar Toolbar -->
 
@@ -42,7 +41,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" data-animation="scale-up"
               aria-expanded="false" role="button">
-              <span class="flag-icon flag-icon-us"></span>
+              <span *ngIf="isen" class="flag-icon flag-icon-gb"></span>
+              <span *ngIf="isfr" class="flag-icon flag-icon-fr"></span>
+              <span *ngIf="isde" class="flag-icon flag-icon-de"></span>
             </a>
             <div class="dropdown-menu" role="menu">
               <a class="dropdown-item" style="width: 92.5%;" (click)="useLanguage('fr')" role="menuitem">

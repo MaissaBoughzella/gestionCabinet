@@ -8,16 +8,36 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  isfr: boolean = false;
+  isen: boolean = false;
+  isde: boolean = false;
   constructor(private translate: TranslateService, private apiService: ApiAuthService, private router: Router) {
     translate.setDefaultLang('fr');
   }
 
   ngOnInit(): void {
+    this.isfr = true;
   }
 
   useLanguage(language: string) {
     this.translate.use(language);
+    console.log(language)
+    this.isfr = true;
+    if (language == 'fr') {
+      this.isfr = true;
+      this.isde = false;
+      this.isen = false;
+    }
+    else if (language == 'en') {
+      this.isen = true;
+      this.isfr = false;
+      this.isde = false;
+    }
+    else if (language == 'de') {
+      this.isde = true;
+      this.isfr = false;
+      this.isen = false;
+    }
   }
 
   logout() {

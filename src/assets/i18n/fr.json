@@ -11,7 +11,8 @@
         "errorMsg": "",
         "submit": "Se connecter",
         "span": "Vous n’avez pas de compte",
-        "link": "S'inscrire"
+        "link": "S'inscrire",
+        "errorMessage":"Email ou Mot de passe Incorrect"
     },
     "header": {
         "french": "Français",
