@@ -7,12 +7,12 @@
         </span>
         <div class="form-group wrap-input100 validate-input">
           <label><span class="focus-input100" >{{ 'login.email' | translate }}</span></label>
-          <input class="input100 form-control"  formControlName="email" type="email" placeholder="{{ 'login.email' | translate }}" name="email">
+          <input class="input100 form-control"  formControlName="email" type="email" placeholder="{{ 'login.email' | translate }}*" name="email">
         </div>
 
         <div class="wrap-input100 validate-input">
           <label><span class="focus-input100" >{{ 'login.password' | translate }}</span></label>
-          <input class="input100 form-control" formControlName="password" placeholder="{{ 'login.password' | translate }}" type="password" name="pass">
+          <input class="input100 form-control" formControlName="password" placeholder="{{ 'login.password' | translate }}*" type="password" name="pass">
         </div>
         <div *ngIf="errorMessage!=''" style="font-weight: 500;
         color: red;
