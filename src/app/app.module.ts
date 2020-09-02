@@ -44,6 +44,7 @@ import { MedicamentsComponent } from './admin/medicaments/medicaments.component'
 import { PatientsComponent } from './admin/patients/patients.component';
 import { PatientByIdComponent } from './admin/patient-by-id/patient-by-id.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { RegistrationComponent } from './registration/registration.component';
     PatientsComponent,
     PatientByIdComponent,
     RegistrationComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

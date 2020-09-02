@@ -185,6 +185,9 @@ export class OrdonnanceComponent implements OnInit {
     this.isEditPresContext = false;
   }
   public htmlToPdf() {
+    document.getElementById('addPresButton').style.visibility = "hidden";
+    document.getElementById('exampleTableEventsToolbar1').style.visibility = "hidden";
+
     var data = document.getElementById('contentToConvert');  //Id of the table
     html2canvas(data).then(canvas => {
       // Few necessary setting options  
@@ -199,6 +202,8 @@ export class OrdonnanceComponent implements OnInit {
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
       pdf.save('ordonnance.pdf'); // Generated PDF   
     });
+    document.getElementById("addPresButton").style.visibility = "visible";
+    this.ngOnInit();
   }
 }
 
